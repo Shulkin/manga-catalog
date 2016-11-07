@@ -1,0 +1,16 @@
+{
+  "name": "manga-catalog",
+  "version": "1.0.0",
+  "description": "Manga database",
+  "main": "server.js",
+  "keywords": ["manga", "catalog"],
+  "author": "Evgeny Shulkin <evgeny.shulkin@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "body-parser": "^1.15.2",
+    "serve-favicon": "^2.3.0",
+    "method-override": "^2.3.6",
+    "mongoose": "^4.6.4"
+  }
+}
