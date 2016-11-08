@@ -1,0 +1,73 @@
+var express = require("express");
+// use express built-in router
+var router = express.Router();
+// get local mongoose model
+var Author = require("../models/author");
+// MongoDB will create collection 'authors'
+// process api/authors/
+router.route("/")
+// get authors list (GET http://localhost:3000/api/authors)
+.get(function(req, res) {
+  Author.find(function(err, authors) {
+    if (err) res.send(err);
+    res.json(authors);
+  });
+})
+// add new author (POST http://localhost:3000/api/authors)
+.post(function(req, res) {
+  Author.create({
+    name: req.body.name,
+    gender: req.body.gender,
+    birthDate: req.body.birthDate,
+    series: req.body.series
+  }, function(err, author) {
+    if (err) res.send(err);
+    // return new authors list
+    Author.find(function(err, authors) {
+      if (err) res.send(err);
+      res.json(authors);
+    });
+  });
+});
+// process api/authors/id
+router.route("/:id")
+// find author by id (GET http://localhost:3000/api/authors/id)
+.get(function(req, res) {
+  Author.findById(req.params.id, function(err, author) {
+    if (err) res.send(err);
+    res.json(author);
+  });
+})
+// update author info (PUT http://localhost:3000/api/authors/id)
+.put(function(req, res) {
+  Author.findById(req.params.id, function(err, author) {
+    if (err) res.send(err);
+    author.name = req.body.name;
+    author.gender = req.body.gender;
+    author.birthDate = req.body.birthDate;
+    author.series = req.body.series;
+    author.save(function(err) {
+      if (err) res.send(err);
+      // return updated author
+      res.json(author);
+    });
+  });
+})
+/*
+ * Add route to insert manga to author's series list
+ * PUT http://localhost:3000/api/authors/id/add_manga
+ */
+// delete author (DELETE http://localhost:3000/api/authors/id)
+.delete(function(req, res) {
+  Author.remove({
+    _id: req.params.id
+  }, function(err, author) {
+    if (err) res.send(err);
+    // return new authors list
+    Author.find(function(err, authors) {
+      if (err) res.send(err);
+      res.json(authors);
+    });
+  })
+});
+module.exports = router;
