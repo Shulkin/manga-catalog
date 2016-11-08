@@ -7,3 +7,4 @@ var MangaSchema = new mongoose.Schema({
   genre: [Schema.Types.ObjectId],
   author: Schema.Types.ObjectId
 });
+module.exports = mongoose.model("Manga", MangaSchema);
