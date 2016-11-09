@@ -42,10 +42,11 @@ router.route("/:id")
 .put(function(req, res) {
   Author.findById(req.params.id, function(err, author) {
     if (err) res.send(err);
+    // set only text info
     author.name = req.body.name;
     author.gender = req.body.gender;
     author.birthDate = req.body.birthDate;
-    author.series = req.body.series;
+    // do not update series list!
     author.save(function(err) {
       if (err) res.send(err);
       // return updated author
@@ -53,10 +54,6 @@ router.route("/:id")
     });
   });
 })
-/*
- * Add route to insert manga to author's series list
- * PUT http://localhost:3000/api/authors/id/add_manga
- */
 // delete author (DELETE http://localhost:3000/api/authors/id)
 .delete(function(req, res) {
   Author.remove({
@@ -69,5 +66,31 @@ router.route("/:id")
       res.json(authors);
     });
   })
+});
+// process api/authors/id/manga
+router.route("/:id/manga")
+// update author series list (POST http://localhost:3000/api/authors/id/manga)
+.post(function(req, res) {
+  Author.findById(req.params.id, function(err, author) {
+    if (err) res.send(err);
+    // rewrite series from scratch
+    author.series = req.body.series;
+    author.save(function(err) {
+      if (err) res.send(err);
+      res.json(author);
+    });
+  });
+})
+// add manga to series list (PUT http://localhost:3000/api/authors/id/manga)
+.put(function(req, res) {
+  Author.findById(req.params.id, function(err, author) {
+    if (err) res.send(err);
+    // add series to list
+    author.series.push(req.body.manga);
+    author.save(function(err) {
+      if (err) res.send(err);
+      res.json(author);
+    });
+  });
 });
 module.exports = router;
