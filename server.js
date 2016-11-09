@@ -24,6 +24,9 @@ app.use(bodyParser.json({type: "application/vnd.api+json"}));
 app.use(bodyParser.urlencoded({"extended": "true"}));
 app.use(methodOverride());
 // load api routes
+app.get("/api/authors", require("./app/routes/author-routes"));
+app.get("/api/genres", require("./app/routes/genre-routes"));
+app.get("/api/series", require("./app/routes/manga-routes"));
 // default route to index.html
 app.get("*", function(req ,res) {
   // anything else is up to Angular

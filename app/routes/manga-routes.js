@@ -79,3 +79,4 @@ router.route("/:id/genre")
     });
   });
 });
+module.exports = router;
