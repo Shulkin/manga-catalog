@@ -85,7 +85,7 @@ router.route("/:id/manga")
 .put(function(req, res) {
   Author.findById(req.params.id, function(err, author) {
     if (err) res.send(err);
-    // add series to list
+    // add series id to list
     author.series.push(req.body.manga);
     author.save(function(err) {
       if (err) res.send(err);
