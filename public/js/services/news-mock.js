@@ -43,7 +43,8 @@ angular.module("news.mock", [])
         var obj = {
           title: TITLES[random(0, TITLES.length - 1)],
           body: TEXTS[random(0, TEXTS.length - 1)],
-          date: ""
+          date: "",
+          author: "admin"
         }
         result.push(obj);
       }
