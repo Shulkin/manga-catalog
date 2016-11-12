@@ -8,6 +8,6 @@ var AuthorSchema = new mongoose.Schema({
     default: "Male"
   },
   birthDate: Date,
-  series: [Schema.Types.ObjectId]
+  series: [mongoose.Schema.Types.ObjectId]
 });
 module.exports = mongoose.model("Author", AuthorSchema);
