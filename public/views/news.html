@@ -6,6 +6,6 @@
     {{news.body}}
   </div>
   <div class="panel-footer">
-    <span>Posted by {{news.author}} on {{news.date}}</span>
+    <span>Posted by <b>{{news.author}}</b> on {{news.date | date: "medium"}}</span>
   </div>
 </div>

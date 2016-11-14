@@ -6,11 +6,11 @@ var mangaApp = angular.module("manga.app", [
   "news.ctrl",
   // news services
   "news.service",
-  "news.mock"/*,
+  "news.mock",
   // authors controllers
   "authors.ctrl",
   // authors services
-  "authors.service",
+  "authors.service"/*,
   // series controllers
   "series.ctrl",
   // series services
