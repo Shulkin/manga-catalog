@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <!-- Columns headers -->
+  <tr>
+    <th ng-repeat="name in series.columns">
+      <h4>{{name}}</h4>
+    </th>
+  </tr>
+  <!-- Actual table content -->
+  <tr ng-repeat="manga in series.list">
+    <!-- Manga title -->
+    <td><a href="#">{{manga.title}}</a></td>
+    <!-- Array of genres -->
+    <td>{{manga.genre}}</td>
+    <!-- Year of writing -->
+    <td>{{manga.year}}</td>
+  </tr>
+</table>

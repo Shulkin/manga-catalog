@@ -1,7 +1,7 @@
 angular.module("authors.ctrl", [])
-.value("HEADERS", ["Name", "Series", "Genres"])
+.value("AUTHORS_HEADERS", ["Name", "Series", "Most Numerous Genre"])
 .controller("AuthorsCtrl", function(
-  HEADERS, // columns names
+  AUTHORS_HEADERS, // columns names
   Authors) { // authors service
   // === Variables ===
   var vm = this;
@@ -17,9 +17,12 @@ angular.module("authors.ctrl", [])
       console.log("Error " + err)
     });
     // fill up columns names
-    vm.columns = HEADERS;
+    vm.columns = AUTHORS_HEADERS;
   }
   // === Start module ===
   init();
   // === Public ===
+  vm.getMostNumerousGenre = function(authorId) {
+    return "test";
+  }
 });

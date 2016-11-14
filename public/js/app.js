@@ -10,10 +10,9 @@ var mangaApp = angular.module("manga.app", [
   // authors controllers
   "authors.ctrl",
   // authors services
-  "authors.service"/*,
+  "authors.service",
   // series controllers
   "series.ctrl",
   // series services
   "series.service"
-  */
 ]);
