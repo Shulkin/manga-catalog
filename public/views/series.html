@@ -9,8 +9,8 @@
   <tr ng-repeat="manga in series.list">
     <!-- Manga title -->
     <td><a href="#">{{manga.title}}</a></td>
-    <!-- String of genres names -->
-    <td>{{manga.allGenres}}</td>
+    <!-- Names of the manga genre -->
+    <td>{{series.toString(manga.genre)}}</td>
     <!-- Year of writing -->
     <td>{{manga.year}}</td>
   </tr>

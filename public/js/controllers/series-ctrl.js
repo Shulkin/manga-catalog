@@ -13,15 +13,6 @@ angular.module("series.ctrl", [])
     Series.getAll()
     .success(function(data) {
       vm.list = data;
-      // convert array of genres ids to string
-      for (var i = 0; i < vm.list.length; i++) {
-        // new field for string presentation of genres
-        vm.list[i].allGenres = "";
-        for (var j = 0; j < vm.list[i].genre.length; j++) {
-          vm.list[i].allGenres += vm.list[i].genre[j].name + ", ";
-        }
-        vm.list[i].allGenres = vm.list[i].allGenres.slice(0, -2);
-      }
     })
     .error(function(err) {
       console.log("Error " + err);
@@ -32,4 +23,8 @@ angular.module("series.ctrl", [])
   // === Start module ===
   init();
   // === Public ===
+  // represent manga genre as string
+  vm.toString = function(genre) {
+    return Genres.toString(genre);
+  }
 });

@@ -6,6 +6,15 @@ angular.module("genres.service", [])
     },
     get: function(id) {
       return $http.get("/api/genres/" + id);
+    },
+    // convert array of genres to string
+    toString: function(genre) {
+      var result = "";
+      for (var i = 0; i < genre.length; i++) {
+        result += genre[i].name;
+        if (i < genre.length - 1) result += ", ";
+      }
+      return result;
     }
   };
 });
