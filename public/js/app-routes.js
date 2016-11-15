@@ -16,6 +16,12 @@ angular.module("manga.routes", []).config(
       templateUrl: "./views/authors.html",
       controller: "AuthorsCtrl as authors"
     })
+    // mangaka info card (not nested!)
+    .state("authors-info", {
+      url: "/authors/:id",
+      templateUrl: "./views/authors-info.html",
+      controller: "AuthorsInfoCtrl as author"
+    })
     // list of series
     .state("series", {
       url: "/series",

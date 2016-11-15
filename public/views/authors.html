@@ -8,7 +8,7 @@
   <!-- Actual table content -->
   <tr ng-repeat="author in authors.list">
     <!-- Authors name -->
-    <td><a href="#">{{author.name}}</a></td>
+    <td><a ui-sref="authors-info({id: author._id})">{{author.name}}</a></td>
     <!-- The number of series, which he wrote -->
     <td>{{author.series.length}}</td>
     <!-- Most numerours genre -->

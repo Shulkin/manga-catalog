@@ -3,6 +3,9 @@ angular.module("authors.service", [])
   return {
     getAll: function() {
       return $http.get("/api/authors");
+    },
+    get: function(id) {
+      return $http.get("/api/authors/" + id);
     }
   };
 });
