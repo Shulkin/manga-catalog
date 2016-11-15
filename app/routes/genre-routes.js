@@ -25,6 +25,13 @@ router.route("/")
 });
 // process api/genres/id
 router.route("/:id")
+// find genre by id (GET http://localhost:3000/api/genres/id)
+.get(function(req, res) {
+  Genre.findById(req.params.id, function(err, genre) {
+    if (err) res.send(err);
+    res.json(genre);
+  });
+})
 // delete genre (DELETE http://localhost:3000/api/genres/id)
 .delete(function(req, res) {
   Genre.remove({
