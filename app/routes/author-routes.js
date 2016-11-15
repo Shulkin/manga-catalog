@@ -8,9 +8,14 @@ var Author = require("../models/author");
 router.route("/")
 // get authors list (GET http://localhost:3000/api/authors)
 .get(function(req, res) {
-  // find authors and populate fields with ids
   Author.find()
-  .populate("series") // get list of series from this author
+  // deep population
+  .populate({
+    path: "series", // get list of series from this author
+    populate: {
+      path: "genre" // get each series genre
+    }
+  })
   .exec(function(err, authors) {
     if (err) res.send(err);
     res.json(authors);

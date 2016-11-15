@@ -5,9 +5,8 @@ var Manga = require("../models/manga");
 router.route("/")
 // get manga list (GET http://localhost:3000/api/series)
 .get(function(req, res) {
-  // find mangas and populate fields with ids
   Manga.find()
-  .populate("genre") // get series genres by id
+  .populate("genre") // get series genre
   .populate("author") // find its author
   .exec(function(err, series) {
     if (err) res.send(err);
