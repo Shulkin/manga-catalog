@@ -8,10 +8,13 @@ var Author = require("../models/author");
 router.route("/")
 // get authors list (GET http://localhost:3000/api/authors)
 .get(function(req, res) {
-  Author.find(function(err, authors) {
+  // find authors and populate fields with ids
+  Author.find()
+  .populate("series") // get list of series from this author
+  .exec(function(err, authors) {
     if (err) res.send(err);
     res.json(authors);
-  });
+  })
 })
 // add new author (POST http://localhost:3000/api/authors)
 .post(function(req, res) {
@@ -33,7 +36,9 @@ router.route("/")
 router.route("/:id")
 // find author by id (GET http://localhost:3000/api/authors/id)
 .get(function(req, res) {
-  Author.findById(req.params.id, function(err, author) {
+  Author.findById(req.params.id)
+  .populate("series")
+  .exec(function(err, author) {
     if (err) res.send(err);
     res.json(author);
   });

@@ -5,7 +5,11 @@ var Manga = require("../models/manga");
 router.route("/")
 // get manga list (GET http://localhost:3000/api/series)
 .get(function(req, res) {
-  Manga.find(function(err, series) {
+  // find mangas and populate fields with ids
+  Manga.find()
+  .populate("genre") // get series genres by id
+  .populate("author") // find its author
+  .exec(function(err, series) {
     if (err) res.send(err);
     res.json(series);
   });
@@ -31,7 +35,10 @@ router.route("/")
 router.route("/:id")
 // find series by id (GET http://localhost:3000/api/series/id)
 .get(function(req, res) {
-  Manga.findById(req.params.id, function(err, manga) {
+  Manga.findById(req.params.id)
+  .populate("genre")
+  .populate("author")
+  .exec(function(err, manga) {
     if (err) res.send(err);
     res.json(manga);
   });

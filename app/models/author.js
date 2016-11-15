@@ -8,7 +8,8 @@ var AuthorSchema = new mongoose.Schema({
     default: "Male"
   },
   birthDate: Date,
-  series: [mongoose.Schema.Types.ObjectId]
+  // define ref to populate field on find
+  series: [{type: mongoose.Schema.Types.ObjectId, ref: "Manga"}]
 }, {
   // explicitly state the collection name
   collection: "authors"

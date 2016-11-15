@@ -7,36 +7,21 @@ angular.module("series.ctrl", [])
   // === Variables ===
   var vm = this;
   // === Private ===
-  // convert array of genres ids to string
-  function getGenres() {
-    Genres.getAll()
-    .success(function(data) {
-      for (var i = 0; i < vm.list.length; i++) {
-        vm.list[i].genreStr = "";
-        var genre = vm.list[i].genre;
-        for (var j = 0; j < genre.length; j++) {
-          for (var k = 0; k < data.length; k++) {
-            if (genre[j] === data[k]._id) {
-              vm.list[i].genreStr += data[k].name + ", ";
-            }
-          }
-        }
-        if (vm.list[i].genreStr != "") {
-          vm.list[i].genreStr = vm.list[i].genreStr.slice(0, -2);
-        }
-      }
-    })
-    .error(function(err) {
-      console.log("Error " + err);
-    });
-  }
   // constructor
   function init() {
     vm.list = []; // array of series
     Series.getAll()
     .success(function(data) {
       vm.list = data;
-      getGenres();
+      // convert array of genres ids to string
+      for (var i = 0; i < vm.list.length; i++) {
+        // new field for string presentation of genres
+        vm.list[i].allGenres = "";
+        for (var j = 0; j < vm.list[i].genre.length; j++) {
+          vm.list[i].allGenres += vm.list[i].genre[j].name + ", ";
+        }
+        vm.list[i].allGenres = vm.list[i].allGenres.slice(0, -2);
+      }
     })
     .error(function(err) {
       console.log("Error " + err);

@@ -6,12 +6,18 @@ angular.module("authors.ctrl", [])
   // === Variables ===
   var vm = this;
   // === Private ===
+  function getMostNumerousGenre(author) {
+    return "test";
+  }
   // constructor
   function init() {
     vm.list = []; // array of authors
     Authors.getAll()
     .success(function(data) {
       vm.list = data;
+      for (var i = 0; i < vm.list.length; i++) {
+        vm.list[i].mostNumerousGenre = getMostNumerousGenre(vm.list[i]);
+      }
     })
     .error(function(err) {
       console.log("Error " + err)
@@ -22,7 +28,4 @@ angular.module("authors.ctrl", [])
   // === Start module ===
   init();
   // === Public ===
-  vm.getMostNumerousGenre = function(authorId) {
-    return "test";
-  }
 });

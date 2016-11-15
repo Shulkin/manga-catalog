@@ -4,8 +4,9 @@ var MangaSchema = new mongoose.Schema({
   title: String,
   description: String,
   year: Number,
-  genre: [mongoose.Schema.Types.ObjectId],
-  author: mongoose.Schema.Types.ObjectId
+  // define ref to populate field on find
+  genre: [{type: mongoose.Schema.Types.ObjectId, ref: "Genre"}],
+  author: {type: mongoose.Schema.Types.ObjectId, ref: "Author"}
 }, {
   // explicitly state the collection name
   collection: "series"
