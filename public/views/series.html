@@ -8,7 +8,7 @@
   <!-- Actual table content -->
   <tr ng-repeat="manga in series.list">
     <!-- Manga title -->
-    <td><a href="#">{{manga.title}}</a></td>
+    <td><a ui-sref="series-info({id: manga._id})">{{manga.title}}</a></td>
     <!-- Names of the manga genre -->
     <td>{{series.toString(manga.genre)}}</td>
     <!-- Year of writing -->

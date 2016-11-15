@@ -3,6 +3,9 @@ angular.module("series.service", [])
   return {
     getAll: function() {
       return $http.get("/api/series");
+    },
+    get: function(id) {
+      return $http.get("/api/series/" + id);
     }
   };
 });

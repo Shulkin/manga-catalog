@@ -21,6 +21,12 @@ angular.module("manga.routes", []).config(
       url: "/series",
       templateUrl: "./views/series.html",
       controller: "SeriesCtrl as series"
+    })
+    // series info card (not nested!)
+    .state("series-info", {
+      url: "/series/:id",
+      templateUrl: "./views/series-info.html",
+      controller: "SeriesInfoCtrl as manga"
     });
   }]
 );
