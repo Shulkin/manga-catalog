@@ -9,5 +9,8 @@ var AuthorSchema = new mongoose.Schema({
   },
   birthDate: Date,
   series: [mongoose.Schema.Types.ObjectId]
+}, {
+  // explicitly state the collection name
+  collection: "authors"
 });
 module.exports = mongoose.model("Author", AuthorSchema);

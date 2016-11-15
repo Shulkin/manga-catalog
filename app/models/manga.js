@@ -6,5 +6,8 @@ var MangaSchema = new mongoose.Schema({
   year: Number,
   genre: [mongoose.Schema.Types.ObjectId],
   author: mongoose.Schema.Types.ObjectId
+}, {
+  // explicitly state the collection name
+  collection: "series"
 });
 module.exports = mongoose.model("Manga", MangaSchema);
