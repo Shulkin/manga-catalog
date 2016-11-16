@@ -1,14 +1,62 @@
-<h2>Series info</h2>
-<div class="thumbnail">
-  <h4>Title: </h4>{{manga.title}}
+<div class="row">
+  <!-- Whole width -->
+  <div class="col-sm-12">
+    <h2>{{manga.title}}</h2>
+  </div>
 </div>
-<div class="thumbnail">
-  <h4>Description: </h4>{{manga.description}}
-</div>
-<div class="thumbnail">
-  <h4>Year: </h4>{{manga.year}}
-</div>
-<div class="thumbnail">
-  <h4>Whole JSON</h4>
-  <div>{{manga.json}}</div>
+<div class="row">
+  <!-- Two equal columns -->
+  <div class="col-sm-6">
+    <!-- Description panel -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Description</h3>
+      </div>
+      <div class="panel-body">
+        {{manga.description}}
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <!-- Manga image -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Image</h3>
+      </div>
+      <div class="panel-body">
+        <!-- center the image in div -->
+        <img class="img-responsive center-block"
+          src="http://placehold.it/170x250">
+      </div>
+    </div>
+    <!-- Series genre -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Genre</h3>
+      </div>
+      <div class="panel-body">
+        {{manga.genreString}}
+      </div>
+    </div>
+    <!-- Link to author -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Author</h3>
+      </div>
+      <div class="panel-body">
+        <a ui-sref="authors-info({id: manga.author._id})">
+          {{manga.author.name}}
+        </a>
+      </div>
+    </div>
+    <!-- Year of writing -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Year</h3>
+      </div>
+      <div class="panel-body">
+        {{manga.year}}
+      </div>
+    </div>
+  </div>
 </div>

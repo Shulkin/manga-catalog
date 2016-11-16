@@ -1,6 +1,7 @@
 angular.module("series.info.ctrl", [])
 .controller("SeriesInfoCtrl", function(
   Series, // series service
+  Genres, // genres service
   $stateParams) {
   // === Variables ===
   var vm = this;
@@ -11,18 +12,11 @@ angular.module("series.info.ctrl", [])
   function init() {
     Series.get(id)
     .success(function(manga) {
-      /*
-      title: String,
-      description: String,
-      year: Number,
-      genre: [{type: mongoose.Schema.Types.ObjectId, ref: "Genre"}],
-      author: {type: mongoose.Schema.Types.ObjectId, ref: "Author"}
-      */
       vm.title = manga.title;
       vm.description = manga.description;
+      vm.genreString = Genres.toString(manga.genre);
+      vm.author = manga.author;
       vm.year = manga.year;
-      // ===
-      vm.json = manga; // delete later!
     })
     .error(function(err) {
       console.log("Error " + err);
