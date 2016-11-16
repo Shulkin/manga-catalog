@@ -1,4 +1,5 @@
 angular.module("authors.info.ctrl", [])
+.value("ALL", Number.MAX_VALUE)
 .controller("AuthorsInfoCtrl", function(
   Authors, // authors service
   $stateParams) {
@@ -15,6 +16,8 @@ angular.module("authors.info.ctrl", [])
       vm.gender = author.gender;
       vm.birthDate = author.birthDate;
       vm.series = author.series;
+      // show all genres in authors series
+      vm.allGenres = Authors.getAllGenres(author);
     })
     .error(function(err) {
       console.log("Error " + err);
