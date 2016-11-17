@@ -19,7 +19,7 @@ router.route("/")
   .exec(function(err, authors) {
     if (err) res.send(err);
     res.json(authors);
-  })
+  });
 })
 // add new author (POST http://localhost:3000/api/authors)
 .post(function(req, res) {
@@ -42,7 +42,13 @@ router.route("/:id")
 // find author by id (GET http://localhost:3000/api/authors/id)
 .get(function(req, res) {
   Author.findById(req.params.id)
-  .populate("series")
+  // deep population
+  .populate({
+    path: "series", // get list of series from this author
+    populate: {
+      path: "genre" // get each series genre
+    }
+  })
   .exec(function(err, author) {
     if (err) res.send(err);
     res.json(author);

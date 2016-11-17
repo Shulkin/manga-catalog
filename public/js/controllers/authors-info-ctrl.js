@@ -1,5 +1,4 @@
 angular.module("authors.info.ctrl", [])
-.value("ALL", Number.MAX_VALUE)
 .controller("AuthorsInfoCtrl", function(
   Authors, // authors service
   $stateParams) {
