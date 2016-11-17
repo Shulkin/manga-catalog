@@ -6,7 +6,8 @@ angular.module("series.service", [])
       return SeriesMock.createList(10);
     },
     get: function(id) {
-      return $http.get("/api/series/" + id);
+      return SeriesMock.createManga(id);
+      //return $http.get("/api/series/" + id);
     }
   };
 });

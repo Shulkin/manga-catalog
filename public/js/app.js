@@ -2,6 +2,8 @@
 var mangaApp = angular.module("manga.app", [
   "ui.router", // states router
   "manga.routes", // app states
+  // utilities functions
+  "utilities",
   // news controllers
   "news.ctrl",
   // news services
