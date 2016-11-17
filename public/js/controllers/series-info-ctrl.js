@@ -11,16 +11,15 @@ angular.module("series.info.ctrl", [])
   // constructor
   function init() {
     Series.get(id)
-    .success(function(manga) {
+    .then(function(manga) {
       vm.title = manga.title;
       vm.description = manga.description;
       vm.genreString = Genres.toString(manga.genre);
       vm.author = manga.author;
       vm.year = manga.year;
-    })
-    .error(function(err) {
+    }, function(err) {
       console.log("Error " + err);
-    })
+    });
   }
   // === Start module ===
   init();

@@ -2,8 +2,10 @@
 var mangaApp = angular.module("manga.app", [
   "ui.router", // states router
   "manga.routes", // app states
+  // global configuration variables
+  "manga.config",
   // utilities functions
-  "utilities",
+  "manga.utilities",
   // news controllers
   "news.ctrl",
   // news services

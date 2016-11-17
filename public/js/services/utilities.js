@@ -1,4 +1,4 @@
-angular.module("utilities", [])
+angular.module("manga.utilities", [])
 .factory("Utilities", function() {
   return {
     randomInt: function(min ,max) {

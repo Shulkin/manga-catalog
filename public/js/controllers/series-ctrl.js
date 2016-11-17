@@ -10,16 +10,12 @@ angular.module("series.ctrl", [])
   // constructor
   function init() {
     vm.list = []; // array of series
-    vm.list = Series.getAll();
-    /*
     Series.getAll()
-    .success(function(data) {
+    .then(function(data) {
       vm.list = data;
-    })
-    .error(function(err) {
+    }, function(err) {
       console.log("Error " + err);
     });
-    */
     // fill up columns names
     vm.columns = SERIES_HEADERS;
   }

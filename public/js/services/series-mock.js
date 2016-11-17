@@ -23,6 +23,7 @@ angular.module("series.mock", [])
       });
     }
     var author = {
+      // authors name is enough for mock manga
       _id: "author_0",
       name: AUTHORS[Utilities.randomInt(0, AUTHORS.length - 1)]
     };
@@ -34,7 +35,6 @@ angular.module("series.mock", [])
       year: Utilities.randomInt(1950, 2014),
       // simulate populate from Mongo find function
       genre: genres,
-      // authors name is enough for mock manga
       author: author
     };
     return result;
