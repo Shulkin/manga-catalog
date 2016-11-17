@@ -1,7 +1,7 @@
 angular.module("series.info.ctrl", [])
 .controller("SeriesInfoCtrl", function(
-  Series, // series service
   Genres, // genres service
+  Series, // series service
   $stateParams) {
   // === Variables ===
   var vm = this;

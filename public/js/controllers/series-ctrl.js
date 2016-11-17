@@ -2,8 +2,8 @@ angular.module("series.ctrl", [])
 .value("SERIES_HEADERS", ["Title", "Genre", "Year"])
 .controller("SeriesCtrl", function(
   SERIES_HEADERS, // columns names
-  Series, // series service
-  Genres) { // genres service
+  Genres, // genres service
+  Series) { // series service
   // === Variables ===
   var vm = this;
   // === Private ===
@@ -24,7 +24,7 @@ angular.module("series.ctrl", [])
   init();
   // === Public ===
   // represent manga genre as string
-  vm.toString = function(genre) {
+  vm.genreToString = function(genre) {
     return Genres.toString(genre);
   }
 });

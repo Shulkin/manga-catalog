@@ -53,6 +53,21 @@
 <div class="row">
   <div class="col-sm-12">
     <!-- Manga table -->
-    {{author.series}}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table table-striped">
+          <tr>
+            <th ng-repeat="name in author.seriesColumns">
+              <h4>{{name}}</h4>
+            </th>
+          </tr>
+          <tr ng-repeat="manga in author.series">
+            <td><a ui-sref="series-info({id: manga._id})">{{manga.title}}</a></td>
+            <td>{{author.genreToString(manga.genre)}}</td>
+            <td>{{manga.year}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

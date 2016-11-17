@@ -10,7 +10,7 @@
     <!-- Manga title -->
     <td><a ui-sref="series-info({id: manga._id})">{{manga.title}}</a></td>
     <!-- Names of the manga genre -->
-    <td>{{series.toString(manga.genre)}}</td>
+    <td>{{series.genreToString(manga.genre)}}</td>
     <!-- Year of writing -->
     <td>{{manga.year}}</td>
   </tr>

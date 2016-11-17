@@ -1,5 +1,7 @@
 angular.module("authors.info.ctrl", [])
 .controller("AuthorsInfoCtrl", function(
+  SERIES_HEADERS, // from series controller
+  Genres, // genres service
   Authors, // authors service
   $stateParams) {
   // === Variables ===
@@ -17,6 +19,8 @@ angular.module("authors.info.ctrl", [])
       vm.series = author.series;
       // show all genres in authors series
       vm.allGenres = Authors.getAllGenres(author);
+      // column headers for manga table
+      vm.seriesColumns = SERIES_HEADERS;
     })
     .error(function(err) {
       console.log("Error " + err);
@@ -25,4 +29,8 @@ angular.module("authors.info.ctrl", [])
   // === Start module ===
   init();
   // === Public ===
+  // represent author's works genre as string
+  vm.genreToString = function(genre) {
+    return Genres.toString(genre);
+  }
 });

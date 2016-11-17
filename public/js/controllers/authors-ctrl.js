@@ -15,7 +15,8 @@ angular.module("authors.ctrl", [])
       // create new field for most used genres in author's works
       for (var i = 0; i < vm.list.length; i++) {
         // select only 5 most used genres!
-        vm.list[i].mostNumerousGenre = Authors.getMostNumerousGenre(vm.list[i], 5);
+        vm.list[i].mostNumerousGenre =
+          Authors.getMostNumerousGenre(vm.list[i], 5);
       }
     })
     .error(function(err) {
