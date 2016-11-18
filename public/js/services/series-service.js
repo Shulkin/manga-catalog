@@ -6,20 +6,26 @@ angular.module("series.service", [])
   // === Private ===
   return {
     getAll: function() {
-      // use 'then' in $http to get rid of success/error handlers
-      return $http.get("/api/series").then(function(response) {
-        // swap response.data with generated mock data
-        if (MOCK) return SeriesMock.createList(MOCK_SERIES_COUNT)
-        else
-          // still need to wait for answer from server
+      if (MOCK) {
+        return new Promise(function(resolve, reject) {
+          resolve(SeriesMock.createList(MOCK_SERIES_COUNT));
+        });
+      } else {
+        return $http.get("/api/series").then(function(response) {
           return response.data;
-      });
+        });
+      }
     },
     get: function(id) {
-      return $http.get("/api/series/" + id).then(function(response) {
-        if (MOCK) return SeriesMock.createManga(id)
-        else return response.data;
-      });
+      if (MOCK) {
+        return new Promise(function(resolve, reject) {
+          resolve(SeriesMock.createManga(id));
+        });
+      } else {
+        return $http.get("/api/series/" + id).then(function(response) {
+          return response.data;
+        });
+      }
     }
   };
 });

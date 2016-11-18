@@ -22,16 +22,26 @@ angular.module("authors.service", [])
   // === Public ===
   return {
     getAll: function() {
-      return $http.get("/api/authors").then(function(response) {
-        if (MOCK) return AuthorsMock.createList(MOCK_AUTHORS_COUNT)
-        else return response.data;
-      });
+      if (MOCK) {
+        return new Promise(function(resolve, reject) {
+          resolve(AuthorsMock.createList(MOCK_AUTHORS_COUNT));
+        });
+      } else {
+        return $http.get("/api/authors").then(function(response) {
+          return response.data;
+        });
+      }
     },
     get: function(id) {
-      return $http.get("/api/authors/" + id).then(function(response) {
-        if (MOCK) return AuthorsMock.createAuthor(id)
-        else return response.data;
-      });
+      if (MOCK) {
+        return new Promise(function(resolve, reject) {
+          resolve(AuthorsMock.createAuthor(id));
+        });
+      } else {
+        return $http.get("/api/authors/" + id).then(function(response) {
+          return response.data;
+        });
+      }
     },
     getMostNumerousGenre: function(author, maxNumber) {
       var allUsed = getAllGenresAppearance(author);
