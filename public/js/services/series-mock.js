@@ -7,26 +7,21 @@ angular.module("series.mock", [])
 .value("MANGA_GENRES", [
   "Shounen", "Action", "Adventure", "Horror", "Drama", "Comedy", "Seinen"
 ])
-.value("AUTHORS", [
-  "Oda Eiichiro", "Kishimoto Masashi", "Araki Hirohiko", "Akira Toriyama"
-])
 .factory("SeriesMock", function(
-  MANGA_TITLES, MANGA_GENRES, AUTHORS, Utilities) {
+  MANGA_TITLES, MANGA_GENRES, Utilities, AuthorsMock) {
   // === Private ===
   function generateMangaObject(id) {
+    // generate genres
     var genres = [];
-    var genresNum = Utilities.randomInt(1, 10);
+    var genresNum = Utilities.randomInt(1, MANGA_GENRES.length);
     for (var i = 0; i < genresNum; i++) {
       genres.push({
         _id: "genre_" + i,
         name: MANGA_GENRES[Utilities.randomInt(0, MANGA_GENRES.length - 1)]
       });
     }
-    var author = {
-      // authors name is enough for mock manga
-      _id: "author_0",
-      name: AUTHORS[Utilities.randomInt(0, AUTHORS.length - 1)]
-    };
+    // get author mock from AuthorsMock service (only name and id!)
+    var author = AuthorsMock.createSimpleAuthor("0");
     var result = {
       // generated _ids must be unique
       _id: "manga_" + id,

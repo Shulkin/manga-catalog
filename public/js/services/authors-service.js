@@ -1,5 +1,8 @@
 angular.module("authors.service", [])
-.factory("Authors", function(MOCK, AuthorsMock, $http) {
+.factory("Authors", function(
+  MOCK,
+  MOCK_AUTHORS_COUNT,
+  AuthorsMock, $http) {
   // === Private ===
   function getAllGenresAppearance(author) {
     var allUsed = new Object();
@@ -20,7 +23,7 @@ angular.module("authors.service", [])
   return {
     getAll: function() {
       return $http.get("/api/authors").then(function(response) {
-        if (MOCK) return AuthorsMock.createList(10)
+        if (MOCK) return AuthorsMock.createList(MOCK_AUTHORS_COUNT)
         else return response.data;
       });
     },

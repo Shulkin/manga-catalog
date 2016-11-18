@@ -1,6 +1,7 @@
 angular.module("series.service", [])
 .factory("Series", function(
   MOCK, // global config variable, do we need to use mock data?
+  MOCK_SERIES_COUNT, // how many mock series generate
   SeriesMock, $http) {
   // === Private ===
   return {
@@ -8,7 +9,7 @@ angular.module("series.service", [])
       // use 'then' in $http to get rid of success/error handlers
       return $http.get("/api/series").then(function(response) {
         // swap response.data with generated mock data
-        if (MOCK) return SeriesMock.createList(10)
+        if (MOCK) return SeriesMock.createList(MOCK_SERIES_COUNT)
         else
           // still need to wait for answer from server
           return response.data;
