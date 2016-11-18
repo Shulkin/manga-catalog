@@ -1,7 +1,12 @@
 <nav aria-label="Pages in series table">
   <ul class="pagination">
-    <li ng-repeat="page in series.pages">
-      <a ng-click="series.setCurrentPage($index)">{{$index}}</a>
+    <!-- Active tab on selected page -->
+    <li ng-repeat="page in series.pages"
+      ng-class="{'active': ($index === series.currentIndex)}">
+      <!-- Change page on click -->
+      <a class="my-cursor-pointer"
+        ng-click="series.setCurrentPage($index)">{{$index}}
+      </a>
     </li>
   </ul>
 </nav>

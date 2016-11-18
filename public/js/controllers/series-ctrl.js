@@ -47,7 +47,8 @@ angular.module("series.ctrl", [])
     return Genres.toString(genre);
   }
   // select current page
-  vm.setCurrentPage = function(id) {
-    vm.currentPage = vm.pages[id];
+  vm.setCurrentPage = function(index) {
+    vm.currentIndex = index; // save current page index
+    vm.currentPage = vm.pages[index];
   }
 });
