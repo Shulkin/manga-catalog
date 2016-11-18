@@ -1,3 +1,10 @@
+<nav aria-label="Pages in series table">
+  <ul class="pagination">
+    <li ng-repeat="page in series.pages">
+      <a ng-click="series.setCurrentPage($index)">{{$index}}</a>
+    </li>
+  </ul>
+</nav>
 <table class="table table-striped">
   <!-- Columns headers -->
   <tr>
@@ -6,7 +13,7 @@
     </th>
   </tr>
   <!-- Actual table content -->
-  <tr ng-repeat="manga in series.list">
+  <tr ng-repeat="manga in series.currentPage">
     <!-- Manga title -->
     <td><a ui-sref="series-info({id: manga._id})">{{manga.title}}</a></td>
     <!-- Names of the manga genre -->
