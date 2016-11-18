@@ -24,13 +24,6 @@ angular.module("authors.mock", [])
     };
     return result;
   }
-  function generateSimpleAuthorObject(id) {
-    var result = {
-      _id: "author_" + id,
-      name: AUTHOR_NAMES[Utilities.randomInt(0, AUTHOR_NAMES.length - 1)]
-    };
-    return result;
-  }
   // === Public ===
   return {
     // create list of authors
@@ -46,9 +39,5 @@ angular.module("authors.mock", [])
     createAuthor: function(id) {
       return generateAuthorObject(id);
     },
-    // create author without populate series list
-    createSimpleAuthor: function(id) {
-      return generateSimpleAuthorObject(id);
-    }
   };
 });

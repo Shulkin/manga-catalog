@@ -8,8 +8,16 @@ angular.module("series.mock", [])
   "Shounen", "Action", "Adventure", "Horror", "Drama", "Comedy", "Seinen"
 ])
 .factory("SeriesMock", function(
-  MANGA_TITLES, MANGA_GENRES, Utilities, AuthorsMock) {
+  MANGA_TITLES, MANGA_GENRES, AUTHOR_NAMES, Utilities) {
   // === Private ===
+  function generateSimpleAuthorObject(id) {
+    // don't populate series list!
+    var result = {
+      _id: "author_" + id,
+      name: AUTHOR_NAMES[Utilities.randomInt(0, AUTHOR_NAMES.length - 1)]
+    };
+    return result;
+  }
   function generateMangaObject(id) {
     // generate genres
     var genres = [];
@@ -20,8 +28,8 @@ angular.module("series.mock", [])
         name: MANGA_GENRES[Utilities.randomInt(0, MANGA_GENRES.length - 1)]
       });
     }
-    // get author mock from AuthorsMock service (only name and id!)
-    var author = AuthorsMock.createSimpleAuthor("0");
+    // create simple author with only name
+    var author = generateSimpleAuthorObject("0");
     var result = {
       // generated _ids must be unique
       _id: "manga_" + id,
