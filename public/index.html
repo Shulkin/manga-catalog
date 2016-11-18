@@ -63,9 +63,10 @@
         <div class="col-sm-3">
           <!-- Main menu -->
           <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="active"><a ui-sref="news">Home</a></li>
-            <li role="presentation"><a ui-sref="series">Series</a></li>
-            <li role="presentation"><a ui-sref="authors">Mangaka</a></li>
+            <!-- ui-sref-active="active" in <li> to highlight on ui-sref -->
+            <li ui-sref-active="active"><a ui-sref="news">Home</a></li>
+            <li ui-sref-active="active"><a ui-sref="series">Series</a></li>
+            <li ui-sref-active="active"><a ui-sref="authors">Mangaka</a></li>
           </ul>
         </div>
         <div class="col-sm-9">
