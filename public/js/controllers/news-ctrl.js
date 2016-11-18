@@ -7,7 +7,12 @@ angular.module("news.ctrl", [])
   // constructor
   function init() {
     vm.list = []; // array of news
-    vm.list = News.getAll();
+    News.getAll()
+    .then(function(data) {
+      vm.list = data;
+    }, function(err) {
+      console.log("Error " + err);
+    });
   }
   // === Start module ===
   init();
