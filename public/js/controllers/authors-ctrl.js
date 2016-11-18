@@ -10,7 +10,7 @@ angular.module("authors.ctrl", [])
   function init() {
     vm.list = []; // array of authors
     Authors.getAll()
-    .success(function(data) {
+    .then(function(data) {
       vm.list = data;
       // create new field for most used genres in author's works
       for (var i = 0; i < vm.list.length; i++) {
@@ -18,9 +18,8 @@ angular.module("authors.ctrl", [])
         vm.list[i].mostNumerousGenre =
           Authors.getMostNumerousGenre(vm.list[i], 5);
       }
-    })
-    .error(function(err) {
-      console.log("Error " + err)
+    }, function(err) {
+      console.log("Error " + err);
     });
     // fill up columns names
     vm.columns = AUTHORS_HEADERS;

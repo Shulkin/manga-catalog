@@ -1,5 +1,5 @@
 angular.module("authors.service", [])
-.factory("Authors", function($http) {
+.factory("Authors", function(MOCK, AuthorsMock, $http) {
   // === Private ===
   function getAllGenresAppearance(author) {
     var allUsed = new Object();
@@ -19,10 +19,16 @@ angular.module("authors.service", [])
   // === Public ===
   return {
     getAll: function() {
-      return $http.get("/api/authors");
+      return $http.get("/api/authors").then(function(response) {
+        if (MOCK) return AuthorsMock.createList(10)
+        else return response.data;
+      });
     },
     get: function(id) {
-      return $http.get("/api/authors/" + id);
+      return $http.get("/api/authors/" + id).then(function(response) {
+        if (MOCK) return AuthorsMock.createAuthor(id)
+        else return response.data;
+      });
     },
     getMostNumerousGenre: function(author, maxNumber) {
       var allUsed = getAllGenresAppearance(author);

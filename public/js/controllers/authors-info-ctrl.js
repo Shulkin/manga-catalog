@@ -12,7 +12,7 @@ angular.module("authors.info.ctrl", [])
   // constructor
   function init() {
     Authors.get(id)
-    .success(function(author) {
+    .then(function(author) {
       vm.name = author.name;
       vm.gender = author.gender;
       vm.birthDate = author.birthDate;
@@ -21,10 +21,9 @@ angular.module("authors.info.ctrl", [])
       vm.allGenres = Authors.getAllGenres(author);
       // column headers for manga table
       vm.seriesColumns = SERIES_HEADERS;
-    })
-    .error(function(err) {
+    }, function(err) {
       console.log("Error " + err);
-    })
+    });
   }
   // === Start module ===
   init();

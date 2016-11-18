@@ -1,2 +1,2 @@
 angular.module("manga.config", [])
-.value("MOCK", true);
+.value("MOCK", false);
