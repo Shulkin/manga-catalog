@@ -48,4 +48,8 @@ angular.module("series.ctrl", [])
     vm.pageIndex = index; // save current page index
     vm.currentPage = vm.pages[index];
   }
+  vm.goSearch = function() {
+    var query = vm.searchQuery;
+    alert("goSearch: " + query);
+  }
 });
