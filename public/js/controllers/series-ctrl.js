@@ -23,12 +23,17 @@ angular.module("series.ctrl", [])
   }
   // constructor
   function init() {
+    // original data
+    vm.response = [];
     // array of series divided by pages
     vm.pages = [[]]; // one empty page
     Series.getAll()
     .then(function(data) {
-      reload(data);
-      // first page by default
+      // save data copy(!) from server
+      vm.response = data.slice();
+      // divide data to pages
+      reload(data); // 'data' will be empty after reload (!)
+      // set first page by default
       vm.setCurrentPage(0);
     }, function(err) {
       console.log("Error " + err);
@@ -50,6 +55,20 @@ angular.module("series.ctrl", [])
   }
   vm.goSearch = function() {
     var query = vm.searchQuery;
-    alert("goSearch: " + query);
+    // set empty query if undefined
+    if (query === undefined) query = "";
+    // apply full-text search filter
+    var filtered = []; // filtered array
+    for (var i = 0; i < vm.response.length; i++) {
+      var obj = vm.response[i];
+      // manga passed filter if title contains query string
+      if (obj.title.indexOf(query) !== -1) {
+        filtered.push(obj);
+      }
+    }
+    // reload filtered data
+    reload(filtered);
+    // return to first page
+    vm.setCurrentPage(0);
   }
 });
