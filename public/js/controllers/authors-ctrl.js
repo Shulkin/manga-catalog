@@ -30,12 +30,15 @@ angular.module("authors.ctrl", [])
   }
   // constructor
   function init() {
+    vm.response = [];
     // array of authors
     vm.pages = [[]]; // one empty page
     Authors.getAll()
     .then(function(data) {
-      reload(data);
-      vm.setCurrentPage(0);
+      // slice() i.e. copy data is mandatory here!
+      vm.response = data.slice();
+      reload(data); // because after reload 'data' will be empty
+      vm.setCurrentPage(0); // first page
     }, function(err) {
       console.log("Error " + err);
     });
@@ -49,5 +52,20 @@ angular.module("authors.ctrl", [])
   vm.setCurrentPage = function(index) {
     vm.pageIndex = index; // save current page index
     vm.currentPage = vm.pages[index];
+  }
+  vm.goSearch = function(query) {
+    var query = vm.searchQuery;
+    if (query === undefined) query = "";
+    var filtered = [];
+    for (var i = 0; i < vm.response.length; i++) {
+      var obj = vm.response[i];
+      // filter author by name
+      if (obj.name.indexOf(query) !== -1) {
+        filtered.push(obj);
+      }
+    }
+    reload(filtered);
+    // return to first page
+    vm.setCurrentPage(0);
   }
 });

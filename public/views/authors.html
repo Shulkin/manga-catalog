@@ -1,3 +1,9 @@
+<div>
+  <h4>Search <b>Name</b> for</n4>&nbsp<nobr>
+  <!-- Text-search in manga titles -->
+  <input type="text" ng-model="authors.searchQuery">&nbsp
+  <button type="button" ng-click="authors.goSearch()">Go</button>
+</div>
 <nav aria-label="Pages in authors table">
   <ul class="pagination">
     <li ng-repeat="page in authors.pages"
