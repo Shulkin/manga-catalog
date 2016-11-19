@@ -1,3 +1,14 @@
+<nav aria-label="Pages in authors table">
+  <ul class="pagination">
+    <li ng-repeat="page in authors.pages"
+      ng-class="{'active': ($index === authors.pageIndex)}">
+      <a class="my-cursor-pointer"
+        ng-click="authors.setCurrentPage($index)">
+        {{$index}}
+      </a>
+    </li>
+  </ul>
+</nav>
 <table class="table table-striped">
   <!-- Columns headers -->
   <tr>
@@ -6,7 +17,7 @@
     </th>
   </tr>
   <!-- Actual table content -->
-  <tr ng-repeat="author in authors.list">
+  <tr ng-repeat="author in authors.currentPage">
     <!-- Authors name -->
     <td><a ui-sref="authors-info({id: author._id})">{{author.name}}</a></td>
     <!-- The number of series, which he wrote -->

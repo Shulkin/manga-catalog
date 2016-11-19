@@ -3,7 +3,7 @@ angular.module("series.ctrl", [])
 .value("SERIES_HEADERS", ["Title", "Genre", "Year"])
 .controller("SeriesCtrl", function(
   SERIES_HEADERS, // columns names
-  SERIES_PER_PAGE, // number of manga per page
+  SERIES_PER_PAGE, // number of mangas per page
   Utilities, // some useful functions
   Genres, // genres service
   Series) { // series service
@@ -13,13 +13,10 @@ angular.module("series.ctrl", [])
   Array.prototype.isEmpty = function() {
     return this.length < 1;
   }
-  // split list to pages
-  function split(data) {
-    return Utilities.split(data, SERIES_PER_PAGE);
-  }
   // reload pages from scratch data
   function reload(data) {
-    vm.pages = split(data);
+    // split list to pages
+    vm.pages = Utilities.split(data, SERIES_PER_PAGE);
     if (vm.pages.isEmpty()) {
       vm.pages.push([]); // push one empty
     }
@@ -32,7 +29,7 @@ angular.module("series.ctrl", [])
     .then(function(data) {
       reload(data);
       // first page by default
-      vm.setCurrentPage(0)
+      vm.setCurrentPage(0);
     }, function(err) {
       console.log("Error " + err);
     });
@@ -48,7 +45,7 @@ angular.module("series.ctrl", [])
   }
   // select current page
   vm.setCurrentPage = function(index) {
-    vm.currentIndex = index; // save current page index
+    vm.pageIndex = index; // save current page index
     vm.currentPage = vm.pages[index];
   }
 });

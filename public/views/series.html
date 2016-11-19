@@ -2,10 +2,11 @@
   <ul class="pagination">
     <!-- Active tab on selected page -->
     <li ng-repeat="page in series.pages"
-      ng-class="{'active': ($index === series.currentIndex)}">
+      ng-class="{'active': ($index === series.pageIndex)}">
       <!-- Change page on click -->
       <a class="my-cursor-pointer"
-        ng-click="series.setCurrentPage($index)">{{$index}}
+        ng-click="series.setCurrentPage($index)">
+        {{$index}}
       </a>
     </li>
   </ul>
