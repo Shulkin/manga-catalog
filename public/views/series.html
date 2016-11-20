@@ -1,15 +1,15 @@
+<!--
 <div>
   <h4>Search <b>Title</b> for</n4>&nbsp<nobr>
-  <!-- Text-search in manga titles -->
   <input type="text" ng-model="series.searchQuery">&nbsp
   <button type="button" ng-click="series.goSearch()">Go</button>
 </div>
+-->
+<!--
 <nav aria-label="Pages in series table">
   <ul class="pagination">
-    <!-- Active tab on selected page -->
     <li ng-repeat="page in series.pages"
       ng-class="{'active': ($index === series.pageIndex)}">
-      <!-- Change page on click -->
       <a class="my-cursor-pointer"
         ng-click="series.setCurrentPage($index)">
         {{$index}}
@@ -17,9 +17,17 @@
     </li>
   </ul>
 </nav>
-<table class="table table-striped">
-  <!-- Columns headers -->
-  <tr>
+-->
+<form>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon"><i class="fa fa-search"></i></div>
+      <input type="text" class="form-control" placeholder="Search manga" ng-model="series.searchQuery">
+    </div>
+  </div>
+</form>
+<table class="table table-striped table-hover table-bordered">
+  <tr> <!-- Columns headers -->
     <th ng-repeat="column in series.columns">
       <!-- Show only if column is sortable -->
       <div ng-show="column.sortable">
@@ -36,7 +44,7 @@
     </th>
   </tr>
   <!-- Actual table content -->
-  <tr ng-repeat="manga in series.currentPage | orderBy:series.sortType:series.sortReverse">
+  <tr ng-repeat="manga in series.list | orderBy:series.sortType:series.sortReverse | filter: series.searchQuery">
     <!-- Manga title -->
     <td><a ui-sref="series-info({id: manga._id})">{{manga.title}}</a></td>
     <!-- Names of the manga genre -->
@@ -45,3 +53,17 @@
     <td>{{manga.year}}</td>
   </tr>
 </table>
+<!--
+<pagination
+  total-items="series.list.length"
+  ng-model="series.currentPage"
+  max-size="5"
+  boundary-links="true"
+  items-per-page="series.numPerPage"
+  class="pagination-sm"
+  previous-text="&lsaquo;"
+  next-text="&rsaquo;"
+  first-text="&laquo;"
+  last-text="&raquo;">
+</pagination>
+-->

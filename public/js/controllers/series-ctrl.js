@@ -13,14 +13,24 @@ angular.module("series.ctrl", [])
   Series) { // series service
   // === Variables ===
   var vm = this;
-  // Sort options
+  // order and filter table data
   vm.sortType = "title"; // sort by title
   vm.sortReverse = false; // ascending order
+  vm.searchQuery = ""; // filter nothing by default
+  // fill up columns names
+  vm.columns = SERIES_COLUMNS;
+  // number of manga per page in table
+  // vm.numPerPage = SERIES_PER_PAGE;
+  // first page by default
+  // vm.currentPage = 1;
   // === Private ===
+  /*
   Array.prototype.isEmpty = function() {
     return this.length < 1;
   }
+  */
   // reload pages from scratch data
+  /*
   function reload(data) {
     // split list to pages
     vm.pages = Utilities.split(data, SERIES_PER_PAGE);
@@ -28,25 +38,27 @@ angular.module("series.ctrl", [])
       vm.pages.push([]); // push one empty
     }
   }
+  */
   // constructor
   function init() {
+    // list of series
+    vm.list = [];
     // original data
-    vm.response = [];
+    // vm.response = [];
     // array of series divided by pages
-    vm.pages = [[]]; // one empty page
+    // vm.pages = [[]]; // one empty page
     Series.getAll()
     .then(function(data) {
+      vm.list = data;
       // save data copy(!) from server
-      vm.response = data.slice();
+      // vm.response = data.slice();
       // divide data to pages
-      reload(data); // 'data' will be empty after reload (!)
+      // reload(data); // 'data' will be empty after reload (!)
       // set first page by default
-      vm.setCurrentPage(0);
+      // vm.setCurrentPage(0);
     }, function(err) {
       console.log("Error " + err);
     });
-    // fill up columns names
-    vm.columns = SERIES_COLUMNS;
   }
   // === Start module ===
   init();
@@ -55,11 +67,24 @@ angular.module("series.ctrl", [])
   vm.genreToString = function(genre) {
     return Genres.toString(genre);
   }
+  /*
+  // paginate filter for ui.bootstrap pagination
+  vm.paginate = function(value) {
+    var begin, end, index;
+    begin = (vm.currentPage - 1) * vm.numPerPage;
+    end = begin + vm.numPerPage;
+    index = vm.list.indexOf(value);
+    return (begin <= index && index < end);
+  }
+  */
   // select current page
+  /*
   vm.setCurrentPage = function(index) {
     vm.pageIndex = index; // save current page index
     vm.currentPage = vm.pages[index];
   }
+  */
+  /*
   vm.goSearch = function() {
     var query = vm.searchQuery;
     // set empty query if undefined
@@ -78,4 +103,5 @@ angular.module("series.ctrl", [])
     // return to first page
     vm.setCurrentPage(0);
   }
+  */
 });
