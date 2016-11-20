@@ -1,14 +1,21 @@
 angular.module("series.ctrl", [])
 .value("SERIES_PER_PAGE", 10)
-.value("SERIES_HEADERS", ["Title", "Genre", "Year"])
+.value("SERIES_COLUMNS", [
+  {header: "Title", fieldName: "title", sortable: true},
+  {header: "Genre", fieldName: "genre", sortable: false},
+  {header: "Year", fieldName: "year", sortable: true},
+])
 .controller("SeriesCtrl", function(
-  SERIES_HEADERS, // columns names
+  SERIES_COLUMNS, // columns names and info
   SERIES_PER_PAGE, // number of mangas per page
   Utilities, // some useful functions
   Genres, // genres service
   Series) { // series service
   // === Variables ===
   var vm = this;
+  // Sort options
+  vm.sortType = "title"; // sort by title
+  vm.sortReverse = false; // ascending order
   // === Private ===
   Array.prototype.isEmpty = function() {
     return this.length < 1;
@@ -39,7 +46,7 @@ angular.module("series.ctrl", [])
       console.log("Error " + err);
     });
     // fill up columns names
-    vm.columns = SERIES_HEADERS;
+    vm.columns = SERIES_COLUMNS;
   }
   // === Start module ===
   init();

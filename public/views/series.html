@@ -20,16 +20,23 @@
 <table class="table table-striped">
   <!-- Columns headers -->
   <tr>
-    <th ng-repeat="name in series.columns">
-      <h4>
-        {{name}}
-        <i class="fa fa-fw fa-sort-asc"></i>
-        <i class="fa fa-fw fa-sort-desc"></i>
-      </h4>
+    <th ng-repeat="column in series.columns">
+      <!-- Show only if column is sortable -->
+      <div ng-show="column.sortable">
+        <a class="my-cursor-pointer" ng-click="series.sortType = column.fieldName; series.sortReverse = !series.sortReverse">
+          <b>{{column.header}}</b>
+          <span ng-show="series.sortType === column.fieldName && !series.sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="series.sortType === column.fieldName && series.sortReverse" class="fa fa-caret-up"></span>
+        </a>
+      </div>
+      <!-- Otherwise show simple header -->
+      <div ng-hide="column.sortable">
+        <b>{{column.header}}</b>
+      </div>
     </th>
   </tr>
   <!-- Actual table content -->
-  <tr ng-repeat="manga in series.currentPage">
+  <tr ng-repeat="manga in series.currentPage | orderBy:series.sortType:series.sortReverse">
     <!-- Manga title -->
     <td><a ui-sref="series-info({id: manga._id})">{{manga.title}}</a></td>
     <!-- Names of the manga genre -->
