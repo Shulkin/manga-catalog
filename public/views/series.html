@@ -21,7 +21,11 @@
   <!-- Columns headers -->
   <tr>
     <th ng-repeat="name in series.columns">
-      <h4>{{name}}</h4>
+      <h4>
+        {{name}}
+        <i class="fa fa-fw fa-sort-asc"></i>
+        <i class="fa fa-fw fa-sort-desc"></i>
+      </h4>
     </th>
   </tr>
   <!-- Actual table content -->
