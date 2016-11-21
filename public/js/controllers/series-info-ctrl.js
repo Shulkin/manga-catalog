@@ -8,6 +8,11 @@ angular.module("series.info.ctrl", [])
   // receive manga id from url
   var id = $stateParams.id;
   // === Private ===
+  function initEditing() {
+    vm.editing = new Object();
+    vm.editing['title'] = false;
+    vm.editing['description'] = false;
+  }
   // constructor
   function init() {
     Series.get(id)
@@ -20,11 +25,22 @@ angular.module("series.info.ctrl", [])
     }, function(err) {
       console.log("Error " + err);
     });
+    initEditing();
   }
   // === Start module ===
   init();
   // === Public ===
   vm.edit = function(field) {
     alert("Edit field '" + field + "' in Manga '" + vm.title + "'");
+    vm.editing[field] = true;
+    // focus input on edit
+    angular.element('#' + field).focus();
+  }
+  vm.isEdit = function(field) {
+    return vm.editing[field];
+  }
+  vm.confirmChange = function(field) {
+    alert("Change confirmed!");
+    vm.editing[field] = false;
   }
 });
