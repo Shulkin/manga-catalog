@@ -32,4 +32,7 @@ angular.module("authors.info.ctrl", [])
   vm.genreToString = function(genre) {
     return Genres.toString(genre);
   }
+  vm.edit = function(field) {
+    alert("Edit field '" + field + "' in Author '" + vm.name + "'");
+  }
 });
