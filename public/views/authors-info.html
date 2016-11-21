@@ -1,7 +1,14 @@
 <div class="row">
   <!-- Whole width -->
   <div class="col-sm-12">
-    <h2>{{author.name}}</h2>
+    <h2>
+      {{author.name}}
+      &nbsp;
+      <!-- Edit button -->
+      <small><a class="my-cursor-pointer"
+        ng-click="author.edit('name')">Edit</a>
+      </small>
+    </h2>
   </div>
 </div>
 <div class="row">
@@ -21,7 +28,13 @@
     <!-- Birth date -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Birth Date</h3>
+        <h3 class="panel-title">
+          Birth Date
+          &nbsp;
+          <small><a class="my-cursor-pointer"
+            ng-click="author.edit('birthDate')">Edit</a>
+          </small>
+        </h3>
       </div>
       <div class="panel-body">
         <!-- Date like 'September 3, 2010' -->
@@ -33,7 +46,13 @@
     <!-- Gender -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Gender</h3>
+        <h3 class="panel-title">
+          Gender
+          &nbsp;
+          <small><a class="my-cursor-pointer"
+            ng-click="author.edit('gender')">Edit</a>
+          </small>
+        </h3>
       </div>
       <div class="panel-body">
         {{author.gender}}
@@ -42,7 +61,7 @@
     <!-- Genres -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Genres</h3>
+        <h3 class="panel-title">Genres</h3>
       </div>
       <div class="panel-body">
         {{author.allGenres}}
@@ -54,6 +73,15 @@
   <div class="col-sm-12">
     <!-- Manga table -->
     <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Mangas
+          &nbsp;
+          <small><a class="my-cursor-pointer"
+            ng-click="author.edit('series')">Edit</a>
+          </small>
+        </h3>
+      </div>
       <div class="panel-body">
         <table class="table table-striped">
           <tr>

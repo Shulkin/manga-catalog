@@ -1,7 +1,18 @@
 <div class="row">
   <!-- Whole width -->
   <div class="col-sm-12">
-    <h2>{{manga.title}}</h2>
+    <span ng-hide="manga.isEdit('title')">
+      <b>{{manga.title}}</b>
+    </span>
+    <span ng-show="manga.isEdit('title')">
+      <!-- id is mandatory to focus() on element, should be the same as fieldName for simplicity -->
+      <input id="title" type="text" ng-model="manga.title" ng-blur="manga.confirmChange('title')">
+    </span>
+    &nbsp;
+    <!-- Edit button -->
+    <small><a class="my-cursor-pointer"
+      ng-click="manga.edit('title')">Edit</a>
+    </small>
   </div>
 </div>
 <div class="row">
@@ -10,10 +21,19 @@
     <!-- Description panel -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Description</h3>
+        <b class="panel-title">Description</b>
+        &nbsp;
+        <small><a class="my-cursor-pointer"
+          ng-click="manga.edit('description')">Edit</a>
+        </small>
       </div>
       <div class="panel-body">
-        {{manga.description}}
+        <span ng-hide="manga.isEdit('description')">
+          {{manga.description}}
+        </span>
+        <span ng-show="manga.isEdit('description')">
+          <textarea id="description" rows="8" cols="40" ng-model="manga.description" ng-blur="manga.confirmChange('description')"></textarea>
+        </span>
       </div>
     </div>
   </div>
@@ -21,7 +41,9 @@
     <!-- Manga image -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Image</h3>
+        <h3 class="panel-title">
+          Image
+        </h3>
       </div>
       <div class="panel-body">
         <!-- Center the image in div -->
@@ -32,7 +54,9 @@
     <!-- Series genre -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Genre</h3>
+        <h3 class="panel-title">
+          Genre
+        </h3>
       </div>
       <div class="panel-body">
         {{manga.genreString}}
@@ -41,7 +65,9 @@
     <!-- Link to author -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Author</h3>
+        <h3 class="panel-title">
+          Author
+        </h3>
       </div>
       <div class="panel-body">
         <a ui-sref="authors-info({id: manga.author._id})">
@@ -52,7 +78,9 @@
     <!-- Year of writing -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Year</h3>
+        <h3 class="panel-title">
+          Year
+        </h3>
       </div>
       <div class="panel-body">
         {{manga.year}}
