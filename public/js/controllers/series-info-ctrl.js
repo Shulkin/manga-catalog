@@ -24,4 +24,7 @@ angular.module("series.info.ctrl", [])
   // === Start module ===
   init();
   // === Public ===
+  vm.edit = function(field) {
+    alert("Edit field '" + field + "' in Manga '" + vm.title + "'");
+  }
 });
