@@ -1,4 +1,7 @@
-angular.module("series.ctrl", [])
+angular.module("series.ctrl", [
+  // third-party directive for table data pagination
+  "angularUtils.directives.dirPagination" // by Michael Bromley
+])
 .value("SERIES_PER_PAGE", 10)
 .value("SERIES_COLUMNS", [
   {header: "Title", fieldName: "title", sortable: true},
@@ -20,7 +23,7 @@ angular.module("series.ctrl", [])
   // fill up columns names
   vm.columns = SERIES_COLUMNS;
   // number of manga per page in table
-  // vm.numPerPage = SERIES_PER_PAGE;
+  vm.perPage = SERIES_PER_PAGE;
   // first page by default
   // vm.currentPage = 1;
   // === Private ===

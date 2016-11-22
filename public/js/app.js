@@ -1,9 +1,9 @@
 // inject all modules to main module
 var mangaApp = angular.module("manga.app", [
-  "ui.router", // states router
-  "manga.routes", // app states
-  // third-party directive for table data pagination
-  "angularUtils.directives.dirPagination", // by Michael Bromley
+  // states router
+  "ui.router",
+  // app states
+  "manga.routes",
   // global configuration variables
   "manga.config",
   // utilities functions

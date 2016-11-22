@@ -44,7 +44,7 @@
     </th>
   </tr>
   <!-- Actual table content -->
-  <tr ng-repeat="manga in series.list | orderBy:series.sortType:series.sortReverse | filter: series.searchQuery">
+  <tr dir-paginate="manga in series.list | orderBy:series.sortType:series.sortReverse | filter:series.searchQuery | itemsPerPage:series.perPage">
     <!-- Manga title -->
     <td><a ui-sref="series-info({id: manga._id})">{{manga.title}}</a></td>
     <!-- Names of the manga genre -->
@@ -53,6 +53,8 @@
     <td>{{manga.year}}</td>
   </tr>
 </table>
+<!-- Pagination controls -->
+<dir-pagination-controls></dir-pagination-controls>
 <!--
 <pagination
   total-items="series.list.length"
