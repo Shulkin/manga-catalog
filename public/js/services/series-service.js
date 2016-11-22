@@ -26,6 +26,12 @@ angular.module("series.service", [])
           return response.data;
         });
       }
+    },
+    // update manga, new title, description ,etc.
+    update: function(id, data) {
+      return $http.put("/api/series/" + id, data).then(function(response) {
+        return response.data;
+      });
     }
   };
 });

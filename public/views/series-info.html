@@ -5,8 +5,8 @@
       <b>{{manga.title}}</b>
     </span>
     <span ng-show="manga.isEdit('title')">
-      <!-- id is mandatory to focus() on element, should be the same as fieldName for simplicity -->
-      <input id="title" type="text" ng-model="manga.title" ng-blur="manga.confirmChange('title')">
+      <!-- id to focus() on element should be the same as fieldName for simplicity -->
+      <input id="title" type="text" ng-model="manga.title" ng-blur="manga.save('title')">
     </span>
     &nbsp;
     <!-- Edit button -->
@@ -32,7 +32,7 @@
           {{manga.description}}
         </span>
         <span ng-show="manga.isEdit('description')">
-          <textarea id="description" rows="8" cols="40" ng-model="manga.description" ng-blur="manga.confirmChange('description')"></textarea>
+          <textarea id="description" rows="8" cols="40" ng-model="manga.description" ng-blur="manga.save('description')"></textarea>
         </span>
       </div>
     </div>
