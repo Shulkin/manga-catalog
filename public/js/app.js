@@ -2,6 +2,8 @@
 var mangaApp = angular.module("manga.app", [
   "ui.router", // states router
   "manga.routes", // app states
+  // third-party directive for table data pagination
+  "angularUtils.directives.dirPagination", // by Michael Bromley
   // global configuration variables
   "manga.config",
   // utilities functions
