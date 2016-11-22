@@ -8,24 +8,24 @@ angular.module("series.mock", [])
   "Shounen", "Action", "Adventure", "Horror", "Drama", "Comedy", "Seinen"
 ])
 .factory("SeriesMock", function(
-  MANGA_TITLES, MANGA_GENRES, AUTHOR_NAMES, Utilities) {
+  MANGA_TITLES, MANGA_GENRES, AUTHOR_NAMES, Utils) {
   // === Private ===
   function generateSimpleAuthorObject(id) {
     // don't populate series list!
     var result = {
       _id: "author_" + id,
-      name: AUTHOR_NAMES[Utilities.randomInt(0, AUTHOR_NAMES.length - 1)]
+      name: AUTHOR_NAMES[Utils.randomInt(0, AUTHOR_NAMES.length - 1)]
     };
     return result;
   }
   function generateMangaObject(id) {
     // generate genres
     var genres = [];
-    var genresNum = Utilities.randomInt(1, MANGA_GENRES.length);
+    var genresNum = Utils.randomInt(1, MANGA_GENRES.length);
     for (var i = 0; i < genresNum; i++) {
       genres.push({
         _id: "genre_" + i,
-        name: MANGA_GENRES[Utilities.randomInt(0, MANGA_GENRES.length - 1)]
+        name: MANGA_GENRES[Utils.randomInt(0, MANGA_GENRES.length - 1)]
       });
     }
     // create simple author with only name
@@ -33,9 +33,9 @@ angular.module("series.mock", [])
     var result = {
       // generated _ids must be unique
       _id: "manga_" + id,
-      title: MANGA_TITLES[Utilities.randomInt(0, MANGA_TITLES.length - 1)],
+      title: MANGA_TITLES[Utils.randomInt(0, MANGA_TITLES.length - 1)],
       description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-      year: Utilities.randomInt(1950, 2014),
+      year: Utils.randomInt(1950, 2014),
       // simulate populate from Mongo find function
       genre: genres,
       author: author

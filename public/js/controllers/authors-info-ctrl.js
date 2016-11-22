@@ -1,6 +1,6 @@
 angular.module("authors.info.ctrl", [])
 .controller("AuthorsInfoCtrl", function(
-  SERIES_HEADERS, // from series controller
+  SERIES_COLUMNS, // from series controller
   Genres, // genres service
   Authors, // authors service
   $stateParams) {
@@ -20,7 +20,7 @@ angular.module("authors.info.ctrl", [])
       // show all genres in authors series
       vm.allGenres = Authors.getAllGenres(author);
       // column headers for manga table
-      vm.seriesColumns = SERIES_HEADERS;
+      vm.seriesColumns = SERIES_COLUMNS;
     }, function(err) {
       console.log("Error " + err);
     });

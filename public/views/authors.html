@@ -1,29 +1,34 @@
-<div>
-  <h4>Search <b>Name</b> for</n4>&nbsp<nobr>
-  <!-- Text-search in manga titles -->
-  <input type="text" ng-model="authors.searchQuery">&nbsp
-  <button type="button" ng-click="authors.goSearch()">Go</button>
-</div>
-<nav aria-label="Pages in authors table">
-  <ul class="pagination">
-    <li ng-repeat="page in authors.pages"
-      ng-class="{'active': ($index === authors.pageIndex)}">
-      <a class="my-cursor-pointer"
-        ng-click="authors.setCurrentPage($index)">
-        {{$index}}
-      </a>
-    </li>
-  </ul>
-</nav>
-<table class="table table-striped">
-  <!-- Columns headers -->
-  <tr>
-    <th ng-repeat="name in authors.columns">
-      <h4>{{name}}</h4>
+<form>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon"><i class="fa fa-search"></i></div>
+      <input type="text" class="form-control"
+        placeholder="Search author" ng-model="authors.searchQuery">
+    </div>
+  </div>
+</form>
+<table class="table table-striped table-hover table-bordered">
+  <tr> <!-- Columns headers -->
+    <th ng-repeat="column in authors.columns">
+      <!-- Show link if column is sortable -->
+      <div ng-show="column.sortable">
+        <a class="my-cursor-pointer" ng-click="authors.sort(column.fieldName)">
+          <b>{{column.header}}</b>
+          <!-- show arrows corresponding sort order -->
+          <span ng-show="authors.isAscending(column.fieldName)"
+            class="fa fa-caret-up"></span> <!-- ascending-->
+          <span ng-show="authors.isDescending(column.fieldName)"
+            class="fa fa-caret-down"></span> <!-- descending -->
+        </a>
+      </div>
+      <!-- Otherwise show simple header -->
+      <div ng-hide="column.sortable">
+        <b>{{column.header}}</b>
+      </div>
     </th>
   </tr>
   <!-- Actual table content -->
-  <tr ng-repeat="author in authors.currentPage">
+  <tr dir-paginate="author in authors.list | orderBy: authors.sortType:authors.sortReverse | filter:authors.searchQuery | itemsPerPage: authors.perPage">
     <!-- Authors name -->
     <td><a ui-sref="authors-info({id: author._id})">{{author.name}}</a></td>
     <!-- The number of series, which he wrote -->
@@ -32,3 +37,5 @@
     <td>{{author.mostNumerousGenre}}</td>
   </tr>
 </table>
+<!-- Pagination controls -->
+<dir-pagination-controls></dir-pagination-controls>

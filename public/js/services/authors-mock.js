@@ -6,19 +6,19 @@ angular.module("authors.mock", [])
 .factory("AuthorsMock", function(
   MOCK_SERIES_COUNT, // up to N series for one author
   AUTHOR_NAMES, AUTHOR_GENDERS, // author params
-  Utilities, SeriesMock) {
+  Utils, SeriesMock) {
   // === Private ===
   function generateAuthorObject(id) {
     // generate list of authors works
     var series = [];
-    var seriesCount = Utilities.randomInt(0, MOCK_SERIES_COUNT);
+    var seriesCount = Utils.randomInt(0, MOCK_SERIES_COUNT);
     for (var i = 0; i < seriesCount; i++) {
       series.push(SeriesMock.createManga(i));
     }
     var result = {
       _id: "author_" + id,
-      name: AUTHOR_NAMES[Utilities.randomInt(0, AUTHOR_NAMES.length - 1)],
-      gender: AUTHOR_GENDERS[Utilities.randomInt(0, AUTHOR_GENDERS.length - 1)],
+      name: AUTHOR_NAMES[Utils.randomInt(0, AUTHOR_NAMES.length - 1)],
+      gender: AUTHOR_GENDERS[Utils.randomInt(0, AUTHOR_GENDERS.length - 1)],
       birthDate: new Date(),
       series: series
     };

@@ -85,8 +85,8 @@
       <div class="panel-body">
         <table class="table table-striped">
           <tr>
-            <th ng-repeat="name in author.seriesColumns">
-              <h4>{{name}}</h4>
+            <th ng-repeat="column in author.seriesColumns">
+              <h4>{{column.header}}</h4>
             </th>
           </tr>
           <tr ng-repeat="manga in author.series">
