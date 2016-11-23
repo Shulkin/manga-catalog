@@ -4,4 +4,13 @@ angular.module("series.info.service", [])
  * series-info view to global series-info controller
  */
 .factory("SeriesInfo", function() {
+  var year;
+  return {
+    setYear: function(value) {
+      year = value;
+    },
+    getYear: function() {
+      return year;
+    }
+  };
 });

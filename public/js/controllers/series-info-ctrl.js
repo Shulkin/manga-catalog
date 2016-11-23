@@ -25,6 +25,7 @@ angular.module("series.info.ctrl", [
       vm.genreString = Genres.toString(manga.genre);
       vm.author = manga.author;
       vm.year = manga.year;
+      SeriesInfo.setYear(vm.year); // save year
     }, function(err) {
       console.log("Error " + err);
     });
@@ -64,7 +65,10 @@ angular.module("series.info.ctrl", [
     return (field in vm.editing && vm.editing[field]);
   }
   vm.save = function(field) {
-    saveAll();
+    // grab saved year from SeriesInfo service
+    vm.year = SeriesInfo.getYear();
+    alert("save year: " + vm.year);
+    //saveAll();
     resetFlags();
   }
 });

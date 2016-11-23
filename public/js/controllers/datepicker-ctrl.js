@@ -17,11 +17,16 @@ angular.module("manga.datepicker.ctrl", [])
     opened: false
   };
   // === Private ===
-  $scope.today = function() {
+  // constructor
+  $scope.init = function() {
     $scope.date = new Date();
+    // init year from intermediate service
+    var year = SeriesInfo.getYear();
+    $scope.date.setFullYear(year);
+    // month, day, etc. is not important!
   }
   // === Start module ===
-  $scope.today();
+  $scope.init();
   // === Public ===
   $scope.clear = function() {
     $scope.date = null;
@@ -31,5 +36,7 @@ angular.module("manga.datepicker.ctrl", [])
   }
   $scope.setDate = function(year, month, day) {
     $scope.date = new Date(year, month, day);
+    // save year to service on change date in controller
+    SeriesInfo.setYear($scope.date.getFullYear());
   }
 });

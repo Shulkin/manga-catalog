@@ -29,6 +29,7 @@ var mangaApp = angular.module("manga.app", [
   // series services
   "series.service",
   "series.mock",
+  "series.info.service",
   // genres services
   "genres.service"
 ]);
