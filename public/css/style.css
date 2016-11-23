@@ -2,3 +2,9 @@
 .my-cursor-pointer {
   cursor: pointer;
 }
+.my-inline-block {
+  display: inline-block;
+}
+.my-fixed-size {
+  resize: none;
+}

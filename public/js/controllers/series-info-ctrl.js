@@ -11,11 +11,8 @@ angular.module("series.info.ctrl", [
   // receive manga id from url
   var id = $stateParams.id;
   // === Private ===
-  function initEdit() {
+  function resetFlags() {
     vm.editing = new Object();
-    vm.editing['title'] = false;
-    vm.editing['description'] = false;
-    vm.editing['year'] = false;
   }
   // reload current manga
   function reload() {
@@ -42,7 +39,6 @@ angular.module("series.info.ctrl", [
       author: vm.author._id,
       year: vm.year
     };
-    alert("saveAll: " + manga);
     Series.update(id, manga)
     .then(function() {
       // reload to get properly populated fields
@@ -53,24 +49,21 @@ angular.module("series.info.ctrl", [
   }
   // constructor
   function init() {
-    reload();
-    initEdit();
+    reload(); // load data on start
+    resetFlags(); // delete all previous edit flags
   }
   // === Start module ===
   init();
   // === Public ===
   vm.edit = function(field) {
-    alert("Start edit field '" + field + "' in Manga '" + vm.title + "'");
     vm.editing[field] = true;
-    // focus on the edited input
-    angular.element('#' + field).focus();
   }
   vm.isEdit = function(field) {
-    return vm.editing[field];
+    // check if key 'field' in Object and Object[key] == true
+    return (field in vm.editing && vm.editing[field]);
   }
   vm.save = function(field) {
-    alert("Change confirmed!");
     saveAll();
-    vm.editing[field] = false;
+    resetFlags();
   }
 });

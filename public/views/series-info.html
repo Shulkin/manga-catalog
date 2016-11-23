@@ -1,18 +1,22 @@
 <div class="row">
   <!-- Whole width -->
   <div class="col-sm-12">
+    <!-- If not edit, show <h2> block -->
     <span ng-hide="manga.isEdit('title')">
-      <b>{{manga.title}}</b>
+      <h2 class="my-inline-block">{{manga.title}}</h2>
+      &nbsp; <!-- Mandatory white-space -->
+      <small> <!-- Edit button -->
+        <a class="my-cursor-pointer" ng-click="manga.edit('title')">Edit</a>
+      </small>
     </span>
+    <!-- Otherwise show input element -->
     <span ng-show="manga.isEdit('title')">
-      <!-- id to focus() on element should be the same as fieldName for simplicity -->
-      <input id="title" type="text" ng-model="manga.title" ng-blur="manga.save('title')">
+      <input type="text" ng-model="manga.title">
+      &nbsp;
+      <small> <!-- Save button -->
+        <a class="my-cursor-pointer" ng-click="manga.save('title')">Save</a>
+      </small>
     </span>
-    &nbsp;
-    <!-- Edit button -->
-    <small><a class="my-cursor-pointer"
-      ng-click="manga.edit('title')">Edit</a>
-    </small>
   </div>
 </div>
 <div class="row">
@@ -21,10 +25,15 @@
     <!-- Description panel -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <b class="panel-title">Description</b>
+        <h3 class="panel-title my-inline-block">Description</h3>
         &nbsp;
-        <small><a class="my-cursor-pointer"
-          ng-click="manga.edit('description')">Edit</a>
+        <small>
+          <a class="my-cursor-pointer"
+            ng-hide="manga.isEdit('description')"
+            ng-click="manga.edit('description')">Edit</a>
+          <a class="my-cursor-pointer"
+            ng-show="manga.isEdit('description')"
+            ng-click="manga.save('description')">Save</a>
         </small>
       </div>
       <div class="panel-body">
@@ -32,7 +41,41 @@
           {{manga.description}}
         </span>
         <span ng-show="manga.isEdit('description')">
-          <textarea id="description" rows="8" cols="40" ng-model="manga.description" ng-blur="manga.save('description')"></textarea>
+          <textarea class="my-fixed-size" rows="8" cols="40"
+            ng-model="manga.description">
+          </textarea>
+        </span>
+      </div>
+    </div>
+    <!-- Year of writing -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <b class="panel-title">Year</b>
+        &nbsp;
+        <small><a class="my-cursor-pointer"
+          ng-click="manga.edit('year')">Edit</a>
+        </small>
+      </div>
+      <div class="panel-body">
+        <span ng-hide="manga.isEdit('year')">
+          {{manga.year}}
+        </span>
+        <span ng-show="manga.isEdit('year')">
+          <div ng-controller="YearPickerCtrl">
+            <p class="input-group">
+              <input type="text" class="form-control"
+                uib-datepicker-popup="{{format}}"
+                ng-model="date" is-open="status.opened"
+                datepicker-options="dateOptions"
+                date-disabled="disabled(date, mode)"
+                ng-required="true" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+            </p>
+          </div>
         </span>
       </div>
     </div>
@@ -73,39 +116,6 @@
         <a ui-sref="authors-info({id: manga.author._id})">
           {{manga.author.name}}
         </a>
-      </div>
-    </div>
-    <!-- Year of writing -->
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <b class="panel-title">Year</b>
-        &nbsp;
-        <small><a class="my-cursor-pointer"
-          ng-click="manga.edit('year')">Edit</a>
-        </small>
-      </div>
-      <div class="panel-body">
-        <span ng-hide="manga.isEdit('year')">
-          {{manga.year}}
-        </span>
-        <span ng-show="manga.isEdit('year')">
-          <div ng-controller="YearPickerCtrl">
-            <p class="input-group">
-              <input type="text" class="form-control"
-                uib-datepicker-popup="{{format}}"
-                ng-model="date" is-open="status.opened"
-                datepicker-options="dateOptions"
-                date-disabled="disabled(date, mode)"
-                ng-required="true" close-text="Close"/>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)">
-                  <i class="glyphicon glyphicon-calendar"></i>
-                </button>
-              </span>
-            </p>
-          </div>
-          <!-- <input id="year" type="number" min="1900" max="2099" step="1" ng-model="manga.year" ng-blur="manga.save('year')"/> -->
-        </span>
       </div>
     </div>
   </div>
