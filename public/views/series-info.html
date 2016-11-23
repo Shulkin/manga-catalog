@@ -4,9 +4,10 @@
     <!-- If not edit, show <h2> block -->
     <span ng-hide="manga.isEdit('title')">
       <h2 class="my-inline-block">{{manga.title}}</h2>
-      &nbsp; <!-- Mandatory white-space -->
+      &nbsp; <!-- Mandatory whitespace -->
       <small> <!-- Edit button -->
-        <a class="my-cursor-pointer" ng-click="manga.edit('title')">Edit</a>
+        <a class="my-cursor-pointer"
+          ng-click="manga.edit('title')">Edit</a>
       </small>
     </span>
     <!-- Otherwise show input element -->
@@ -14,7 +15,8 @@
       <input type="text" ng-model="manga.title">
       &nbsp;
       <small> <!-- Save button -->
-        <a class="my-cursor-pointer" ng-click="manga.save('title')">Save</a>
+        <a class="my-cursor-pointer"
+          ng-click="manga.save('title')">Save</a>
       </small>
     </span>
   </div>
@@ -26,7 +28,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title my-inline-block">Description</h3>
-        &nbsp;
+        &nbsp; <!-- Whitespace -->
         <small>
           <a class="my-cursor-pointer"
             ng-hide="manga.isEdit('description')"
@@ -50,10 +52,15 @@
     <!-- Year of writing -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <b class="panel-title">Year</b>
-        &nbsp;
-        <small><a class="my-cursor-pointer"
-          ng-click="manga.edit('year')">Edit</a>
+        <h3 class="panel-title my-inline-block">Year</h3>
+        &nbsp; <!-- Whitespace -->
+        <small>
+          <a class="my-cursor-pointer"
+            ng-hide="manga.isEdit('year')"
+            ng-click="manga.edit('year')">Edit</a>
+          <a class="my-cursor-pointer"
+            ng-show="manga.isEdit('year')"
+            ng-click="manga.save('year')">Save</a>
         </small>
       </div>
       <div class="panel-body">
@@ -61,7 +68,9 @@
           {{manga.year}}
         </span>
         <span ng-show="manga.isEdit('year')">
+          <!-- Year picker element with custom controller -->
           <div ng-controller="YearPickerCtrl">
+            <!-- Based on Angular-UI Bootstrap DatePicker -->
             <p class="input-group">
               <input type="text" class="form-control"
                 uib-datepicker-popup="{{format}}"
@@ -70,7 +79,8 @@
                 date-disabled="disabled(date, mode)"
                 ng-required="true" close-text="Close"/>
               <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)">
+                <button type="button" class="btn btn-default"
+                  ng-click="open($event)"> <!-- open picker -->
                   <i class="glyphicon glyphicon-calendar"></i>
                 </button>
               </span>

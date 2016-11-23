@@ -1,5 +1,7 @@
 angular.module("manga.datepicker.ctrl", [])
-.controller("YearPickerCtrl", function($scope) {
+.controller("YearPickerCtrl", function(
+  SeriesInfo, // service to pass data to SeriesInfoCtrl
+  $scope) {
   // === Variables ===
   // set date format to year-only
   $scope.formats = ['yyyy'];

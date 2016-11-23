@@ -5,6 +5,7 @@ angular.module("series.info.ctrl", [
 .controller("SeriesInfoCtrl", function(
   Genres, // genres service
   Series, // series service
+  SeriesInfo, // receive data from minor nested controllers in view
   $stateParams) {
   // === Variables ===
   var vm = this;
