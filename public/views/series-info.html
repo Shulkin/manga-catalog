@@ -78,12 +78,34 @@
     <!-- Year of writing -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">
-          Year
-        </h3>
+        <b class="panel-title">Year</b>
+        &nbsp;
+        <small><a class="my-cursor-pointer"
+          ng-click="manga.edit('year')">Edit</a>
+        </small>
       </div>
       <div class="panel-body">
-        {{manga.year}}
+        <span ng-hide="manga.isEdit('year')">
+          {{manga.year}}
+        </span>
+        <span ng-show="manga.isEdit('year')">
+          <div ng-controller="YearPickerCtrl">
+            <p class="input-group">
+              <input type="text" class="form-control"
+                uib-datepicker-popup="{{format}}"
+                ng-model="date" is-open="status.opened"
+                datepicker-options="dateOptions"
+                date-disabled="disabled(date, mode)"
+                ng-required="true" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+            </p>
+          </div>
+          <!-- <input id="year" type="number" min="1900" max="2099" step="1" ng-model="manga.year" ng-blur="manga.save('year')"/> -->
+        </span>
       </div>
     </div>
   </div>

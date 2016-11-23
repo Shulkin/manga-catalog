@@ -1,4 +1,7 @@
-angular.module("series.info.ctrl", [])
+angular.module("series.info.ctrl", [
+  // inject module with datepicker controller
+  "manga.datepicker.ctrl" // use YearPickerCtrl in view
+])
 .controller("SeriesInfoCtrl", function(
   Genres, // genres service
   Series, // series service
@@ -12,6 +15,7 @@ angular.module("series.info.ctrl", [])
     vm.editing = new Object();
     vm.editing['title'] = false;
     vm.editing['description'] = false;
+    vm.editing['year'] = false;
   }
   // reload current manga
   function reload() {

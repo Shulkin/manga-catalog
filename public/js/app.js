@@ -1,5 +1,9 @@
-// inject all modules to main module
+// inject all global modules to main module
 var mangaApp = angular.module("manga.app", [
+  // animate module
+  "ngAnimate",
+  // angular-ui bootstrap
+  "ui.bootstrap",
   // states router
   "ui.router",
   // app states
