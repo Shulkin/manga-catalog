@@ -5,7 +5,7 @@ angular.module("series.info.ctrl", [
 .controller("SeriesInfoCtrl", function(
   Genres, // genres service
   Series, // series service
-  SeriesInfo, // receive data from minor nested controllers in view
+  SeriesInfo, // receive data from YearPickerCtrl
   $stateParams) {
   // === Variables ===
   var vm = this;
@@ -17,20 +17,23 @@ angular.module("series.info.ctrl", [
   }
   // reload current manga
   function reload() {
+    console.log("SeriesInfoCtrl.reload()");
     Series.get(id)
     .then(function(manga) {
+      console.log("Reload success!");
       vm.title = manga.title;
       vm.description = manga.description;
       vm.genre = manga.genre; // save for use later
       vm.genreString = Genres.toString(manga.genre);
       vm.author = manga.author;
-      vm.year = manga.year;
-      SeriesInfo.setYear(vm.year); // save year
+      // bind vm.year to date in year picker through SeriesInfo
+      vm.year = SeriesInfo.date.year = manga.year;
     }, function(err) {
       console.log("Error " + err);
     });
   }
   function saveAll() {
+    console.log("SeriesInfoCtrl.saveAll()");
     // fill all manga fields
     var manga = {
       title: vm.title,
@@ -41,16 +44,20 @@ angular.module("series.info.ctrl", [
       author: vm.author._id,
       year: vm.year
     };
+    console.log("Update manga " + JSON.stringify(manga));
+    /*
     Series.update(id, manga)
     .then(function() {
       // reload to get properly populated fields
       reload();
     }, function(err) {
       console.log("Error " + err);
-    })
+    });
+    */
   }
   // constructor
   function init() {
+    console.log("SeriesInfoCtrl.init()");
     reload(); // load data on start
     resetFlags(); // delete all previous edit flags
   }
@@ -65,10 +72,7 @@ angular.module("series.info.ctrl", [
     return (field in vm.editing && vm.editing[field]);
   }
   vm.save = function(field) {
-    // grab saved year from SeriesInfo service
-    vm.year = SeriesInfo.getYear();
-    alert("save year: " + vm.year);
-    //saveAll();
+    saveAll();
     resetFlags();
   }
 });

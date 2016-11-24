@@ -4,13 +4,11 @@ angular.module("series.info.service", [])
  * series-info view to global series-info controller
  */
 .factory("SeriesInfo", function() {
-  var year;
   return {
-    setYear: function(value) {
-      year = value;
-    },
-    getYear: function() {
-      return year;
+    // this is binded to both SeriesInfoCtrl and YearPickerCtrl
+    date: {
+      // change will be reflected in both controllers
+      year : 1999 // some default number
     }
-  };
+  }
 });
