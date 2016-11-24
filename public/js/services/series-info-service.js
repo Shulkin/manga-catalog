@@ -1,14 +1,26 @@
 angular.module("series.info.service", [])
 /*
- * This is special factory to pass data from nested controllers in
- * series-info view to global series-info controller
+ * This is special factory to share
+ * data between controllers
  */
-.factory("SeriesInfo", function() {
+.factory("SeriesInfo", function($rootScope) {
   return {
-    // this is binded to both SeriesInfoCtrl and YearPickerCtrl
-    date: {
-      // change will be reflected in both controllers
-      year : 1999 // some default number
+    data: {
+      // share between SeriesInfoCtrl and YearPickerCtrl
+      year : 2014 // some default number
+    },
+    getYear: function() {
+      return this.data.year;
+    },
+    setYear: function(year) {
+      this.data.year = year;
+    },
+    // share data through $broadcast
+    shareYear: function() {
+      console.log("SeriesInfo.shareYear()");
+      console.log("[SeriesInfo.shareYear] this.data.year = " + this.getYear());
+      // fire notify event
+      $rootScope.$broadcast("year_shared");
     }
-  }
+  };
 });
