@@ -124,14 +124,32 @@
     <!-- Link to author -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">
-          Author
-        </h3>
+        <h3 class="panel-title my-inline-block">Author</h3>
+        &nbsp;
+        <small>
+          <a class="my-cursor-pointer"
+            ng-hide="manga.isEdit('author')"
+            ng-click="manga.edit('author')">Edit</a>
+          <a class="my-cursor-pointer"
+            ng-show="manga.isEdit('author')"
+            ng-click="manga.save('author')">Save</a>
+        </small>
       </div>
       <div class="panel-body">
-        <a ui-sref="authors-info({id: manga.author._id})">
-          {{manga.author.name}}
-        </a>
+        <span ng-hide="manga.isEdit('author')">
+          <a ui-sref="authors-info({id: manga.author._id})">
+            {{manga.author.name}}
+          </a>
+        </span>
+        <span ng-show="manga.isEdit('author')">
+          <!-- change id of current author -->
+          <select class="form-control" ng-model="manga.author._id">
+            <!-- changes will be reflected after save -->
+            <option ng-repeat="author in manga.allAuthors" value="{{author._id}}">
+              {{author.name}}
+            </option>
+          </select>
+        </span>
       </div>
     </div>
   </div>

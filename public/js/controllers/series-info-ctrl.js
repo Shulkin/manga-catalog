@@ -5,6 +5,7 @@ angular.module("series.info.ctrl", [
 .controller("SeriesInfoCtrl", function(
   Genres, // genres service
   Series, // series service
+  Authors, // authors service
   SeriesInfo, // share data with YearPickerCtrl
   $stateParams) {
   // === Variables ===
@@ -14,6 +15,15 @@ angular.module("series.info.ctrl", [
   // === Private ===
   function resetFlags() {
     vm.editing = new Object();
+  }
+  function loadAuthorsList() {
+    vm.allAuthors = [];
+    Authors.getAll()
+    .then(function(list) {
+      vm.allAuthors = list;
+    }, function(err) {
+      console.log("Error " + err);
+    })
   }
   // reload current manga
   function reload() {
@@ -33,6 +43,7 @@ angular.module("series.info.ctrl", [
     });
   }
   function saveAll() {
+    // console.log("SeriesInfoCtrl.saveAll()");
     // get year from YearPickerCtrl
     vm.year = SeriesInfo.getYear();
     // fill all manga fields
@@ -45,6 +56,7 @@ angular.module("series.info.ctrl", [
       author: vm.author._id,
       year: vm.year
     };
+    // console.log("[SeriesInfoCtrl.saveAll] manga = " + JSON.stringify(manga));
     Series.update(id, manga)
     .then(function() {
       // reload to get properly populated fields
@@ -55,7 +67,8 @@ angular.module("series.info.ctrl", [
   }
   // constructor
   function init() {
-    reload(); // load data on start
+    reload(); // load manga data on start
+    loadAuthorsList(); // load info about all authors
     resetFlags(); // delete all previous edit flags
   }
   // === Start module ===
@@ -69,6 +82,13 @@ angular.module("series.info.ctrl", [
     return (field in vm.editing && vm.editing[field]);
   }
   vm.save = function(field) {
+    if (field === "author") {
+      /*
+       * Some code to properly add/delete manga
+       * in authors list, when we change author
+       * of the series
+       */
+    }
     saveAll();
     resetFlags();
   }
