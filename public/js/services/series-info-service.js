@@ -17,8 +17,6 @@ angular.module("series.info.service", [])
     },
     // share data through $broadcast
     shareYear: function() {
-      console.log("SeriesInfo.shareYear()");
-      console.log("[SeriesInfo.shareYear] this.data.year = " + this.getYear());
       // fire notify event
       $rootScope.$broadcast("SharedYear");
     }
