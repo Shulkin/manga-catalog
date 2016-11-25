@@ -64,28 +64,23 @@
         </small>
       </div>
       <div class="panel-body">
-        <!-- <span ng-hide="manga.isEdit('year')"> -->
-        <span>
+        <span ng-hide="manga.isEdit('year')">
           {{manga.year}}
         </span>
-        <hr> <!-- Temporal! Divider -->
-        <!-- <span ng-show="manga.isEdit('year')"> -->
-        <span>
+        <span ng-show="manga.isEdit('year')">
           <!-- Year picker element with custom controller -->
           <div ng-controller="YearPickerCtrl">
             <!-- Based on Angular-UI Bootstrap DatePicker -->
             <p class="input-group">
               <input
-                type="text"
-                class="form-control"
+                type="text" class="form-control"
                 uib-datepicker-popup="{{format}}"
-                ng-model="date"
+                ng-model="date" ng-required="true"
                 ng-change="changeDate()"
                 is-open="status.opened"
                 datepicker-options="dateOptions"
                 date-disabled="disabled(date, mode)"
-                ng-required="true"
-                close-text="Close"/>
+                show-button-bar="false" close-text="Close"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default"
                   ng-click="open($event)"> <!-- open picker -->

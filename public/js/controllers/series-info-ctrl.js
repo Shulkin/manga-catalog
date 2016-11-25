@@ -52,7 +52,6 @@ angular.module("series.info.ctrl", [
       year: vm.year
     };
     console.log("[SeriesInfoCtrl.saveAll] Update manga " + JSON.stringify(manga));
-    /*
     Series.update(id, manga)
     .then(function() {
       // reload to get properly populated fields
@@ -60,7 +59,6 @@ angular.module("series.info.ctrl", [
     }, function(err) {
       console.log("Error " + err);
     });
-    */
   }
   // constructor
   function init() {
