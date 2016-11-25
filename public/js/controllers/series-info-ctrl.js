@@ -16,14 +16,25 @@ angular.module("series.info.ctrl", [
   function resetFlags() {
     vm.editing = new Object();
   }
-  function loadAuthorsList() {
+  function getAllAuthors() {
     vm.allAuthors = [];
     Authors.getAll()
     .then(function(list) {
       vm.allAuthors = list;
     }, function(err) {
       console.log("Error " + err);
-    })
+    });
+  }
+  function getAllGenres() {
+    vm.allGenres = [];
+    Genres.getAll()
+    .then(function(list) {
+      vm.allGenres = list;
+      // init new genre model
+      vm.newGenre = list[0]._id;
+    }, function(err) {
+      console.log("Error " + err);
+    });
   }
   // reload current manga
   function reload() {
@@ -70,12 +81,19 @@ angular.module("series.info.ctrl", [
   // constructor
   function init() {
     reload(); // load manga data on start
-    loadAuthorsList(); // load info about all authors
+    getAllGenres(); // load list of all genres
+    getAllAuthors(); // load info about all authors
     resetFlags(); // delete all previous edit flags
   }
   // === Start module ===
   init();
   // === Public ===
+  vm.addGenre = function(genreId) {
+    console.log("SeriesInfoCtrl.addGenre() genreId = " + genreId);
+  }
+  vm.removeGenre = function(genreId) {
+    console.log("SeriesInfoCtrl.removeGenre() genreId = " + genreId);
+  }
   vm.edit = function(field) {
     vm.editing[field] = true;
   }

@@ -2,10 +2,14 @@ angular.module("genres.service", [])
 .factory("Genres", function($http) {
   return {
     getAll: function() {
-      return $http.get("/api/genres");
+      return $http.get("/api/genres").then(function(response) {
+        return response.data;
+      });
     },
     get: function(id) {
-      return $http.get("/api/genres/" + id);
+      return $http.get("/api/genres/" + id).then(function(response) {
+        return response.data;
+      });
     },
     // convert array of genres to string
     toString: function(genre) {
