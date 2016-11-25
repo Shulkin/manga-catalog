@@ -7,7 +7,7 @@ angular.module("series.info.service", [])
   return {
     data: {
       // share between SeriesInfoCtrl and YearPickerCtrl
-      year : 2014 // some default number
+      year : 2007 // some default number
     },
     getYear: function() {
       return this.data.year;
@@ -20,7 +20,7 @@ angular.module("series.info.service", [])
       console.log("SeriesInfo.shareYear()");
       console.log("[SeriesInfo.shareYear] this.data.year = " + this.getYear());
       // fire notify event
-      $rootScope.$broadcast("year_shared");
+      $rootScope.$broadcast("SharedYear");
     }
   };
 });
