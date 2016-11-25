@@ -100,9 +100,7 @@
     <!-- Manga image -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">
-          Image
-        </h3>
+        <h3 class="panel-title">Image</h3>
       </div>
       <div class="panel-body">
         <!-- Center the image in div -->
@@ -113,12 +111,48 @@
     <!-- Series genre -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">
-          Genre
-        </h3>
+        <h3 class="panel-title my-inline-block">Genre</h3>
+        &nbsp;
+        <small>
+          <a class="my-cursor-pointer"
+            ng-hide="manga.isEdit('genre')"
+            ng-click="manga.edit('genre')">Edit</a>
+          <a class="my-cursor-pointer"
+            ng-show="manga.isEdit('genre')"
+            ng-click="manga.save('genre')">Save</a>
+        </small>
       </div>
       <div class="panel-body">
-        {{manga.genreString}}
+        <!-- <span ng-hide="manga.isEdit('genre')"> -->
+        <span>
+          {{manga.genreString}}
+        </span>
+        <!-- <span ng-show="manga.isEdit('genre')"> -->
+        <hr>
+        <span>
+          <!-- List of this manga's genres -->
+          <span ng-repeat="genre in manga.genre">
+            {{genre.name}}
+            <!-- Remove genre from list -->
+            <button type="button" class="btn btn-warning btn-xs" ng-click="">
+              <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <span ng-hide="$last">,&nbsp;</span>
+          </span>
+          <div>
+            <!-- Select new genre -->
+            <select class="form-control" ng-model="manga.newGenre">
+              <!-- From the list of all available genres -->
+              <option ng-repeat="genre in manga.allGenres" value="{{genre._id}}">
+                {{genre.name}}
+              </option>
+            </select>
+            <!-- Add new genre to manga -->
+            <button type="button" class="btn btn-info" ng-click="">
+              Add<i class="glyphicon glyphicon-plus"></i>
+            </button>
+          </div>
+        </span>
       </div>
     </div>
     <!-- Link to author -->
@@ -143,8 +177,8 @@
         </span>
         <span ng-show="manga.isEdit('author')">
           <!-- change id of current author -->
-          <select class="form-control" ng-model="manga.author._id">
-            <!-- changes will be reflected after save -->
+          <select class="form-control" ng-model="manga.authorId">
+            <!-- changes will be reflected after save and reload -->
             <option ng-repeat="author in manga.allAuthors" value="{{author._id}}">
               {{author.name}}
             </option>

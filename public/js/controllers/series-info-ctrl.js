@@ -38,6 +38,8 @@ angular.module("series.info.ctrl", [
       // send year to YearPickerCtrl through SeriesInfo service
       SeriesInfo.setYear(vm.year); // set value
       SeriesInfo.shareYear(); // share by $broadcast
+      // save author id to variable
+      vm.authorId = vm.author._id;
     }, function(err) {
       console.log("Error " + err);
     });
@@ -52,8 +54,8 @@ angular.module("series.info.ctrl", [
       description: vm.description,
       // get rid of populated objects
       genre: Genres.extractIds(vm.genre),
-      // we need to save only ids
-      author: vm.author._id,
+      // user may change authorId
+      author: vm.authorId,
       year: vm.year
     };
     // console.log("[SeriesInfoCtrl.saveAll] manga = " + JSON.stringify(manga));
