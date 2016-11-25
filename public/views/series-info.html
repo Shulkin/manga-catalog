@@ -12,7 +12,10 @@
     </span>
     <!-- Otherwise show input element -->
     <span ng-show="manga.isEdit('title')">
-      <input type="text" ng-model="manga.title">
+      <input type="text"
+        class="form-control input-lg my-manga-title-input"
+        placeholder="Manga title"
+        ng-model="manga.title">
       &nbsp;
       <small> <!-- Save button -->
         <a class="my-cursor-pointer"
@@ -43,7 +46,7 @@
           {{manga.description}}
         </span>
         <span ng-show="manga.isEdit('description')">
-          <textarea class="my-fixed-size" rows="8" cols="40"
+          <textarea class="form-control my-fixed-size" rows="7"
             ng-model="manga.description">
           </textarea>
         </span>

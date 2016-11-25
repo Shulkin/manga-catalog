@@ -17,7 +17,6 @@ angular.module("manga.datepicker.ctrl", [])
   // === Private ===
   // constructor
   $scope.init = function() {
-    console.log("YearPickerCtrl.init()");
     // create date
     $scope.date = new Date();
     // get year from SeriesInfo
