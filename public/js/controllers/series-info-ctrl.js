@@ -42,15 +42,16 @@ angular.module("series.info.ctrl", [
     .then(function(manga) {
       vm.title = manga.title;
       vm.description = manga.description;
-      vm.genre = manga.genre; // save for use later
-      vm.genreString = Genres.toString(manga.genre);
+      vm.genre = manga.genre;
       vm.author = manga.author;
       vm.year = manga.year;
       // send year to YearPickerCtrl through SeriesInfo service
       SeriesInfo.setYear(vm.year); // set value
       SeriesInfo.shareYear(); // share by $broadcast
-      // save author id to variable
+      // save author id
       vm.authorId = vm.author._id;
+      // convert genres to string
+      vm.genreString = Genres.toString(manga.genre);
     }, function(err) {
       console.log("Error " + err);
     });
@@ -90,9 +91,29 @@ angular.module("series.info.ctrl", [
   // === Public ===
   vm.addGenre = function(genreId) {
     console.log("SeriesInfoCtrl.addGenre() genreId = " + genreId);
+    var obj = {_id: genreId}; // without name
+    // search genre name in allGenres array
+    for (var i = 0; i < vm.allGenres.length; i++) {
+      if (vm.allGenres[i]._id === genreId) {
+        // fill all fields
+        obj = {
+          _id: vm.allGenres[i]._id,
+          name: vm.allGenres[i].name
+        }; // find only first entry
+        break;
+      }
+    }
+    vm.genre.push(obj);
   }
   vm.removeGenre = function(genreId) {
     console.log("SeriesInfoCtrl.removeGenre() genreId = " + genreId);
+    var i = vm.genre.length;
+    // loop backwards
+    while (i--) {
+      if (vm.genre[i]._id === genreId) {
+        vm.genre.splice(i, 1);
+      }
+    }
   }
   vm.edit = function(field) {
     vm.editing[field] = true;
