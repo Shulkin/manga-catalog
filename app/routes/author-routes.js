@@ -108,5 +108,23 @@ router.route("/:id/manga")
       res.json(author);
     });
   });
+})
+// delete manga from list of authors works (DELETE http://localhost:3000/api/authors/id/manga)
+.delete(function(req, res) {
+  Author.findById(req.params.id, function(err, author) {
+    if (err) res.send(err);
+    // find series in list by id and remove it
+    var i = author.series.length;
+    while (i--) { // loop backwards
+      if (author.series[i]._id === req.body.manga._id) {
+        // remove from list
+        author.series.splice(i, 1);
+      }
+    }
+    author.save(function(err) {
+      if (err) res.send(err);
+      res.json(author);
+    });
+  });
 });
 module.exports = router;
