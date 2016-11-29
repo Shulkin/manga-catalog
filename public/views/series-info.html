@@ -110,15 +110,12 @@
         </small>
       </div>
       <div class="panel-body">
-        <!-- <span ng-hide="manga.isEdit('author')"> -->
-        <span>
+        <span ng-hide="manga.isEdit('author')">
           <a ui-sref="authors-info({id: manga.author._id})">
             {{manga.author.name}}
           </a>
         </span>
-        <!-- <span ng-show="manga.isEdit('author')"> -->
-        <hr>
-        <span>
+        <span ng-show="manga.isEdit('author')">
           <!-- Change id of current author -->
           <select class="form-control" ng-model="manga.authorId">
             <!-- Changes will be reflected after save and reload -->
@@ -157,13 +154,10 @@
         </small>
       </div>
       <div class="panel-body">
-        <!-- <span ng-hide="manga.isEdit('genre')"> -->
-        <span>
+        <span ng-hide="manga.isEdit('genre')">
           {{manga.genreString}}
         </span>
-        <!-- <span ng-show="manga.isEdit('genre')"> -->
-        <hr>
-        <span>
+        <span ng-show="manga.isEdit('genre')">
           <!-- Use Bootstrap layout to set size right -->
           <div class="row">
             <div class="col-sm-12">
