@@ -43,6 +43,17 @@ angular.module("authors.service", [])
         });
       }
     },
+    addManga: function(id, mangaId) {
+      var data = {id: mangaId};
+      return $http.put("/api/authors/" + id + "/manga", data).then(function(response) {
+        return response.data;
+      });
+    },
+    deleteManga: function(id, mangaId) {
+      return $http.delete("/api/authors/" + id + "/manga/" + mangaId).then(function(response) {
+        return response.data;
+      });
+    },
     getMostNumerousGenre: function(author, maxNumber) {
       var allUsed = getAllGenresAppearance(author);
       // sort genres by appearance count

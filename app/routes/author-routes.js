@@ -101,22 +101,25 @@ router.route("/:id/manga")
 .put(function(req, res) {
   Author.findById(req.params.id, function(err, author) {
     if (err) res.send(err);
-    // add series id to list
-    author.series.push(req.body.manga);
+    // push manga id to list
+    author.series.push(req.body.id);
     author.save(function(err) {
       if (err) res.send(err);
       res.json(author);
     });
   });
-})
-// delete manga from list of authors works (DELETE http://localhost:3000/api/authors/id/manga)
+});
+// process api/authors/id/manga/manga_id
+router.route("/:id/manga/:manga_id")
+// delete manga from list of authors works (DELETE http://localhost:3000/api/authors/id/manga/manga_id)
 .delete(function(req, res) {
   Author.findById(req.params.id, function(err, author) {
     if (err) res.send(err);
     // find series in list by id and remove it
     var i = author.series.length;
     while (i--) { // loop backwards
-      if (author.series[i]._id === req.body.manga._id) {
+      // compare ids of series
+      if (author.series[i].equals(req.params.manga_id)) {
         // remove from list
         author.series.splice(i, 1);
       }
