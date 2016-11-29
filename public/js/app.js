@@ -23,6 +23,7 @@ var mangaApp = angular.module("manga.app", [
   // authors services
   "authors.service",
   "authors.mock",
+  "authors.info.service",
   // series controllers
   "series.ctrl",
   "series.info.ctrl",

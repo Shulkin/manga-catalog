@@ -1,14 +1,25 @@
 <div class="row">
   <!-- Whole width -->
   <div class="col-sm-12">
-    <h2>
-      {{author.name}}
+    <span ng-hide="author.isEdit('name')">
+      <h2 class="my-inline-block">{{author.name}}</h2>
       &nbsp;
-      <!-- Edit button -->
-      <small><a class="my-cursor-pointer"
-        ng-click="author.edit('name')">Edit</a>
+      <small> <!-- Edit button -->
+        <a class="my-cursor-pointer"
+          ng-click="author.edit('name')">Edit</a>
       </small>
-    </h2>
+    </span>
+    <span ng-show="author.isEdit('name')">
+      <input type="text"
+        class="form-control input-lg my-title-input"
+        placeholder="Author name"
+        ng-model="author.name">
+      &nbsp;
+      <small> <!-- Save button -->
+        <a class="my-cursor-pointer"
+          ng-click="author.save('name')">Save</a>
+      </small>
+    </span>
   </div>
 </div>
 <div class="row">
@@ -17,10 +28,9 @@
     <!-- Author photo or image -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Image</h3>
+        <h3 class="panel-title">Image</h3>
       </div>
       <div class="panel-body">
-        <!-- Center the image in div -->
         <img class="img-responsive center-block"
           src="http://placehold.it/200x200">
       </div>
@@ -28,17 +38,46 @@
     <!-- Birth date -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">
-          Birth Date
-          &nbsp;
-          <small><a class="my-cursor-pointer"
+        <h3 class="panel-title my-inline-block">Birth Date</h3>
+        &nbsp;
+        <small>
+          <a class="my-cursor-pointer"
+            ng-hide="author.isEdit('birthDate')"
             ng-click="author.edit('birthDate')">Edit</a>
-          </small>
-        </h3>
+          <a class="my-cursor-pointer"
+            ng-show="author.isEdit('birthDate')"
+            ng-click="author.save('birthDate')">Save</a>
+        </small>
       </div>
       <div class="panel-body">
-        <!-- Date like 'September 3, 2010' -->
-        {{author.birthDate | date: "longDate"}}
+        <!-- <span ng-hide="author.isEdit('birthDate')"> -->
+        <span>
+          <!-- Date like 'September 3, 2010' -->
+          {{author.birthDate | date: "longDate"}}
+        </span>
+        <!-- <span ng-show="author.isEdit('birthDate')"> -->
+        <hr>
+        <span>
+          <div ng-controller="DatePickerCtrl">
+            <p class="input-group">
+              <input
+                type="text" class="form-control"
+                uib-datepicker-popup="{{format}}"
+                ng-model="date" ng-required="true"
+                ng-change="changeDate()"
+                is-open="status.opened"
+                datepicker-options="dateOptions"
+                date-disabled="disabled(date, mode)"
+                show-button-bar="false" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default"
+                  ng-click="open($event)">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+            </p>
+          </div>
+        </span>
       </div>
     </div>
   </div>
@@ -46,16 +85,31 @@
     <!-- Gender -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">
-          Gender
-          &nbsp;
-          <small><a class="my-cursor-pointer"
+        <h3 class="panel-title my-inline-block">Gender</h3>
+        &nbsp;
+        <small>
+          <a class="my-cursor-pointer"
+            ng-hide="author.isEdit('gender')"
             ng-click="author.edit('gender')">Edit</a>
-          </small>
-        </h3>
+          <a class="my-cursor-pointer"
+            ng-show="author.isEdit('gender')"
+            ng-click="author.save('gender')">Save</a>
+        </small>
       </div>
       <div class="panel-body">
-        {{author.gender}}
+        <!-- <span ng-hide="author.isEdit('gender')"> -->
+        <span>
+          {{author.gender}}
+        </span>
+        <!-- <span ng-show="author.isEdit('gender')"> -->
+        <hr>
+        <span>
+          <select class="form-control" ng-model="author.gender">
+            <!-- Simple choice! -->
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </span>
       </div>
     </div>
     <!-- Genres -->
@@ -74,13 +128,7 @@
     <!-- Manga table -->
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">
-          Mangas
-          &nbsp;
-          <small><a class="my-cursor-pointer"
-            ng-click="author.edit('series')">Edit</a>
-          </small>
-        </h3>
+        <h3 class="panel-title">Series</h3>
       </div>
       <div class="panel-body">
         <table class="table table-striped">
@@ -90,7 +138,9 @@
             </th>
           </tr>
           <tr ng-repeat="manga in author.series">
-            <td><a ui-sref="series-info({id: manga._id})">{{manga.title}}</a></td>
+            <td><a ui-sref="series-info({id: manga._id})">
+              {{manga.title}}
+            </a></td>
             <td>{{author.genreToString(manga.genre)}}</td>
             <td>{{manga.year}}</td>
           </tr>

@@ -1,16 +1,23 @@
-angular.module("authors.info.ctrl", [])
+angular.module("authors.info.ctrl", [
+  // inject datepicker module
+  "manga.datepicker.ctrl" // DatePickerCtrl
+])
 .controller("AuthorsInfoCtrl", function(
   SERIES_COLUMNS, // from series controller
   Genres, // genres service
   Authors, // authors service
+  AuthorsInfo // share data with DatePickerCtrl
   $stateParams) {
   // === Variables ===
   var vm = this;
   // receive author id from url
   var id = $stateParams.id;
   // === Private ===
-  // constructor
-  function init() {
+  function resetFlags() {
+    vm.editing = new Object();
+  }
+  // reload author
+  function reload() {
     Authors.get(id)
     .then(function(author) {
       vm.name = author.name;
@@ -25,6 +32,26 @@ angular.module("authors.info.ctrl", [])
       console.log("Error " + err);
     });
   }
+  function saveAll() {
+    vm.birthDate = AuthorsInfo.getBirthDate();
+    var author = {
+      name: vm.name,
+      gender: vm.gender,
+      birthDate: vm.birthDate
+      // anything else is unnecessary!
+    };
+    Authors.update(id, author)
+    .then(function() {
+      reload();
+    }, function(err) {
+      console.log("Error " + err);
+    });
+  }
+  // constructor
+  function init() {
+    reload();
+    resetFlags();
+  }
   // === Start module ===
   init();
   // === Public ===
@@ -33,6 +60,14 @@ angular.module("authors.info.ctrl", [])
     return Genres.toString(genre);
   }
   vm.edit = function(field) {
-    alert("Edit field '" + field + "' in Author '" + vm.name + "'");
+    vm.editing[field] = true;
+  }
+  vm.isEdit = function(field) {
+    // check if key 'field' in Object and Object[key] == true
+    return (field in vm.editing && vm.editing[field]);
+  }
+  vm.save = function(field) {
+    saveAll();
+    resetFlags();
   }
 });

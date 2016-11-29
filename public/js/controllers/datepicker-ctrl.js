@@ -1,6 +1,35 @@
 angular.module("manga.datepicker.ctrl", [])
+// basic controller to pick authors birthday
+.controller("DatePickerCtrl", function(
+  AuthorsInfo // share date with AuthorsInfoCtrl
+  $scope) {
+  // === Variables ===
+  $scope.status = {opened: false};
+  // === Private ===
+  // constructor
+  $scope.init = function() {
+    $scope.date = AuthorsInfo.getBirthDate();
+  }
+  // === Start module ===
+  $scope.init();
+  // === Handlers ===
+  $scope.on("SharedBirthDate", function() {
+    $scope.date = AuthorsInfo.getBirthDate();
+  });
+  // === Public ===
+  $scope.changeDate = function() {
+    AuthorsInfo.setBirthDate($scope.date);
+  }
+  $scope.clear = function() {
+    $scope.date = null;
+  }
+  $scope.open = function($event) {
+    $scope.status.opened = true;
+  }
+})
+// more complex controller to select year only
 .controller("YearPickerCtrl", function(
-  SeriesInfo, // service to share date with SeriesInfoCtrl
+  SeriesInfo, // service to share year with SeriesInfoCtrl
   $scope) { // use scope to control view
   // === Variables ===
   // set date format to year-only

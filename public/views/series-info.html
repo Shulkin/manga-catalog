@@ -12,8 +12,9 @@
     </span>
     <!-- Otherwise show input element -->
     <span ng-show="manga.isEdit('title')">
+      <!-- my-title-input class fixed width -->
       <input type="text"
-        class="form-control input-lg my-manga-title-input"
+        class="form-control input-lg my-title-input"
         placeholder="Manga title"
         ng-model="manga.title">
       &nbsp;

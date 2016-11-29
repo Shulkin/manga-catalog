@@ -37,16 +37,14 @@ angular.module("series.info.ctrl", [
     });
   }
   function changeAuthor(prevId, newId) {
-    // id of this manga
-    var mangaId = vm._id;
     // delete manga from the list of previous author
-    Authors.deleteManga(prevId, mangaId)
+    Authors.deleteManga(prevId, id)
     .then(function(author) { // do nothing
     }, function(err) {
       console.log("Error " + err);
     });
     // add manga to new author series list
-    Authors.addManga(newId, mangaId)
+    Authors.addManga(newId, id)
     .then(function(author) { // do nothing
     }, function(err) {
       console.log("Error " + err);
@@ -56,7 +54,6 @@ angular.module("series.info.ctrl", [
   function reload() {
     Series.get(id)
     .then(function(manga) {
-      vm._id = manga._id;
       vm.title = manga.title;
       vm.description = manga.description;
       vm.genre = manga.genre;

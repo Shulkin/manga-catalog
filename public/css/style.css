@@ -8,7 +8,7 @@
 .my-fixed-size {
   resize: none;
 }
-.my-manga-title-input {
+.my-title-input {
   display: inline-block;
   width: 200px;
 }
