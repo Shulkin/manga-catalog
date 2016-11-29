@@ -6,7 +6,7 @@ angular.module("authors.info.ctrl", [
   SERIES_COLUMNS, // from series controller
   Genres, // genres service
   Authors, // authors service
-  AuthorsInfo // share data with DatePickerCtrl
+  AuthorsInfo, // share data with DatePickerCtrl
   $stateParams) {
   // === Variables ===
   var vm = this;
@@ -24,6 +24,9 @@ angular.module("authors.info.ctrl", [
       vm.gender = author.gender;
       vm.birthDate = author.birthDate;
       vm.series = author.series;
+      // send year to DatePickerCtrl through AuthorsInfo
+      AuthorsInfo.setBirthDate(vm.birthDate);
+      AuthorsInfo.shareBirthDate();
       // show all genres in authors series
       vm.allGenres = Authors.getAllGenres(author);
       // column headers for manga table
@@ -40,12 +43,15 @@ angular.module("authors.info.ctrl", [
       birthDate: vm.birthDate
       // anything else is unnecessary!
     };
+    console.log("[AuthorsInfoCtrl.saveAll] author = " + JSON.stringify(author));
+    /*
     Authors.update(id, author)
     .then(function() {
       reload();
     }, function(err) {
       console.log("Error " + err);
     });
+    */
   }
   // constructor
   function init() {
