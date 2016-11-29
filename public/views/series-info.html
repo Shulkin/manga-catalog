@@ -188,7 +188,10 @@
               <!-- Add new genre to manga -->
               <button type="button" class="col-xs-12 btn btn-info"
                 ng-click="manga.addGenre(manga.newGenre)">
-                Add&nbsp;<i class="glyphicon glyphicon-plus"></i>
+                <!-- Hide words 'Add' ONLY on small AND medium screens -->
+                <span class="hidden-sm hidden-md">Add&nbsp;</span>
+                <!-- On extra-small layout changes, so it should be okay! -->
+                <i class="glyphicon glyphicon-plus"></i>
               </button>
             </div>
           </div>

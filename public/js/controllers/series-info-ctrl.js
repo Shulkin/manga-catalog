@@ -39,22 +39,15 @@ angular.module("series.info.ctrl", [
   function changeAuthor(prevId, newId) {
     // id of this manga
     var mangaId = vm._id;
-    var mangaTitle = vm.title;
-    var prevName = vm.author.name;
-    console.log("[SeriesInfoCtrl.save] We just changed author...");
-    console.log("[SeriesInfoCtrl.save] old author = {id: " + prevId + ", name: " + prevName + "}");
-    console.log("[SeriesInfoCtrl.save] new author id = " + newId);
     // delete manga from the list of previous author
     Authors.deleteManga(prevId, mangaId)
-    .then(function(author) {
-      console.log("[Success!] Removed '" + mangaTitle + "' from works of '" + author.name + "'");
+    .then(function(author) { // do nothing
     }, function(err) {
       console.log("Error " + err);
     });
     // add manga to new author series list
     Authors.addManga(newId, mangaId)
-    .then(function(author) {
-      console.log("[Success!] Added '" + mangaTitle + "' to works of '" + author.name + "'");
+    .then(function(author) { // do nothing
     }, function(err) {
       console.log("Error " + err);
     });
@@ -81,7 +74,6 @@ angular.module("series.info.ctrl", [
     });
   }
   function saveAll() {
-    console.log("SeriesInfoCtrl.saveAll()");
     // get year from YearPickerCtrl
     vm.year = SeriesInfo.getYear();
     if (vm.author._id !== vm.authorId) {
@@ -101,7 +93,6 @@ angular.module("series.info.ctrl", [
       author: vm.authorId,
       year: vm.year
     };
-    console.log("[SeriesInfoCtrl.saveAll] manga = " + JSON.stringify(manga));
     Series.update(id, manga)
     .then(function() {
       // reload to get properly populated fields
@@ -121,13 +112,11 @@ angular.module("series.info.ctrl", [
   init();
   // === Public ===
   vm.addGenre = function(genreId) {
-    console.log("SeriesInfoCtrl.addGenre() genreId = " + genreId);
     var obj = {_id: genreId}; // without name
     // search genre name in allGenres array
     for (var i = 0; i < vm.allGenres.length; i++) {
       if (vm.allGenres[i]._id === genreId) {
-        // fill all fields
-        obj = {
+        obj = { // fill all fields
           _id: vm.allGenres[i]._id,
           name: vm.allGenres[i].name
         }; // find only first entry
@@ -137,10 +126,8 @@ angular.module("series.info.ctrl", [
     vm.genre.push(obj);
   }
   vm.removeGenre = function(genreId) {
-    console.log("SeriesInfoCtrl.removeGenre() genreId = " + genreId);
     var i = vm.genre.length;
-    // loop backwards
-    while (i--) {
+    while (i--) { // loop backwards
       if (vm.genre[i]._id === genreId) {
         vm.genre.splice(i, 1);
       }
