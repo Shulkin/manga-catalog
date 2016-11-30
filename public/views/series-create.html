@@ -1,65 +1,99 @@
-<h1>Create new series</h1>
 <div class="row">
-  <!-- Title -->
-  <input type="text" class="form-control input-lg my-title-input" placeholder="Manga title" ng-model="manga.title">
-</div>
-<div class="row">
-  <!-- Description -->
-  <textarea class="form-control my-fixed-size" rows="7" ng-model="manga.description"></textarea>
-</div>
-<div class="row">
-  <!-- Writing year -->
-  {{manga.date | date: manga.yearFormat}}
-  <div
-    uib-datepicker={{manga.yearFormat}}
-    ng-model="manga.date"
-    class="form-control"
-    datepicker-options="manga.dateOptions">
+  <div class="col-xs-12">
+    <h2>Create new series</h2>
   </div>
 </div>
 <div class="row">
-  <!-- Author name -->
-  <select class="form-control" ng-model="manga.authorId">
-    <option ng-repeat="author in manga.allAuthors" value="{{author._id}}">
-      {{author.name}}
-    </option>
-  </select>
+  <div class="col-xs-12">
+    <!-- Title -->
+    <input type="text" class="form-control input-lg my-title-input"
+      placeholder="Manga title" ng-model="manga.title">
+  </div>
 </div>
 <div class="row">
-  <div class="row">
-    <div class="col-sm-12">
-      <!-- List of this manga's genres -->
-      <span ng-repeat="genre in manga.genre">
-        {{genre.name}}
-        <!-- Remove genre from list -->
-        <button type="button" class="btn btn-warning btn-xs"
-          ng-click="manga.removeGenre(genre._id)">
-          <i class="glyphicon glyphicon-remove"></i>
+  <div class="col-xs-12">
+    <!-- Description -->
+    <h4>Description</h4>
+    <textarea class="form-control my-fixed-size" rows="7"
+      ng-model="manga.description">
+    </textarea>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <!-- Writing year -->
+    <span><b>Year of writing:&nbsp;</b></span>
+    {{manga.date | date: manga.format}}
+    <p class="input-group">
+      <input
+        type="text" class="form-control"
+        uib-datepicker-popup="{{manga.format}}"
+        ng-model="manga.date" ng-required="true"
+        is-open="manga.status.opened"
+        datepicker-options="manga.options"
+        date-disabled="disabled(date, mode)"
+        show-button-bar="false" close-text="Close"/>
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default"
+          ng-click="manga.open($event)"> <!-- open picker -->
+          <i class="glyphicon glyphicon-calendar"></i>
         </button>
-        <span ng-hide="$last">,&nbsp;</span>
       </span>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <!-- Author name -->
+    <h4>Author</h4>
+    <select class="form-control" ng-model="manga.authorId">
+      <option ng-repeat="author in manga.allAuthors" value="{{author._id}}">
+        {{author.name}}
+      </option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <!-- List of genres -->
+    <h4>Genres</h4>
+    <span ng-repeat="genre in manga.genre">
+      {{genre.name}}
+      <!-- Remove genre from list -->
+      <button type="button" class="btn btn-warning btn-xs"
+        ng-click="manga.removeGenre(genre._id)">
+        <i class="glyphicon glyphicon-remove"></i>
+      </button>
+      <span ng-hide="$last">,&nbsp;</span>
+    </span>
+    <hr>
+    <div class="row">
+      <div class="col-xs-8">
+        <!-- Select new genre -->
+        <select class="form-control" ng-model="manga.newGenre">
+          <!-- From the list of all available genres -->
+          <option ng-repeat="genre in manga.allGenres" value="{{genre._id}}">
+            {{genre.name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-4">
+        <!-- Add new genre to manga -->
+        <button type="button" class="btn btn-info"
+          ng-click="manga.addGenre(manga.newGenre)">
+          <span>Add&nbsp;</span><i class="glyphicon glyphicon-plus"></i>
+        </button>
+      </div>
     </div>
   </div>
-  <hr>
-  <div class="row">
-    <div class="col-xs-8">
-      <!-- Select new genre -->
-      <select class="col-xs-12 form-control" ng-model="manga.newGenre">
-        <!-- From the list of all available genres -->
-        <option ng-repeat="genre in manga.allGenres" value="{{genre._id}}">
-          {{genre.name}}
-        </option>
-      </select>
-    </div>
-    <div class="col-xs-4">
-      <!-- Add new genre to manga -->
-      <button type="button" class="col-xs-12 btn btn-info"
-        ng-click="manga.addGenre(manga.newGenre)">
-        <!-- Hide words 'Add' ONLY on small AND medium screens -->
-        <span class="hidden-sm hidden-md">Add&nbsp;</span>
-        <!-- On extra-small layout changes, so it should be okay! -->
-        <i class="glyphicon glyphicon-plus"></i>
-      </button>
-    </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <button type="button" class="btn btn-success" ng-click="manga.save()">
+      <span>Ok&nbsp;</span><i class="glyphicon glyphicon-ok"></i>
+    </button>
+    <button type="button" class="btn btn-danger" ui-sref="series">
+      <span>Cancel&nbsp;</span><i class="glyphicon glyphicon-remove"></i>
+    </button>
   </div>
 </div>
