@@ -1,41 +1,56 @@
-<form>
-  <div class="form-group">
-    <div class="input-group">
-      <div class="input-group-addon"><i class="fa fa-search"></i></div>
-      <input type="text" class="form-control"
-        placeholder="Search author" ng-model="authors.searchQuery">
-    </div>
+<div class="row">
+  <div class="col-xs-9">
+    <!-- Search query -->
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-search"></i></div>
+          <input type="text" class="form-control"
+            placeholder="Search author" ng-model="authors.searchQuery">
+        </div>
+      </div>
+    </form>
   </div>
-</form>
-<table class="table table-striped table-hover table-bordered">
-  <tr> <!-- Columns headers -->
-    <th ng-repeat="column in authors.columns">
-      <!-- Show link if column is sortable -->
-      <div ng-show="column.sortable">
-        <a class="my-cursor-pointer" ng-click="authors.sort(column.fieldName)">
-          <b>{{column.header}}</b>
-          <!-- show arrows corresponding sort order -->
-          <span ng-show="authors.isAscending(column.fieldName)"
-            class="fa fa-caret-up"></span> <!-- ascending-->
-          <span ng-show="authors.isDescending(column.fieldName)"
-            class="fa fa-caret-down"></span> <!-- descending -->
-        </a>
-      </div>
-      <!-- Otherwise show simple header -->
-      <div ng-hide="column.sortable">
-        <b>{{column.header}}</b>
-      </div>
-    </th>
-  </tr>
-  <!-- Actual table content -->
-  <tr dir-paginate="author in authors.list | orderBy: authors.sortType:authors.sortReverse | filter:authors.searchQuery | itemsPerPage: authors.perPage">
-    <!-- Authors name -->
-    <td><a ui-sref="authors-info({id: author._id})">{{author.name}}</a></td>
-    <!-- The number of series, which he wrote -->
-    <td>{{author.series.length}}</td>
-    <!-- Most numerours genre -->
-    <td>{{author.mostNumerousGenre}}</td>
-  </tr>
-</table>
-<!-- Pagination controls -->
-<dir-pagination-controls></dir-pagination-controls>
+  <div class="col-xs-3">
+    <!-- Add new author -->
+    <button type="button" class="col-xs-12 btn btn-info" ui-sref="authors-create">
+      <span>Add&nbsp;</span><i class="glyphicon glyphicon-plus"></i>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped table-hover table-bordered">
+      <tr> <!-- Columns headers -->
+        <th ng-repeat="column in authors.columns">
+          <!-- Show link if column is sortable -->
+          <div ng-show="column.sortable">
+            <a class="my-cursor-pointer" ng-click="authors.sort(column.fieldName)">
+              <b>{{column.header}}</b>
+              <!-- show arrows corresponding sort order -->
+              <span ng-show="authors.isAscending(column.fieldName)"
+                class="fa fa-caret-up"></span> <!-- ascending-->
+              <span ng-show="authors.isDescending(column.fieldName)"
+                class="fa fa-caret-down"></span> <!-- descending -->
+            </a>
+          </div>
+          <!-- Otherwise show simple header -->
+          <div ng-hide="column.sortable">
+            <b>{{column.header}}</b>
+          </div>
+        </th>
+      </tr>
+      <!-- Actual table content -->
+      <tr dir-paginate="author in authors.list | orderBy: authors.sortType:authors.sortReverse | filter:authors.searchQuery | itemsPerPage: authors.perPage">
+        <!-- Authors name -->
+        <td><a ui-sref="authors-info({id: author._id})">{{author.name}}</a></td>
+        <!-- The number of series, which he wrote -->
+        <td>{{author.series.length}}</td>
+        <!-- Most numerours genre -->
+        <td>{{author.mostNumerousGenre}}</td>
+      </tr>
+    </table>
+    <!-- Pagination controls -->
+    <dir-pagination-controls></dir-pagination-controls>
+  </div>
+</div>

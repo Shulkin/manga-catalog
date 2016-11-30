@@ -22,6 +22,12 @@ angular.module("manga.routes", []).config(
       templateUrl: "./views/authors-info.html",
       controller: "AuthorsInfoCtrl as author"
     })
+    // create new author screen
+    .state("authors-create", {
+      url: "/add/author",
+      templateUrl: "./views/authors-create.html",
+      controller: "AuthorsAddCtrl as author"
+    })
     // list of series
     .state("series", {
       url: "/series",
@@ -36,7 +42,7 @@ angular.module("manga.routes", []).config(
     })
     // create new manga screen
     .state("series-create", {
-      url: "/add/series",
+      url: "/add/manga",
       templateUrl: "./views/series-create.html",
       controller: "SeriesAddCtrl as manga"
     });
