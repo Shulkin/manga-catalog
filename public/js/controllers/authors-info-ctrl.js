@@ -43,15 +43,12 @@ angular.module("authors.info.ctrl", [
       birthDate: vm.birthDate
       // anything else is unnecessary!
     };
-    console.log("[AuthorsInfoCtrl.saveAll] author = " + JSON.stringify(author));
-    /*
     Authors.update(id, author)
     .then(function() {
       reload();
     }, function(err) {
       console.log("Error " + err);
     });
-    */
   }
   // constructor
   function init() {

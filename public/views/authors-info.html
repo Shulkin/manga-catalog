@@ -50,14 +50,11 @@
         </small>
       </div>
       <div class="panel-body">
-        <!-- <span ng-hide="author.isEdit('birthDate')"> -->
-        <span>
+        <span ng-hide="author.isEdit('birthDate')">
           <!-- Date like 'September 3, 2010' -->
           {{author.birthDate | date: "longDate"}}
         </span>
-        <!-- <span ng-show="author.isEdit('birthDate')"> -->
-        <hr>
-        <span>
+        <span ng-show="author.isEdit('birthDate')">
           <div ng-controller="DatePickerCtrl">
             <p class="input-group">
               <input
@@ -96,13 +93,10 @@
         </small>
       </div>
       <div class="panel-body">
-        <!-- <span ng-hide="author.isEdit('gender')"> -->
-        <span>
+        <span ng-hide="author.isEdit('gender')">
           {{author.gender}}
         </span>
-        <!-- <span ng-show="author.isEdit('gender')"> -->
-        <hr>
-        <span>
+        <span ng-show="author.isEdit('gender')">
           <select class="form-control" ng-model="author.gender">
             <!-- Simple choice! -->
             <option value="Male">Male</option>

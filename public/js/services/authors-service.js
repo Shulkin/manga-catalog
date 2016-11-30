@@ -43,6 +43,11 @@ angular.module("authors.service", [])
         });
       }
     },
+    update: function(id, data) {
+      return $http.put("/api/authors/" + id, data).then(function(response) {
+        return response.data;
+      });
+    },
     addManga: function(id, mangaId) {
       var data = {id: mangaId};
       return $http.put("/api/authors/" + id + "/manga", data).then(function(response) {

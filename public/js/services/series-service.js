@@ -3,7 +3,7 @@ angular.module("series.service", [])
   MOCK, // global config variable, do we need to use mock data?
   MOCK_SERIES_COUNT, // how many mock series generate
   SeriesMock, $http) {
-  // === Private ===
+  // === Public ===
   return {
     getAll: function() {
       if (MOCK) {
