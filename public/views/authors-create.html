@@ -3,3 +3,55 @@
     <h2>Create new author</h2>
   </div>
 </div>
+<div class="row">
+  <div class="col-xs-12">
+    <!-- Name -->
+    <input type="text" class="form-control input-lg my-title-input"
+      placeholder="Author name" ng-model="author.name">
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <!-- Birth date -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span><b>Birth date:&nbsp;</b></span>
+        {{author.date | date: "longDate"}}
+      </div>
+      <div class="panel-body">
+        <p class="input-group">
+          <input
+            type="text" class="form-control"
+            uib-datepicker-popup="{{author.format}}"
+            ng-model="author.date" ng-required="true"
+            is-open="author.status.opened"
+            date-disabled="disabled(date, mode)"
+            show-button-bar="false" close-text="Close"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default"
+              ng-click="author.open($event)"> <!-- open picker -->
+              <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <!-- Gender -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>Gender</h4>
+      </div>
+      <div class="panel-body">
+        <select class="form-control" ng-model="author.gender">
+          <!-- Simple choice! -->
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
