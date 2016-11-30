@@ -33,6 +33,12 @@ angular.module("manga.routes", []).config(
       url: "/series/:id",
       templateUrl: "./views/series-info.html",
       controller: "SeriesInfoCtrl as manga"
+    })
+    // create new manga screen
+    .state("series-create", {
+      url: "/add/series",
+      templateUrl: "./views/series-create.html",
+      controller: "SeriesAddCtrl as manga"
     });
   }]
 );
