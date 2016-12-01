@@ -1,5 +1,5 @@
 angular.module("news.ctrl", [])
-.controller("NewsCtrl", function(
+.controller("NewsCtrl", ["News", function(
   News) { // news service
   // === Variables ===
   var vm = this; // store 'this'
@@ -17,4 +17,4 @@ angular.module("news.ctrl", [])
   // === Start module ===
   init();
   // === Public ===
-});
+}]);

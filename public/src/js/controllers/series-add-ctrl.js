@@ -1,5 +1,6 @@
 angular.module("series.add.ctrl", [])
-.controller("SeriesAddCtrl", function(
+.controller("SeriesAddCtrl", [
+  "Genres", "Authors", "Series", "$state", function(
   Genres, Authors, Series, $state) {
   // === Variables ===
   var vm = this;
@@ -102,4 +103,4 @@ angular.module("series.add.ctrl", [])
       console.log("Error " + err);
     });
   }
-});
+}]);

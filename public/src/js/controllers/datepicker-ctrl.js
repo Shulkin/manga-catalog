@@ -1,6 +1,6 @@
 angular.module("manga.datepicker.ctrl", [])
 // basic controller to pick authors birthday
-.controller("DatePickerCtrl", function(
+.controller("DatePickerCtrl", ["AuthorsInfo", "$scope", function(
   AuthorsInfo, // share date with AuthorsInfoCtrl
   $scope) {
   // === Variables ===
@@ -79,4 +79,4 @@ angular.module("manga.datepicker.ctrl", [])
   $scope.open = function($event) {
     $scope.status.opened = true;
   }
-});
+}]);

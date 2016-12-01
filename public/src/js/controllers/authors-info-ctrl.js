@@ -2,7 +2,9 @@ angular.module("authors.info.ctrl", [
   // inject datepicker module
   "manga.datepicker.ctrl" // DatePickerCtrl
 ])
-.controller("AuthorsInfoCtrl", function(
+.controller("AuthorsInfoCtrl", [
+  "SERIES_COLUMNS", "Genres", "Authors",
+  "AuthorsInfo", "$stateParams", function(
   SERIES_COLUMNS, // from series controller
   Genres, // genres service
   Authors, // authors service
@@ -73,4 +75,4 @@ angular.module("authors.info.ctrl", [
     saveAll();
     resetFlags();
   }
-});
+}]);

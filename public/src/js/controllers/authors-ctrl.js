@@ -7,7 +7,8 @@ angular.module("authors.ctrl", [
   {header: "Series", fieldName: "series", sortable: true},
   {header: "Most Numerous Genre", fieldName: "mostNumerousGenre", sortable: false},
 ])
-.controller("AuthorsCtrl", function(
+.controller("AuthorsCtrl", [
+  "AUTHORS_COLUMNS", "AUTHORS_PER_PAGE", "Authors", function(
   AUTHORS_COLUMNS, // columns names and info
   AUTHORS_PER_PAGE, // number of authors per page
   Authors) { // authors service
@@ -57,4 +58,4 @@ angular.module("authors.ctrl", [
   vm.isDescending = function(fieldName) {
     return (vm.sortType === fieldName && !vm.sortReverse);
   }
-});
+}]);

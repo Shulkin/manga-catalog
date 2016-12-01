@@ -1,5 +1,5 @@
 angular.module("authors.info.service", [])
-.factory("AuthorsInfo", function($rootScope) {
+.factory("AuthorsInfo", ["$rootScope", function($rootScope) {
   return {
     data: {
       birthDate : new Date()
@@ -14,4 +14,4 @@ angular.module("authors.info.service", [])
       $rootScope.$broadcast("SharedBirthDate");
     }
   };
-});
+}]);

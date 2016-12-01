@@ -1,5 +1,5 @@
 angular.module("authors.add.ctrl", [])
-.controller("AuthorsAddCtrl", function(
+.controller("AuthorsAddCtrl", ["Authors", "$state", function(
   Authors, $state) {
   // === Variables ===
   var vm = this;
@@ -33,4 +33,4 @@ angular.module("authors.add.ctrl", [])
       console.log("Error " + err);
     });
   }
-});
+}]);

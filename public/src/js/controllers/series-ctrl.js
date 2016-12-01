@@ -8,7 +8,8 @@ angular.module("series.ctrl", [
   {header: "Genre", fieldName: "genre", sortable: false},
   {header: "Year", fieldName: "year", sortable: true},
 ])
-.controller("SeriesCtrl", function(
+.controller("SeriesCtrl", [
+  "SERIES_COLUMNS", "SERIES_PER_PAGE", "Genres", "Series", function(
   SERIES_COLUMNS, // columns names and info
   SERIES_PER_PAGE, // number of mangas per page
   Genres, // genres service
@@ -60,4 +61,4 @@ angular.module("series.ctrl", [
   vm.isDescending = function(fieldName) {
     return (vm.sortType === fieldName && !vm.sortReverse);
   }
-});
+}]);

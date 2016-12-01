@@ -1,5 +1,7 @@
 angular.module("authors.service", [])
-.factory("Authors", function(
+.factory("Authors", [
+  "MOCK", "MOCK_AUTHORS_COUNT",
+  "AuthorsMock", "$http", function(
   MOCK,
   MOCK_AUTHORS_COUNT,
   AuthorsMock, $http) {
@@ -82,4 +84,4 @@ angular.module("authors.service", [])
       return allGenres.join(", ");
     }
   };
-});
+}]);

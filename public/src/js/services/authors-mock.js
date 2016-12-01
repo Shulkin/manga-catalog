@@ -3,7 +3,9 @@ angular.module("authors.mock", [])
   "Oda Eiichiro", "Kishimoto Masashi", "Araki Hirohiko", "Akira Toriyama"
 ])
 .value("AUTHOR_GENDERS", ["Male", "Female"])
-.factory("AuthorsMock", function(
+.factory("AuthorsMock", [
+  "MOCK_SERIES_COUNT", "AUTHOR_NAMES", "AUTHOR_GENDERS",
+  "Utils", "SeriesMock", function(
   MOCK_SERIES_COUNT, // up to N series for one author
   AUTHOR_NAMES, AUTHOR_GENDERS, // author params
   Utils, SeriesMock) {
@@ -40,4 +42,4 @@ angular.module("authors.mock", [])
       return generateAuthorObject(id);
     },
   };
-});
+}]);
