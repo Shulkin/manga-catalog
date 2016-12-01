@@ -3,7 +3,7 @@ angular.module("series.info.service", [])
  * This is special factory to share
  * data between controllers
  */
-.factory("SeriesInfo", function($rootScope) {
+.factory("SeriesInfo", ["$rootScope", function($rootScope) {
   return {
     data: {
       // share between SeriesInfoCtrl and YearPickerCtrl
@@ -21,4 +21,4 @@ angular.module("series.info.service", [])
       $rootScope.$broadcast("SharedYear");
     }
   };
-});
+}]);

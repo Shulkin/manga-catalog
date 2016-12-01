@@ -1,5 +1,7 @@
 angular.module("series.service", [])
-.factory("Series", function(
+.factory("Series", [
+  "MOCK", "MOCK_SERIES_COUNT",
+  "SeriesMock", "$http", function(
   MOCK, // global config variable, do we need to use mock data?
   MOCK_SERIES_COUNT, // how many mock series generate
   SeriesMock, $http) {
@@ -39,4 +41,4 @@ angular.module("series.service", [])
       });
     }
   };
-});
+}]);

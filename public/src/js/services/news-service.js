@@ -1,5 +1,5 @@
 angular.module("news.service", [])
-.factory("News", function(NewsMock, $http) {
+.factory("News", ["NewsMock", "$http", function(NewsMock, $http) {
   return {
     getAll: function() {
       // do not call api, return promise with mock news by default
@@ -10,4 +10,4 @@ angular.module("news.service", [])
       });
     }
   };
-});
+}]);

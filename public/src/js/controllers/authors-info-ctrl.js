@@ -16,7 +16,7 @@ angular.module("authors.info.ctrl", [
   var id = $stateParams.id;
   // === Private ===
   function resetFlags() {
-    vm.editing = new Object();
+    vm.editing = {};
   }
   // reload author
   function reload() {
@@ -63,16 +63,16 @@ angular.module("authors.info.ctrl", [
   // represent author's works genre as string
   vm.genreToString = function(genre) {
     return Genres.toString(genre);
-  }
+  };
   vm.edit = function(field) {
     vm.editing[field] = true;
-  }
+  };
   vm.isEdit = function(field) {
     // check if key 'field' in Object and Object[key] == true
     return (field in vm.editing && vm.editing[field]);
-  }
+  };
   vm.save = function(field) {
     saveAll();
     resetFlags();
-  }
+  };
 }]);

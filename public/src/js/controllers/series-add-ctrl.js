@@ -58,7 +58,7 @@ angular.module("series.add.ctrl", [])
   // === Public ===
   vm.open = function($event) {
     vm.status.opened = true;
-  }
+  };
   vm.addGenre = function(genreId) {
     var obj = {_id: genreId}; // without name
     // search genre name in allGenres array
@@ -72,7 +72,7 @@ angular.module("series.add.ctrl", [])
       }
     }
     vm.genre.push(obj);
-  }
+  };
   vm.removeGenre = function(genreId) {
     var i = vm.genre.length;
     while (i--) { // loop backwards
@@ -80,7 +80,7 @@ angular.module("series.add.ctrl", [])
         vm.genre.splice(i, 1);
       }
     }
-  }
+  };
   vm.save = function() {
     var data = {
       title: vm.title,
@@ -102,5 +102,5 @@ angular.module("series.add.ctrl", [])
     }, function(err) {
       console.log("Error " + err);
     });
-  }
+  };
 }]);

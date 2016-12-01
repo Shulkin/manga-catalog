@@ -17,7 +17,7 @@ angular.module("authors.add.ctrl", [])
   // === Public ===
   vm.open = function($event) {
     vm.status.opened = true;
-  }
+  };
   vm.save = function() {
     var data = {
       name: vm.name,
@@ -32,5 +32,5 @@ angular.module("authors.add.ctrl", [])
     }, function(err) {
       console.log("Error " + err);
     });
-  }
+  };
 }]);

@@ -7,7 +7,7 @@ angular.module("authors.service", [])
   AuthorsMock, $http) {
   // === Private ===
   function getAllGenresAppearance(author) {
-    var allUsed = new Object();
+    var allUsed = {};
     var series = author.series;
     // look through all genres in all mangas of this author
     for (var i = 0; i < series.length; i++) {
@@ -69,7 +69,10 @@ angular.module("authors.service", [])
     getMostNumerousGenre: function(author, maxNumber) {
       var allUsed = getAllGenresAppearance(author);
       // sort genres by appearance count
-      var sorted = Object.keys(allUsed).sort((a, b) => allUsed[b] - allUsed[a]);
+      //var sorted = Object.keys(allUsed).sort((a, b) => allUsed[b] - allUsed[a]);
+      var sorted = Object.keys(allUsed).sort(function(a, b) {
+        return allUsed[a] - allUsed[b];
+      });
       var mostUsed = sorted.slice(0, maxNumber); // first N most used genres
       // return elements separated by comma
       return mostUsed.join(", ");

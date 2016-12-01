@@ -11,7 +11,7 @@ angular.module("manga.datepicker.ctrl", [])
   // constructor
   $scope.init = function() {
     $scope.date = AuthorsInfo.getBirthDate();
-  }
+  };
   // === Start module ===
   $scope.init();
   // === Handlers ===
@@ -21,16 +21,16 @@ angular.module("manga.datepicker.ctrl", [])
   // === Public ===
   $scope.changeDate = function() {
     AuthorsInfo.setBirthDate($scope.date);
-  }
+  };
   $scope.clear = function() {
     $scope.date = null;
-  }
+  };
   $scope.open = function($event) {
     $scope.status.opened = true;
-  }
-})
+  };
+}])
 // more complex controller to select year only
-.controller("YearPickerCtrl", function(
+.controller("YearPickerCtrl", ["SeriesInfo", "$scope", function(
   SeriesInfo, // service to share year with SeriesInfoCtrl
   $scope) { // use scope to control view
   // === Variables ===
@@ -55,7 +55,7 @@ angular.module("manga.datepicker.ctrl", [])
     // set year to calendar
     $scope.date.setFullYear($scope.year);
     // month, day, etc. is not important!
-  }
+  };
   // === Start module ===
   $scope.init();
   // === Handlers ===
@@ -72,11 +72,11 @@ angular.module("manga.datepicker.ctrl", [])
   $scope.changeDate = function() {
     $scope.year = $scope.date.getFullYear();
     SeriesInfo.setYear($scope.year);
-  }
+  };
   $scope.clear = function() {
     $scope.date = null;
-  }
+  };
   $scope.open = function($event) {
     $scope.status.opened = true;
-  }
+  };
 }]);

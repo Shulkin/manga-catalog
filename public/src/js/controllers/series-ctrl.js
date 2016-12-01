@@ -42,7 +42,7 @@ angular.module("series.ctrl", [
   // represent manga genre as string
   vm.genreToString = function(genre) {
     return Genres.toString(genre);
-  }
+  };
   // switch sort on selected column
   vm.sort = function(fieldName) {
     // if enabled first time on column
@@ -54,11 +54,11 @@ angular.module("series.ctrl", [
       vm.sortReverse = !vm.sortReverse;
     }
     vm.sortType = fieldName;
-  }
+  };
   vm.isAscending = function(fieldName) {
     return (vm.sortType === fieldName && vm.sortReverse);
-  }
+  };
   vm.isDescending = function(fieldName) {
     return (vm.sortType === fieldName && !vm.sortReverse);
-  }
+  };
 }]);

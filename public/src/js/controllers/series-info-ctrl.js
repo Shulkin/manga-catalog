@@ -2,7 +2,9 @@ angular.module("series.info.ctrl", [
   // inject module with datepicker controller
   "manga.datepicker.ctrl" // use YearPickerCtrl in view
 ])
-.controller("SeriesInfoCtrl", function(
+.controller("SeriesInfoCtrl", [
+  "Genres", "Series", "Authors",
+  "SeriesInfo", "$stateParams", function(
   Genres, // genres service
   Series, // series service
   Authors, // authors service
@@ -14,7 +16,7 @@ angular.module("series.info.ctrl", [
   var id = $stateParams.id;
   // === Private ===
   function resetFlags() {
-    vm.editing = new Object();
+    vm.editing = {};
   }
   function getAllAuthors() {
     vm.allAuthors = [];
@@ -121,7 +123,7 @@ angular.module("series.info.ctrl", [
       }
     }
     vm.genre.push(obj);
-  }
+  };
   vm.removeGenre = function(genreId) {
     var i = vm.genre.length;
     while (i--) { // loop backwards
@@ -129,16 +131,16 @@ angular.module("series.info.ctrl", [
         vm.genre.splice(i, 1);
       }
     }
-  }
+  };
   vm.edit = function(field) {
     vm.editing[field] = true;
-  }
+  };
   vm.isEdit = function(field) {
     // check if key 'field' in Object and Object[key] == true
     return (field in vm.editing && vm.editing[field]);
-  }
+  };
   vm.save = function(field) {
     saveAll();
     resetFlags();
-  }
-});
+  };
+}]);

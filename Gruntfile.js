@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       build: {
         files: {
           "public/dst/js/app.min.js": [
-            "public/src/config/*.js" // config.js
+            "public/src/config/*.js", // config.js
             "public/src/js/**/*.js", // all controllers and services
             "public/src/js/*.js" // app.js, app-routes.js
           ]
@@ -22,13 +22,12 @@ module.exports = function(grunt) {
     cssmin: {
       build: {
         files: {
-          "public/dst/css/style.min.css":
-            "public/src/css/style.css"
+          "public/dst/css/style.min.css": "public/src/css/style.css"
         }
       }
     },
     // === Global ===
-    // watch css and js files and process above Tasks
+    // watch css and js files and process above tasks
     watch: {
       css: {
         files: ["public/src/css/**/*.css"],
@@ -61,5 +60,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
   // register them
-  grunt.registerTask("default", ["cssmin", "jshint", "uglify", "concurrent"]);
+  grunt.registerTask('default', ["cssmin", "jshint", "uglify", "concurrent"]);
 };

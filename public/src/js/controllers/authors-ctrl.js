@@ -51,11 +51,11 @@ angular.module("authors.ctrl", [
       vm.sortReverse = !vm.sortReverse;
     }
     vm.sortType = fieldName;
-  }
+  };
   vm.isAscending = function(fieldName) {
     return (vm.sortType === fieldName && vm.sortReverse);
-  }
+  };
   vm.isDescending = function(fieldName) {
     return (vm.sortType === fieldName && !vm.sortReverse);
-  }
+  };
 }]);

@@ -7,7 +7,8 @@ angular.module("series.mock", [])
 .value("MANGA_GENRES", [
   "Shounen", "Action", "Adventure", "Horror", "Drama", "Comedy", "Seinen"
 ])
-.factory("SeriesMock", function(
+.factory("SeriesMock", [
+  "MANGA_TITLES", "MANGA_GENRES", "AUTHOR_NAMES", "Utils", function(
   MANGA_TITLES, MANGA_GENRES, AUTHOR_NAMES, Utils) {
   // === Private ===
   function generateSimpleAuthorObject(id) {
@@ -58,4 +59,4 @@ angular.module("series.mock", [])
       return generateMangaObject(id);
     }
   };
-});
+}]);

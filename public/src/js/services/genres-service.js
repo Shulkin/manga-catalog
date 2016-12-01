@@ -1,5 +1,5 @@
 angular.module("genres.service", [])
-.factory("Genres", function($http) {
+.factory("Genres", ["$http", function($http) {
   return {
     getAll: function() {
       return $http.get("/api/genres").then(function(response) {
@@ -29,4 +29,4 @@ angular.module("genres.service", [])
       return result;
     }
   };
-});
+}]);
