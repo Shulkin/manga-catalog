@@ -16,6 +16,11 @@ angular.module("series.service", [])
         });
       }
     },
+    create: function(data) {
+      return $http.post("api/series", data).then(function(response) {
+        return response.data;
+      });
+    },
     get: function(id) {
       if (MOCK) {
         return new Promise(function(resolve, reject) {

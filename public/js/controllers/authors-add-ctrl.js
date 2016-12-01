@@ -1,5 +1,6 @@
 angular.module("authors.add.ctrl", [])
-.controller("AuthorsAddCtrl", function() {
+.controller("AuthorsAddCtrl", function(
+  Authors, $state) {
   // === Variables ===
   var vm = this;
   vm.format = 'dd-MMMM-yyyy';
@@ -7,10 +8,9 @@ angular.module("authors.add.ctrl", [])
   // === Private ===
   // constructor
   function init() {
-    console.log("SeriesAddCtrl.init()");
     vm.name = "";
-    vm.date = new Date(); // birth date
     vm.gender = "Male";
+    vm.date = new Date(); // birth date
   }
   // === Start module ===
   init();
@@ -20,11 +20,20 @@ angular.module("authors.add.ctrl", [])
   }
   vm.save = function() {
     console.log("AuthorsAddCtrl.save()");
-    var author = {
+    var data = {
       name: vm.name,
-      birthDate: vm.date,
       gender: vm.gender
+      birthDate: vm.date,
+      series: [] // empty
     };
-    console.log("[AuthorsAddCtrl.save] manga = " + JSON.stringify(author));
+    console.log("[AuthorsAddCtrl.save] author = " + JSON.stringify(data));
+    Authors.create(data)
+    .then(function(author) {
+      console.log("[Success! Create new author] author = " + JSON.stringify(author));
+      // return to authors table
+      $state.go("authors");
+    }, function(err) {
+      console.log("Error " + err);
+    });
   }
 });

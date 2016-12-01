@@ -1,6 +1,6 @@
 angular.module("series.add.ctrl", [])
 .controller("SeriesAddCtrl", function(
-  Genres, Authors) {
+  Genres, Authors, Series, $state) {
   // === Variables ===
   var vm = this;
   vm.format = 'yyyy'; // year-only
@@ -29,7 +29,6 @@ angular.module("series.add.ctrl", [])
   }
   // constructor
   function init() {
-    console.log("SeriesAddCtrl.init()");
     // init all models
     vm.title = "";
     vm.description = "";
@@ -83,13 +82,27 @@ angular.module("series.add.ctrl", [])
   }
   vm.save = function() {
     console.log("SeriesAddCtrl.save()");
-    var manga = {
+    var data = {
       title: vm.title,
       description: vm.description,
       year: vm.date.getFullYear(),
       genre: Genres.extractIds(vm.genre),
       author: vm.authorId
     };
-    console.log("[SeriesAddCtrl.save] manga = " + JSON.stringify(manga));
+    console.log("[SeriesAddCtrl.save] manga = " + JSON.stringify(data));
+    Series.create(data)
+    .then(function(manga) {
+      console.log("[Success! Create new manga] manga = " + JSON.stringify(manga));
+      // add new manga to authors list
+      Authors.addManga(vm.authorId, manga._id)
+      .then(function(author) {
+        // return to series table
+        $state.go("series");
+      }, function(err) {
+        console.log("Error " + err);
+      });
+    }, function(err) {
+      console.log("Error " + err);
+    });
   }
 });

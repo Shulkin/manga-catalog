@@ -32,6 +32,11 @@ angular.module("authors.service", [])
         });
       }
     },
+    create: function(data) {
+      return $http.post("api/authors", data).then(function(response) {
+        return response.data;
+      });
+    },
     get: function(id) {
       if (MOCK) {
         return new Promise(function(resolve, reject) {

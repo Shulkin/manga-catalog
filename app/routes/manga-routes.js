@@ -24,10 +24,14 @@ router.route("/")
   }, function(err, manga) {
     if (err) res.send(err);
     // return new series list
+    /*
     Manga.find(function(err, series) {
       if (err) res.send(err);
       res.json(series);
     });
+    */
+    // return new series
+    res.json(manga);
   });
 });
 // process api/series/id
