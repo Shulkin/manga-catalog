@@ -30,13 +30,6 @@ router.route("/")
     series: req.body.series
   }, function(err, author) {
     if (err) res.send(err);
-    // return new authors list
-    /*
-    Author.find(function(err, authors) {
-      if (err) res.send(err);
-      res.json(authors);
-    });
-    */
     // return new author
     res.json(author);
   });

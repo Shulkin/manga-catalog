@@ -81,7 +81,6 @@ angular.module("series.add.ctrl", [])
     }
   }
   vm.save = function() {
-    console.log("SeriesAddCtrl.save()");
     var data = {
       title: vm.title,
       description: vm.description,
@@ -89,10 +88,8 @@ angular.module("series.add.ctrl", [])
       genre: Genres.extractIds(vm.genre),
       author: vm.authorId
     };
-    console.log("[SeriesAddCtrl.save] manga = " + JSON.stringify(data));
     Series.create(data)
     .then(function(manga) {
-      console.log("[Success! Create new manga] manga = " + JSON.stringify(manga));
       // add new manga to authors list
       Authors.addManga(vm.authorId, manga._id)
       .then(function(author) {

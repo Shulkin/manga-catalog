@@ -23,14 +23,7 @@ router.route("/")
     author: req.body.author // Schema.Types.ObjectId
   }, function(err, manga) {
     if (err) res.send(err);
-    // return new series list
-    /*
-    Manga.find(function(err, series) {
-      if (err) res.send(err);
-      res.json(series);
-    });
-    */
-    // return new series
+    // return new manga
     res.json(manga);
   });
 });
