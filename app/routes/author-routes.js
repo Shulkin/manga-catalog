@@ -4,6 +4,8 @@ var router = express.Router();
 // get local mongoose model
 var Author = require("../models/author");
 // MongoDB will create collection 'authors'
+// middleware for authenticating jwt tokens
+var auth = jwt({secret: "SECRET", userProperty: "payload"});
 // process api/authors/
 router.route("/")
 // get authors list (GET http://localhost:3000/api/authors)
@@ -22,7 +24,7 @@ router.route("/")
   });
 })
 // add new author (POST http://localhost:3000/api/authors)
-.post(function(req, res) {
+.post(auth, function(req, res) { // require authentication!
   Author.create({
     name: req.body.name,
     gender: req.body.gender,
@@ -52,7 +54,7 @@ router.route("/:id")
   });
 })
 // update author info (PUT http://localhost:3000/api/authors/id)
-.put(function(req, res) {
+.put(auth, function(req, res) { // require authentication!
   Author.findById(req.params.id, function(err, author) {
     if (err) res.send(err);
     // set only text info
@@ -68,7 +70,7 @@ router.route("/:id")
   });
 })
 // delete author (DELETE http://localhost:3000/api/authors/id)
-.delete(function(req, res) {
+.delete(auth, function(req, res) { // require authentication!
   Author.remove({
     _id: req.params.id
   }, function(err, author) {
@@ -83,7 +85,7 @@ router.route("/:id")
 // process api/authors/id/manga
 router.route("/:id/manga")
 // update author series list (POST http://localhost:3000/api/authors/id/manga)
-.post(function(req, res) {
+.post(auth, function(req, res) { // require authentication!
   Author.findById(req.params.id, function(err, author) {
     if (err) res.send(err);
     // rewrite series from scratch
@@ -95,7 +97,7 @@ router.route("/:id/manga")
   });
 })
 // add manga to series list (PUT http://localhost:3000/api/authors/id/manga)
-.put(function(req, res) {
+.put(auth, function(req, res) { // require authentication!
   Author.findById(req.params.id, function(err, author) {
     if (err) res.send(err);
     // push manga id to list
@@ -109,7 +111,7 @@ router.route("/:id/manga")
 // process api/authors/id/manga/manga_id
 router.route("/:id/manga/:manga_id")
 // delete manga from list of authors works (DELETE http://localhost:3000/api/authors/id/manga/manga_id)
-.delete(function(req, res) {
+.delete(auth, function(req, res) { // require authentication!
   Author.findById(req.params.id, function(err, author) {
     if (err) res.send(err);
     // find series in list by id and remove it

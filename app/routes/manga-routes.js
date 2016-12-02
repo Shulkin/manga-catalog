@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var Manga = require("../models/manga");
+// middleware for authenticating jwt tokens
+var auth = jwt({secret: "SECRET", userProperty: "payload"});
 // process api/series
 router.route("/")
 // get manga list (GET http://localhost:3000/api/series)
@@ -14,7 +16,7 @@ router.route("/")
   });
 })
 // create manga (POST http://localhost:3000/api/series)
-.post(function(req, res) {
+.post(auth, function(req, res) { // require authentication!
   Manga.create({
     title: req.body.title,
     description: req.body.description,
@@ -40,7 +42,7 @@ router.route("/:id")
   });
 })
 // update manga info (PUT http://localhost:3000/api/series/id)
-.put(function(req, res) {
+.put(auth, function(req, res) { // require authentication!
   Manga.findById(req.params.id, function(err, manga) {
     if (err) res.send(err);
     manga.title = req.body.title;
@@ -56,7 +58,7 @@ router.route("/:id")
   });
 })
 // delete series (DELETE http://localhost:3000/api/series/id)
-.delete(function(req, res) {
+.delete(auth, function(req, res) { // require authentication!
   Manga.remove({
     _id: req.params.id
   }, function(err, manga) {
@@ -71,7 +73,7 @@ router.route("/:id")
 // process api/series/id/genre
 router.route("/:id/genre")
 // add genre to manga (PUT http://localhost:3000/api/series/id/genre)
-.put(function(req, res) {
+.put(auth, function(req, res) { // require authentication!
   Manga.findById(req.params.id, function(err, manga) {
     if (err) res.send(err);
     // insert new genre id
