@@ -8,18 +8,16 @@ var cookieParser = require("cookie-parser");
 var methodOverride = require("method-override");
 var mongoose = require("mongoose");
 var passport = require("passport");
-var flash = require("connect-flash");
-var session = require("express-session");
 // initialize express app
 var app = express();
 // set up the port
 var port = process.env.PORT || 3000;
 // load the database config
 var database = require("./config/database");
+// require passport config
+require("./config/passport");
 // connect to database
 mongoose.connect(database.url);
-// pass passport for configuration
-require("./config/passport")(passport);
 // === Configure ===
 // set up list of express middleware
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
@@ -30,20 +28,16 @@ app.use(bodyParser.json({type: "application/vnd.api+json"}));
 app.use(bodyParser.urlencoded({"extended": "true"}));
 app.use(cookieParser()); // need to auth
 app.use(methodOverride());
-// required for passport
-app.use(session({
-  // session secret
-  secret: "secret"
-}));
+// initialize passport after express middleware
 app.use(passport.initialize());
-// persistent login sessions
-app.use(passport.session());
-// use connect-flash for flash messages stored in session
-app.use(flash());
 // load api routes
 app.use("/api/authors", require("./app/routes/author-routes"));
 app.use("/api/genres", require("./app/routes/genre-routes"));
 app.use("/api/series", require("./app/routes/manga-routes"));
+// load auth routes
+app.use("auth/users", require("./app/routes/user-routes")); // list of users
+app.use("auth/login", require("./app/routes/login-routes")); // login
+app.use("auth/register", require("./app/routes/register-routes")); // register
 // default route to index.html
 app.get("*", function(req ,res) {
   // anything else is up to Angular

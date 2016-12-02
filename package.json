@@ -11,16 +11,15 @@
   },
   "dependencies": {
     "express": "^4.14.0",
-    "express-session": "~1.0.0",
+    "express-jwt": "^5.1.0",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.0.0",
     "serve-favicon": "^2.3.0",
     "method-override": "^2.3.6",
+    "jsonwebtoken": "^7.1.9",
     "mongoose": "^4.6.4",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "connect-flash": "~0.1.1",
-    "bcrypt-nodejs": "latest"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
