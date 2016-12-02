@@ -12,6 +12,8 @@ var mangaApp = angular.module("manga.app", [
   "manga.config",
   // utilities functions
   "manga.utilities",
+  // authenticate services
+  "manga.auth",
   // news controllers
   "news.ctrl",
   // news services
