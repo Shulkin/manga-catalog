@@ -35,9 +35,9 @@ app.use("/api/authors", require("./app/routes/author-routes"));
 app.use("/api/genres", require("./app/routes/genre-routes"));
 app.use("/api/series", require("./app/routes/manga-routes"));
 // load auth routes
-app.use("auth/users", require("./app/routes/user-routes")); // list of users
-app.use("auth/login", require("./app/routes/login-routes")); // login
-app.use("auth/register", require("./app/routes/register-routes")); // register
+app.use("/auth/users", require("./app/routes/user-routes")); // list of users
+app.use("/auth/login", require("./app/routes/login-routes")); // login
+app.use("/auth/register", require("./app/routes/register-routes")); // register
 // default route to index.html
 app.get("*", function(req ,res) {
   // anything else is up to Angular
