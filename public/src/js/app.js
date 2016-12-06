@@ -12,7 +12,7 @@ var mangaApp = angular.module("manga.app", [
   "manga.config",
   // utilities functions
   "manga.utilities",
-  // authenticate services
+  // authenticate service
   "manga.auth",
   // news controllers
   "news.ctrl",

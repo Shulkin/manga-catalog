@@ -41,9 +41,39 @@
   </head>
   <body ng-app="manga.app">
     <div class="container">
+      <!-- Header & Register/Login -->
       <div class="row">
         <div class="col-sm-12">
-          <!-- Header -->
+          <b>Manga Catalog</b>
+          <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
+            <ul class="nav navbar-nav">
+              <li ng-show="isLoggedIn()"><a>{{currentUser()}}</a></li>
+              <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
+              <li ng-show="isLoggedIn()"><a ui-sref="login">Log In</a></li>
+              <li ng-show="isLoggedIn()"><a ui-sref="register">Register</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div ui-view></div>
+        </div>
+        <!--
+        <div class="col-sm-3">
+          <div ui-view="menu"></div>
+        </div>
+        <div class="col-sm-9">
+          <div ui-view="content"></div>
+        </div>
+        -->
+      </div>
+    </div>
+    <!-- ========== -->
+    <!--
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
           <div class="jumbotron text-center">
             <h1>Manga Catalog</h1>
           </div>
@@ -51,19 +81,17 @@
       </div>
       <div class="row">
         <div class="col-sm-3">
-          <!-- Main menu -->
           <ul class="nav nav-pills nav-stacked">
-            <!-- ui-sref-active="active" in <li> to highlight on ui-sref -->
             <li ui-sref-active="active"><a ui-sref="news">Home</a></li>
             <li ui-sref-active="active"><a ui-sref="series">Series</a></li>
             <li ui-sref-active="active"><a ui-sref="authors">Mangaka</a></li>
           </ul>
         </div>
         <div class="col-sm-9">
-          <!-- Main content goes here -->
           <div ui-view></div>
         </div>
       </div>
     </div>
+    -->
   </body>
 </html>

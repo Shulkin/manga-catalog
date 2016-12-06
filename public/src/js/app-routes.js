@@ -1,9 +1,24 @@
 angular.module("manga.routes", []).config(
   ["$stateProvider", "$urlRouterProvider",
   function($stateProvider, $urlRouterProvider) {
-    // all other routes will lead to /news
-    $urlRouterProvider.otherwise("/news");
+    // all other routes will lead to /home
+    $urlRouterProvider.otherwise("/home");
     $stateProvider
+    .state("home", {
+      url: "/home",
+      templateUrl: "./views/home.html"
+    })
+    .state("login", {
+      url: "/login",
+      templateUrl: "./views/login.html"
+      controller: "AuthCtrl"
+    })
+    .state("register", {
+      url: "/register",
+      templateUrl: "./views/register.html",
+      controller: "AuthCtrl"
+    })
+    /*
     // news page state
     .state("news", {
       url: "/news",
@@ -46,5 +61,6 @@ angular.module("manga.routes", []).config(
       templateUrl: "./views/series-create.html",
       controller: "SeriesAddCtrl as manga"
     });
+    */
   }]
 );
