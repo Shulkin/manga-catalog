@@ -1,4 +1,6 @@
 var express = require("express");
+// load jsonwebtoken
+var jwt = require("express-jwt");
 // use express built-in router
 var router = express.Router();
 // get local mongoose model

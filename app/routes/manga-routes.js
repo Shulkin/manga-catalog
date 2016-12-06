@@ -1,4 +1,5 @@
 var express = require("express");
+var jwt = require("express-jwt");
 var router = express.Router();
 var Manga = require("../models/manga");
 // middleware for authenticating jwt tokens

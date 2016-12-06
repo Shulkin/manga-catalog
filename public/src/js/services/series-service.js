@@ -1,7 +1,7 @@
 angular.module("series.service", [])
 .factory("Series", [
   "MOCK", "MOCK_SERIES_COUNT",
-  "SeriesMock", "Auth" "$http", function(
+  "SeriesMock", "Auth", "$http", function(
   MOCK, // global config variable, do we need to use mock data?
   MOCK_SERIES_COUNT, // how many mock series generate
   SeriesMock, Auth, $http) {

@@ -43,8 +43,8 @@ angular.module("manga.auth", [])
     getToken: function() {
       return $window.localStorage["manga-catalog-token"];
     },
-    isLoggedIn: function(token) {
-      var token = auth.getToken();
+    isLoggedIn: function() {
+      var token = Auth.getToken();
       if (token) {
         /*
          * If a token exists, we'll need to check the payload to see if the
@@ -57,20 +57,20 @@ angular.module("manga.auth", [])
       }
     },
     currentUser: function() {
-      if (auth.isLoggedIn()) {
-        var token = auth.getToken();
+      if (Auth.isLoggedIn()) {
+        var token = Auth.getToken();
         var payload = JSON.parse($window.atob(token.split(".")[1]));
         return payload.username;
       }
     },
     register: function(user) {
       return $http.post("/auth/register", user).then(function(response) {
-        auth.saveToken(response.data.token);
+        Auth.saveToken(response.data.token);
       });
     },
     logIn: function(user) {
       return $http.post("/auth/login", user).then(function(response) {
-        auth.saveToken(response.data.token);
+        Auth.saveToken(response.data.token);
       });
     },
     logOut: function(user) {

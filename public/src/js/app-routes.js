@@ -10,14 +10,14 @@ angular.module("manga.routes", []).config(
     })
     .state("login", {
       url: "/login",
-      templateUrl: "./views/login.html"
+      templateUrl: "./views/login.html",
       controller: "AuthCtrl"
     })
     .state("register", {
       url: "/register",
       templateUrl: "./views/register.html",
       controller: "AuthCtrl"
-    })
+    });
     /*
     // news page state
     .state("news", {
