@@ -28,13 +28,23 @@ angular.module("manga.auth", [])
     }
   };
   auth.register = function(user) {
+    console.log("Send http POST register: " + JSON.stringify(user));
     return $http.post("/auth/register", user).then(function(response) {
+      console.log("[Register] Response: " + JSON.stringify(response));
       auth.saveToken(response.data.token);
+    }, function(error) {
+      console.log("[Register] Error: " + JSON.stringify(error));
+      return error.data;
     });
   };
   auth.logIn = function(user) {
+    console.log("Send http POST login: " + JSON.stringify(user));
     return $http.post("/auth/login", user).then(function(response) {
+      console.log("[Login] Response: " + JSON.stringify(response));
       auth.saveToken(response.data.token);
+    }, function(error) {
+      console.log("[Login] Error: " + JSON.stringify(error));
+      return error.data;
     });
   };
   auth.logOut = function(user) {

@@ -6,19 +6,25 @@ angular.module("manga.auth.ctrl", [])
   "Auth", "$scope", "$state", function(Auth, $scope, $state) {
     $scope.user = {};
     $scope.register = function() {
-      Auth.register($scope.user).error(function(error) {
-        // error on register user
-        $scope.error = error;
-      }).then(function() {
-        // return to main page
-        $state.go("home");
+      Auth.register($scope.user)
+      .then(function(error) {
+        if (error !== undefined) {
+          // error on register user
+          $scope.error = error;
+        } else {
+          // return to main page
+          $state.go("home");
+        }
       });
     };
     $scope.logIn = function() {
-      Auth.logIn($scope.user).error(function(error) {
-        $scope.error = error;
-      }).then(function() {
-        $state.go("home");
+      Auth.logIn($scope.user)
+      .then(function(error) {
+        if (error !== undefined) {
+          $scope.error = error;
+        } else {
+          $state.go("home");
+        }
       });
     };
 }]);
