@@ -1,10 +1,10 @@
 angular.module("authors.service", [])
 .factory("Authors", [
   "MOCK", "MOCK_AUTHORS_COUNT",
-  "AuthorsMock", "$http", function(
+  "AuthorsMock", "Auth", "$http", function(
   MOCK,
   MOCK_AUTHORS_COUNT,
-  AuthorsMock, $http) {
+  AuthorsMock, Auth, $http) {
   // === Private ===
   function getAllGenresAppearance(author) {
     var allUsed = {};
@@ -35,7 +35,9 @@ angular.module("authors.service", [])
       }
     },
     create: function(data) {
-      return $http.post("api/authors", data).then(function(response) {
+      return $http.post("api/authors", data, {
+        headers: {Authorization: "Bearer " + Auth.getToken()}
+      }).then(function(response) {
         return response.data;
       });
     },
@@ -51,18 +53,24 @@ angular.module("authors.service", [])
       }
     },
     update: function(id, data) {
-      return $http.put("/api/authors/" + id, data).then(function(response) {
+      return $http.put("/api/authors/" + id, data, {
+        headers: {Authorization: "Bearer " + Auth.getToken()}
+      }).then(function(response) {
         return response.data;
       });
     },
     addManga: function(id, mangaId) {
       var data = {id: mangaId};
-      return $http.put("/api/authors/" + id + "/manga", data).then(function(response) {
+      return $http.put("/api/authors/" + id + "/manga", data, {
+        headers: {Authorization: "Bearer " + Auth.getToken()}
+      }).then(function(response) {
         return response.data;
       });
     },
     deleteManga: function(id, mangaId) {
-      return $http.delete("/api/authors/" + id + "/manga/" + mangaId).then(function(response) {
+      return $http.delete("/api/authors/" + id + "/manga/" + mangaId, {
+        headers: {Authorization: "Bearer " + Auth.getToken()}
+      }).then(function(response) {
         return response.data;
       });
     },
