@@ -1,37 +1,5 @@
 angular.module("manga.auth", [])
 /*
- * Simple controller for nevigation header that exposes isLoggedIn,
- * currentUser, and logOut methods from Auth factory.
- */
-.controller("NavCtrl", ["Auth", "$scope", function(Auth, $scope) {
-  $scope.isLoggedIn = Auth.isLoggedIn;
-  $scope.currentUser = Auth.currentUser;
-  $scope.logOut = Auth.logOut;
-}])
-/*
- * Controller for login and register views
- */
-.controller("AuthCtrl", [
-  "Auth", "$scope", "$state", function(Auth, $scope, $state) {
-    $scope.user = {};
-    $scope.register = function() {
-      Auth.register($scope.user).error(function(error) {
-        // error on register user
-        $scope.error = error;
-      }).then(function() {
-        // return to main page
-        $state.go("home");
-      });
-    };
-    $scope.logIn = function() {
-      Auth.logIn($scope.user).error(function(error) {
-        $scope.error = error;
-      }).then(function() {
-        $state.go("home");
-      });
-    };
-}])
-/*
  * We'll need to inject $http for interfacing with our server, and $window
  * for interfacing with localStorage.
  */
@@ -77,4 +45,13 @@ angular.module("manga.auth", [])
       $window.localStorage.removeItem("manga-catalog-token");
     }
   };
+}])
+/*
+ * Simple controller for nevigation header that exposes isLoggedIn,
+ * currentUser, and logOut methods from Auth factory.
+ */
+.controller("NavCtrl", ["Auth", "$scope", function(Auth, $scope) {
+  $scope.isLoggedIn = Auth.isLoggedIn;
+  $scope.currentUser = Auth.currentUser;
+  $scope.logOut = Auth.logOut;
 }]);
