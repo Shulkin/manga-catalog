@@ -8,10 +8,10 @@ angular.module("authors.ctrl", [
   {header: "Most Numerous Genre", fieldName: "mostNumerousGenre", sortable: false},
 ])
 .controller("AuthorsCtrl", [
-  "AUTHORS_COLUMNS", "AUTHORS_PER_PAGE", "Authors", function(
+  "AUTHORS_COLUMNS", "AUTHORS_PER_PAGE", "Auth", "Authors", function(
   AUTHORS_COLUMNS, // columns names and info
   AUTHORS_PER_PAGE, // number of authors per page
-  Authors) { // authors service
+  Auth, Authors) { // auth and authors services
   // === Variables ===
   var vm = this;
   vm.columns = AUTHORS_COLUMNS;
@@ -40,6 +40,7 @@ angular.module("authors.ctrl", [
   // === Start module ===
   init();
   // === Public ===
+  vm.isUserLoggedIn = Auth.isLoggedIn;
   // switch sort on selected column
   vm.sort = function(fieldName) {
     // if enabled first time on column

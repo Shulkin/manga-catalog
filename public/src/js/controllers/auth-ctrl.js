@@ -9,14 +9,14 @@ angular.module("manga.auth.ctrl", [])
       Auth.register($scope.user).error(function(error) {
         $scope.error = error;
       }).then(function() {
-        $state.go("home");
+        $state.go("home.news");
       });
     };
     $scope.logIn = function() {
       Auth.logIn($scope.user).error(function(error) {
         $scope.error = error;
       }).then(function() {
-        $state.go("home");
+        $state.go("home.news");
       });
     };
 }]);

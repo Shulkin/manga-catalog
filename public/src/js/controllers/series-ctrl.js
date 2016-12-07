@@ -9,9 +9,11 @@ angular.module("series.ctrl", [
   {header: "Year", fieldName: "year", sortable: true},
 ])
 .controller("SeriesCtrl", [
-  "SERIES_COLUMNS", "SERIES_PER_PAGE", "Genres", "Series", function(
+  "SERIES_COLUMNS", "SERIES_PER_PAGE",
+  "Auth", "Genres", "Series", function(
   SERIES_COLUMNS, // columns names and info
   SERIES_PER_PAGE, // number of mangas per page
+  Auth, // authentication
   Genres, // genres service
   Series) { // series service
   // === Variables ===
@@ -39,6 +41,7 @@ angular.module("series.ctrl", [
   // === Start module ===
   init();
   // === Public ===
+  vm.isUserLoggedIn = Auth.isLoggedIn;
   // represent manga genre as string
   vm.genreToString = function(genre) {
     return Genres.toString(genre);

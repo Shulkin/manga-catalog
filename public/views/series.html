@@ -13,7 +13,8 @@
   </div>
   <div class="col-xs-3">
     <!-- Add new series to list, navigate to create window -->
-    <button type="button" class="col-xs-12 btn btn-info" ui-sref="home.series-create">
+    <button type="button" ng-show="series.isUserLoggedIn()"
+      class="col-xs-12 btn btn-info" ui-sref="home.series-create">
       <span>Add&nbsp;</span><i class="glyphicon glyphicon-plus"></i>
     </button>
   </div>
