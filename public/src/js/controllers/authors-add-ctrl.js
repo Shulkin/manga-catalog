@@ -28,7 +28,7 @@ angular.module("authors.add.ctrl", [])
     Authors.create(data)
     .then(function(author) {
       // return to authors table
-      $state.go("authors");
+      $state.go("home.authors");
     }, function(err) {
       console.log("Error " + err);
     });

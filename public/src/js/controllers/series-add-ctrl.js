@@ -95,7 +95,7 @@ angular.module("series.add.ctrl", [])
       Authors.addManga(vm.authorId, manga._id)
       .then(function(author) {
         // return to series table
-        $state.go("series");
+        $state.go("home.series");
       }, function(err) {
         console.log("Error " + err);
       });

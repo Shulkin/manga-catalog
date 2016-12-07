@@ -25,6 +25,11 @@ angular.module("manga.routes", []).config(
       templateUrl: "./views/series-info.html",
       controller: "SeriesInfoCtrl as manga"
     })
+    .state("home.series-create", {
+      url: "/add/manga",
+      templateUrl: "./views/series-create.html",
+      controller: "SeriesAddCtrl as manga"
+    })
     .state("home.authors", {
       url: "/authors",
       templateUrl: "./views/authors.html",
@@ -34,6 +39,11 @@ angular.module("manga.routes", []).config(
       url: "/authors/:id",
       templateUrl: "./views/authors-info.html",
       controller: "AuthorsInfoCtrl as author"
+    })
+    .state("home.authors-create", {
+      url: "/add/author",
+      templateUrl: "./views/authors-create.html",
+      controller: "AuthorsAddCtrl as author"
     })
     // independent states
     .state("login", {
