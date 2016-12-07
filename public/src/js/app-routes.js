@@ -20,10 +20,20 @@ angular.module("manga.routes", []).config(
       templateUrl: "./views/series.html",
       controller: "SeriesCtrl as series"
     })
+    .state("home.series-info", {
+      url: "/series/:id",
+      templateUrl: "./views/series-info.html",
+      controller: "SeriesInfoCtrl as manga"
+    })
     .state("home.authors", {
       url: "/authors",
       templateUrl: "./views/authors.html",
       controller: "AuthorsCtrl as authors"
+    })
+    .state("home.authors-info", {
+      url: "/authors/:id",
+      templateUrl: "./views/authors-info.html",
+      controller: "AuthorsInfoCtrl as author"
     })
     // independent states
     .state("login", {

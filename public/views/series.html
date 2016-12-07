@@ -43,7 +43,7 @@
       <!-- Actual table content -->
       <tr dir-paginate="manga in series.list | orderBy:series.sortType:series.sortReverse | filter:series.searchQuery | itemsPerPage:series.perPage">
         <!-- Manga title -->
-        <td><a ui-sref="series-info({id: manga._id})">{{manga.title}}</a></td>
+        <td><a ui-sref="home.series-info({id: manga._id})">{{manga.title}}</a></td>
         <!-- Names of the manga genre -->
         <td>{{series.genreToString(manga.genre)}}</td>
         <!-- Year of writing -->
