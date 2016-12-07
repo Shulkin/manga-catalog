@@ -1,13 +1,31 @@
 angular.module("manga.routes", []).config(
   ["$stateProvider", "$urlRouterProvider",
   function($stateProvider, $urlRouterProvider) {
-    // all other routes will lead to /home
-    $urlRouterProvider.otherwise("/home");
+    // all other routes will lead to /home/news page
+    $urlRouterProvider.otherwise("/home/news");
     $stateProvider
+    // parent state
     .state("home", {
       url: "/home",
       templateUrl: "./views/home.html"
     })
+    // nested states
+    .state("home.news", {
+      url: "/news",
+      templateUrl: "./views/news.html",
+      controller: "NewsCtrl as news"
+    })
+    .state("home.series", {
+      url: "/series",
+      templateUrl: "./views/series.html",
+      controller: "SeriesCtrl as series"
+    })
+    .state("home.authors", {
+      url: "/authors",
+      templateUrl: "./views/authors.html",
+      controller: "AuthorsCtrl as authors"
+    })
+    // independent states
     .state("login", {
       url: "/login",
       templateUrl: "./views/login.html",

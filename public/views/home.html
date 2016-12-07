@@ -1,15 +1,12 @@
-<!--
-<div class="row">
-  <div class="col-sm-3">
-    <ul class="nav nav-pills nav-stacked">
-      <li ui-sref-active="active"><a ui-sref="news">News</a></li>
-      <li ui-sref-active="active"><a ui-sref="series">Series</a></li>
-      <li ui-sref-active="active"><a ui-sref="authors">Mangaka</a></li>
-    </ul>
-  </div>
-  <div class="col-sm-9">
-    <div ui-view></div>
-  </div>
+<div class="col-sm-2">
+  <!-- Vertical menu -->
+  <ul class="nav nav-pills nav-stacked">
+    <li ui-sref-active="active"><a ui-sref="home.news">News</a></li>
+    <li ui-sref-active="active"><a ui-sref="home.series">Series</a></li>
+    <li ui-sref-active="active"><a ui-sref="home.authors">Mangaka</a></li>
+  </ul>
 </div>
--->
-Test
+<div class="col-sm-10">
+  <!-- Content goes here -->
+  <div ui-view></div>
+</div>
