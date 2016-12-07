@@ -3,9 +3,10 @@ angular.module("authors.info.ctrl", [
   "manga.datepicker.ctrl" // DatePickerCtrl
 ])
 .controller("AuthorsInfoCtrl", [
-  "SERIES_COLUMNS", "Genres", "Authors",
+  "SERIES_COLUMNS", "Auth", "Genres", "Authors",
   "AuthorsInfo", "$stateParams", function(
   SERIES_COLUMNS, // from series controller
+  Auth, // expose isLoggedIn
   Genres, // genres service
   Authors, // authors service
   AuthorsInfo, // share data with DatePickerCtrl
@@ -60,6 +61,8 @@ angular.module("authors.info.ctrl", [
   // === Start module ===
   init();
   // === Public ===
+  // check if user is logged in
+  vm.isUserLoggedIn = Auth.isLoggedIn;
   // represent author's works genre as string
   vm.genreToString = function(genre) {
     return Genres.toString(genre);

@@ -3,8 +3,9 @@ angular.module("series.info.ctrl", [
   "manga.datepicker.ctrl" // use YearPickerCtrl in view
 ])
 .controller("SeriesInfoCtrl", [
-  "Genres", "Series", "Authors",
+  "Auth", "Genres", "Series", "Authors",
   "SeriesInfo", "$stateParams", function(
+  Auth, // check if user isLoggedIn
   Genres, // genres service
   Series, // series service
   Authors, // authors service
@@ -110,6 +111,9 @@ angular.module("series.info.ctrl", [
   // === Start module ===
   init();
   // === Public ===
+  // check if user is logged in
+  vm.isUserLoggedIn = Auth.isLoggedIn;
+  // edit genre list
   vm.addGenre = function(genreId) {
     var obj = {_id: genreId}; // without name
     // search genre name in allGenres array

@@ -4,7 +4,7 @@
     <span ng-hide="author.isEdit('name')">
       <h2 class="my-inline-block">{{author.name}}</h2>
       &nbsp;
-      <small> <!-- Edit button -->
+      <small ng-show="author.isUserLoggedIn()"> <!-- Edit button -->
         <a class="my-cursor-pointer"
           ng-click="author.edit('name')">Edit</a>
       </small>
@@ -15,7 +15,7 @@
         placeholder="Author name"
         ng-model="author.name">
       &nbsp;
-      <small> <!-- Save button -->
+      <small ng-show="author.isUserLoggedIn()"> <!-- Save button -->
         <a class="my-cursor-pointer"
           ng-click="author.save('name')">Save</a>
       </small>
@@ -40,7 +40,7 @@
       <div class="panel-heading">
         <h3 class="panel-title my-inline-block">Birth Date</h3>
         &nbsp;
-        <small>
+        <small ng-show="author.isUserLoggedIn()">
           <a class="my-cursor-pointer"
             ng-hide="author.isEdit('birthDate')"
             ng-click="author.edit('birthDate')">Edit</a>
@@ -83,7 +83,7 @@
       <div class="panel-heading">
         <h3 class="panel-title my-inline-block">Gender</h3>
         &nbsp;
-        <small>
+        <small ng-show="author.isUserLoggedIn()">
           <a class="my-cursor-pointer"
             ng-hide="author.isEdit('gender')"
             ng-click="author.edit('gender')">Edit</a>
