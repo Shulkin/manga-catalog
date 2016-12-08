@@ -47,8 +47,18 @@
         <td><a ui-sref="home.series-info({id: manga._id})">{{manga.title}}</a></td>
         <!-- Names of the manga genre -->
         <td>{{series.genreToString(manga.genre)}}</td>
-        <!-- Year of writing -->
-        <td>{{manga.year}}</td>
+        <td class="row row-no-padding">
+          <div class="col-xs-6">
+            <!-- Year of writing -->
+            {{manga.year}}
+          </div>
+          <div class="col-xs-6 text-right" ng-show="series.isUserLoggedIn()">
+            <!-- Delete button -->
+            <button type="button" class="btn btn-danger btn-xs">
+              <i class="glyphicon glyphicon-remove"></i>
+            </button>
+          </div>
+        </td>
       </tr>
     </table>
     <!-- Pagination controls -->

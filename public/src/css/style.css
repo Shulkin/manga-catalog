@@ -15,6 +15,10 @@
 .my-margin-top-30 {
   margin-top: 30px;
 }
+.row-no-padding [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 /* This parent can be any width and height */
 .my-block {
   text-align: center;

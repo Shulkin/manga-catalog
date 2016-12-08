@@ -47,8 +47,18 @@
         <td><a ui-sref="home.authors-info({id: author._id})">{{author.name}}</a></td>
         <!-- The number of series, which he wrote -->
         <td>{{author.series.length}}</td>
-        <!-- Most numerours genre -->
-        <td>{{author.mostNumerousGenre}}</td>
+        <td class="row row-no-padding">
+          <div class="col-xs-6">
+            <!-- Most numerours genre -->
+            {{author.mostNumerousGenre}}
+          </div>
+          <div class="col-xs-6 text-right" ng-show="authors.isUserLoggedIn()">
+            <!-- Delete button -->
+            <button type="button" class="btn btn-danger btn-xs">
+              <i class="glyphicon glyphicon-remove"></i>
+            </button>
+          </div>
+        </td>
       </tr>
     </table>
     <!-- Pagination controls -->
