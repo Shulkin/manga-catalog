@@ -65,7 +65,10 @@ router.route("/:id")
   }, function(err, manga) {
     if (err) res.send(err);
     // return new series list
-    Manga.find(function(err, series) {
+    Manga.find().
+    populate("genre").
+    populate("author")
+    .exec(function(err, series) {
       if (err) res.send(err);
       res.json(series);
     });

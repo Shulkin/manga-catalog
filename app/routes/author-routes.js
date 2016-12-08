@@ -16,11 +16,8 @@ router.route("/")
   // deep population
   .populate({
     path: "series", // get list of series from this author
-    populate: {
-      path: "genre" // get each series genre
-    }
-  })
-  .exec(function(err, authors) {
+    populate: {path: "genre"} // get each series genre
+  }).exec(function(err, authors) {
     if (err) res.send(err);
     res.json(authors);
   });
@@ -46,11 +43,8 @@ router.route("/:id")
   // deep population
   .populate({
     path: "series", // get list of series from this author
-    populate: {
-      path: "genre" // get each series genre
-    }
-  })
-  .exec(function(err, author) {
+    populate: {path: "genre"} // get each series genre
+  }).exec(function(err, author) {
     if (err) res.send(err);
     res.json(author);
   });
@@ -78,7 +72,11 @@ router.route("/:id")
   }, function(err, author) {
     if (err) res.send(err);
     // return new authors list
-    Author.find(function(err, authors) {
+    Author.find()
+    .populate({
+      path: "series",
+      populate: {path: "genre"}
+    }).exec(function(err, authors) {
       if (err) res.send(err);
       res.json(authors);
     });

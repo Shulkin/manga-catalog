@@ -10,12 +10,11 @@ angular.module("series.ctrl", [
 ])
 .controller("SeriesCtrl", [
   "SERIES_COLUMNS", "SERIES_PER_PAGE",
-  "Auth", "Genres", "Series", function(
+  "Auth", "Genres", "Authors", "Series", function(
   SERIES_COLUMNS, // columns names and info
   SERIES_PER_PAGE, // number of mangas per page
   Auth, // authentication
-  Genres, // genres service
-  Series) { // series service
+  Genres, Authors, Series) {
   // === Variables ===
   var vm = this;
   // fill up columns names
@@ -45,6 +44,27 @@ angular.module("series.ctrl", [
   // delete manga from the list
   vm.delete = function(mangaId) {
     console.log("[SeriesCtrl.delete()] mangaId = " + mangaId);
+    // find who wrote this manga (maybe more than one author!)
+    var mangakas = [];
+    for (var i = 0; i < vm.list.length; i++) {
+      if (vm.list[i]._id === mangaId) {
+        mangakas.push(vm.list[i].author);
+      }
+    }
+    // call delete from series service
+    Series.delete(mangaId)
+    .then(function(data) {
+      console.log("[SeriesCtrl.delete()] Success!");
+      vm.list = data; // reload series list
+      console.log("[SeriesCtrl.delete()] who wrote this manga = " + JSON.stringify(mangakas));
+      // remove manga from authors work list
+      for (var i = 0; i < mangakas.length; i++) {
+        console.log("[SeriesCtrl.delete()] Delete this manga from author = " + mangakas[i]._id);
+        Authors.deleteManga(mangakas[i]._id, mangaId);
+      }
+    }, function(err) {
+      console.log("Error " + err);
+    });
   };
   // represent manga genre as string
   vm.genreToString = function(genre) {

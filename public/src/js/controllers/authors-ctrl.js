@@ -11,7 +11,7 @@ angular.module("authors.ctrl", [
   "AUTHORS_COLUMNS", "AUTHORS_PER_PAGE", "Auth", "Authors", function(
   AUTHORS_COLUMNS, // columns names and info
   AUTHORS_PER_PAGE, // number of authors per page
-  Auth, Authors) { // auth and authors services
+  Auth, Authors, Series) {
   // === Variables ===
   var vm = this;
   vm.columns = AUTHORS_COLUMNS;
@@ -44,6 +44,27 @@ angular.module("authors.ctrl", [
   // delete author from the list
   vm.delete = function(authorId) {
     console.log("[AuthorsCtrl.delete()] authorId = " + authorId);
+    // find list of series for this author
+    var series = [];
+    for (var i = 0; i < vm.list.length; i++) {
+      if (vm.list[i]._id === authorId) {
+        series = vm.list[i].series;
+        break;
+      }
+    }
+    Authors.delete(authorId)
+    .then(function(data) {
+      console.log("[AuthorsCtrl.delete()] Success!");
+      vm.list = data; // reload authors
+      console.log("[AuthorsCtrl.delete()] Delete all his works = " + JSON.stringify(series));
+      // delete all works by this author
+      for (var i = 0; i < series.length; i++) {
+        console.log("[AuthorsCtrl.delete()] Delete manga = " + series[i]._id);
+        Series.delete(series[i]._id);
+      }
+    }, function(err) {
+      console.log("Error " + err);
+    });
   };
   // switch sort on selected column
   vm.sort = function(fieldName) {
