@@ -41,6 +41,10 @@ angular.module("authors.ctrl", [
   init();
   // === Public ===
   vm.isUserLoggedIn = Auth.isLoggedIn;
+  // delete author from the list
+  vm.delete = function(authorId) {
+    console.log("[AuthorsCtrl.delete()] authorId = " + authorId);
+  };
   // switch sort on selected column
   vm.sort = function(fieldName) {
     // if enabled first time on column

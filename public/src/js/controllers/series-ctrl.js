@@ -42,6 +42,10 @@ angular.module("series.ctrl", [
   init();
   // === Public ===
   vm.isUserLoggedIn = Auth.isLoggedIn;
+  // delete manga from the list
+  vm.delete = function(mangaId) {
+    console.log("[SeriesCtrl.delete()] mangaId = " + mangaId);
+  };
   // represent manga genre as string
   vm.genreToString = function(genre) {
     return Genres.toString(genre);

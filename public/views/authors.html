@@ -54,7 +54,8 @@
           </div>
           <div class="col-xs-6 text-right" ng-show="authors.isUserLoggedIn()">
             <!-- Delete button -->
-            <button type="button" class="btn btn-danger btn-xs">
+            <button type="button" class="btn btn-danger btn-xs"
+              ng-click="authors.delete(author._id)">
               <i class="glyphicon glyphicon-remove"></i>
             </button>
           </div>
