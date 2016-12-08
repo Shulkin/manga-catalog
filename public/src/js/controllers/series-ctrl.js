@@ -43,7 +43,6 @@ angular.module("series.ctrl", [
   vm.isUserLoggedIn = Auth.isLoggedIn;
   // delete manga from the list
   vm.delete = function(mangaId) {
-    console.log("[SeriesCtrl.delete()] mangaId = " + mangaId);
     // find who wrote this manga (maybe more than one author!)
     var mangakas = [];
     for (var i = 0; i < vm.list.length; i++) {
@@ -54,12 +53,9 @@ angular.module("series.ctrl", [
     // call delete from series service
     Series.delete(mangaId)
     .then(function(data) {
-      console.log("[SeriesCtrl.delete()] Success!");
       vm.list = data; // reload series list
-      console.log("[SeriesCtrl.delete()] who wrote this manga = " + JSON.stringify(mangakas));
       // remove manga from authors work list
       for (var i = 0; i < mangakas.length; i++) {
-        console.log("[SeriesCtrl.delete()] Delete this manga from author = " + mangakas[i]._id);
         Authors.deleteManga(mangakas[i]._id, mangaId);
       }
     }, function(err) {

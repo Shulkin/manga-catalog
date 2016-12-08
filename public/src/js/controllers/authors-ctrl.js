@@ -8,7 +8,8 @@ angular.module("authors.ctrl", [
   {header: "Most Numerous Genre", fieldName: "mostNumerousGenre", sortable: false},
 ])
 .controller("AuthorsCtrl", [
-  "AUTHORS_COLUMNS", "AUTHORS_PER_PAGE", "Auth", "Authors", function(
+  "AUTHORS_COLUMNS", "AUTHORS_PER_PAGE",
+  "Auth", "Authors", "Series", function(
   AUTHORS_COLUMNS, // columns names and info
   AUTHORS_PER_PAGE, // number of authors per page
   Auth, Authors, Series) {
@@ -21,18 +22,21 @@ angular.module("authors.ctrl", [
   vm.sortReverse = false; // ascending
   vm.searchQuery = ""; // filter nothing
   // === Private ===
+  function reloadList(data) {
+    vm.list = data;
+    // create new field for most used genres in author's works
+    for (var i = 0; i < vm.list.length; i++) {
+      // select five most used genres!
+      vm.list[i].mostNumerousGenre = Authors.getMostNumerousGenre(vm.list[i], 5);
+    }
+  }
   // constructor
   function init() {
     // list of authors
     vm.list = [];
     Authors.getAll()
     .then(function(data) {
-      vm.list = data;
-      // create new field for most used genres in author's works
-      for (var i = 0; i < vm.list.length; i++) {
-        // select five most used genres!
-        vm.list[i].mostNumerousGenre = Authors.getMostNumerousGenre(vm.list[i], 5);
-      }
+      reloadList(data);
     }, function(err) {
       console.log("Error " + err);
     });
@@ -54,12 +58,9 @@ angular.module("authors.ctrl", [
     }
     Authors.delete(authorId)
     .then(function(data) {
-      console.log("[AuthorsCtrl.delete()] Success!");
-      vm.list = data; // reload authors
-      console.log("[AuthorsCtrl.delete()] Delete all his works = " + JSON.stringify(series));
+      reloadList(data);
       // delete all works by this author
       for (var i = 0; i < series.length; i++) {
-        console.log("[AuthorsCtrl.delete()] Delete manga = " + series[i]._id);
         Series.delete(series[i]._id);
       }
     }, function(err) {
