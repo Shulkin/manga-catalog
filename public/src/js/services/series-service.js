@@ -43,6 +43,14 @@ angular.module("series.service", [])
       }).then(function(response) {
         return response.data;
       });
+    },
+    // delete manga from database
+    delete: function(id) {
+      return $http.delete("/api/series/" + id, {
+        headers: {Authorization: "Bearer " + Auth.getToken()}
+      }).then(function(response) {
+        return response.data;
+      });
     }
   };
 }]);

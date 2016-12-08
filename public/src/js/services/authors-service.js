@@ -59,6 +59,14 @@ angular.module("authors.service", [])
         return response.data;
       });
     },
+    // delete author
+    delete: function(id) {
+      return $http.delete("/api/authors/" + id, {
+        headers: {Authorization: "Bearer " + Auth.getToken()}
+      }).then(function(response) {
+        return response.data;
+      });
+    },
     addManga: function(id, mangaId) {
       var data = {id: mangaId};
       return $http.put("/api/authors/" + id + "/manga", data, {
