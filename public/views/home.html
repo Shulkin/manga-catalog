@@ -1,9 +1,25 @@
 <div class="col-sm-2">
   <!-- Vertical menu -->
   <ul class="nav nav-pills nav-stacked">
-    <li ui-sref-active="active"><a ui-sref="home.news">News</a></li>
-    <li ui-sref-active="active"><a ui-sref="home.series">Series</a></li>
-    <li ui-sref-active="active"><a ui-sref="home.authors">Mangaka</a></li>
+    <!-- Highlight only on active news list -->
+    <li ng-class="{active: ('home.news' | includedByState)}">
+      <!-- List of news -->
+      <a ui-sref="home.news">News</a>
+    </li>
+    <!-- Active on series table, series info and create cards -->
+    <li ng-class="{active: ('home.series' | includedByState) ||
+      ('home.series-info' | includedByState) ||
+      ('home.series-create' | includedByState)}">
+      <!-- Series table -->
+      <a ui-sref="home.series">Series</a>
+    </li>
+    <!-- Same, active on authors table, info and create cards -->
+    <li ng-class="{active: ('home.authors' | includedByState) ||
+      ('home.authors-info' | includedByState) ||
+      ('home.authors-create' | includedByState)}">
+      <!-- Authors table -->
+      <a ui-sref="home.authors">Mangaka</a>
+    </li>
   </ul>
 </div>
 <div class="col-sm-10">
